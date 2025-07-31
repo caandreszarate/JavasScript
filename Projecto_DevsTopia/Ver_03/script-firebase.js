@@ -316,30 +316,60 @@ function setupFirebaseListeners() {
     });
 }
 
-// Función para enviar mensajes
+// Función para enviar mensajes con respuestas automáticas
 function sendMessage() {
     const chatInput = document.getElementById('chat-input');
     const message = chatInput.value.trim();
     
     if (message && chatConnected) {
-        // Crear mensaje
-        const messageData = {
+        // Crear mensaje del usuario
+        const userMessageData = {
             id: Date.now() + Math.random(),
             user: 'Usuario',
             message: message,
             timestamp: firebase.serverTimestamp(),
-            userId: generateUserId()
+            userId: generateUserId(),
+            type: 'user'
         };
         
-        // Enviar a Firebase usando la nueva API
+        // Enviar mensaje del usuario a Firebase
         const messagesRef = firebase.ref(firebase.database, 'chat/messages');
-        firebase.push(messagesRef, messageData);
+        firebase.push(messagesRef, userMessageData);
         
         // Limpiar input
         chatInput.value = '';
         
-        // Guardar en historial local
-        saveMessageToHistory(messageData);
+        // Guardar mensaje del usuario en historial local
+        saveMessageToHistory(userMessageData);
+        
+        // Mostrar indicador de "escribiendo" del asistente
+        showAutoResponseThinking();
+        
+        // Simular tiempo de procesamiento y generar respuesta automática
+        setTimeout(() => {
+            // Ocultar indicador de "escribiendo"
+            hideAutoResponseThinking();
+            
+            // Procesar respuesta automática
+            const autoResponse = processAutoResponse(message);
+            
+            // Crear respuesta del asistente
+            const assistantMessageData = {
+                id: Date.now() + Math.random() + 1,
+                user: 'Asistente DevsTopia',
+                message: autoResponse,
+                timestamp: firebase.serverTimestamp(),
+                userId: 'auto-assistant',
+                type: 'assistant'
+            };
+            
+            // Enviar respuesta del asistente a Firebase
+            firebase.push(messagesRef, assistantMessageData);
+            
+            // Guardar respuesta del asistente en historial local
+            saveMessageToHistory(assistantMessageData);
+            
+        }, 1500); // Simular 1.5 segundos de "pensamiento"
         
     } else if (!chatConnected) {
         showNotification('Chat no disponible. Intenta más tarde.', 'error');
@@ -389,23 +419,43 @@ function handleTyping() {
     }
 }
 
-// Función para mostrar mensajes
+// Función para mostrar mensajes con diferentes estilos
 function displayMessage(data) {
     const chatMessages = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${data.user === 'Usuario' ? 'user' : 'bot'}`;
     
     const time = new Date(data.timestamp).toLocaleTimeString();
     const isSystem = data.type === 'system';
     
     if (isSystem) {
         messageDiv.className = 'message system';
+        messageDiv.innerHTML = `
+            <p>${data.message}</p>
+            <small>${time}</small>
+        `;
+    } else if (data.type === 'assistant') {
+        messageDiv.className = 'message assistant-message';
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="assistant-avatar">🤖</div>
+                <div class="message-text">
+                    <strong>${data.user}:</strong> ${data.message}
+                    <small>${time}</small>
+                </div>
+            </div>
+        `;
+    } else {
+        messageDiv.className = 'message user-message';
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">
+                    <strong>${data.user}:</strong> ${data.message}
+                    <small>${time}</small>
+                </div>
+                <div class="user-avatar">👤</div>
+            </div>
+        `;
     }
-    
-    messageDiv.innerHTML = `
-        <p>${data.message}</p>
-        <small>${time}</small>
-    `;
     
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
