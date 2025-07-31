@@ -466,12 +466,13 @@ function handleContactForm(event) {
     
     const form = event.target;
     const submitBtn = form.querySelector('button[type="submit"]');
-    const submitText = document.getElementById('submit-text');
-    const loadingText = document.getElementById('loading-text');
+    const submitText = submitBtn.querySelector('span');
+    
+    // Guardar texto original
+    const originalText = submitText.textContent;
     
     // Mostrar estado de carga
-    submitText.style.display = 'none';
-    loadingText.style.display = 'inline';
+    submitText.textContent = 'Enviando...';
     submitBtn.disabled = true;
     
     const formData = new FormData(form);
@@ -485,11 +486,13 @@ function handleContactForm(event) {
     // Validación básica
     if (!data.nombre || !data.email || !data.asunto || !data.mensaje) {
         showNotification('Por favor completa todos los campos', 'error');
-        resetFormState();
+        resetFormState(originalText);
         return;
     }
     
     // Configuración de EmailJS - Variables corregidas
+    // NOTA: El email de destino se configura en tu template de EmailJS
+    // Email de destino: info@devstopia.com
     const templateParams = {
         name: data.nombre,
         email: data.email,
@@ -498,8 +501,8 @@ function handleContactForm(event) {
     };
     
     // Enviar email usando EmailJS
-    // REEMPLAZA 'TU_SERVICE_ID' con tu Service ID real de EmailJS
-    // REEMPLAZA 'TU_TEMPLATE_ID' con tu Template ID real de EmailJS
+    // El email de destino se configura en tu template de EmailJS
+    // Email de destino: info@devstopia.com
     emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
@@ -510,17 +513,16 @@ function handleContactForm(event) {
             showNotification('Error al enviar el mensaje. Por favor intenta nuevamente.', 'error');
         })
         .finally(function() {
-            resetFormState();
+            resetFormState(originalText);
         });
 }
 
-function resetFormState() {
-    const submitText = document.getElementById('submit-text');
-    const loadingText = document.getElementById('loading-text');
+function resetFormState(originalText = 'Enviar Mensaje') {
     const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+    const submitText = submitBtn.querySelector('span');
     
-    submitText.style.display = 'inline';
-    loadingText.style.display = 'none';
+    // Restaurar texto original
+    submitText.textContent = originalText;
     submitBtn.disabled = false;
 }
 
