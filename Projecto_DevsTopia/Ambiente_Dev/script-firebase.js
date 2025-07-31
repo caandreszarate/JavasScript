@@ -316,19 +316,21 @@ function setupFirebaseListeners() {
     });
 }
 
-// Función para enviar mensajes con respuestas automáticas
+// Función para enviar mensajes con IA avanzada
 function sendMessage() {
     const chatInput = document.getElementById('chat-input');
     const message = chatInput.value.trim();
     
     if (message && chatConnected) {
+        const userId = generateUserId();
+        
         // Crear mensaje del usuario
         const userMessageData = {
             id: Date.now() + Math.random(),
             user: 'Usuario',
             message: message,
             timestamp: firebase.serverTimestamp(),
-            userId: generateUserId(),
+            userId: userId,
             type: 'user'
         };
         
@@ -345,22 +347,25 @@ function sendMessage() {
         // Mostrar indicador de "escribiendo" del asistente
         showAutoResponseThinking();
         
-        // Simular tiempo de procesamiento y generar respuesta automática
+        // Procesar con IA avanzada
         setTimeout(() => {
             // Ocultar indicador de "escribiendo"
             hideAutoResponseThinking();
             
-            // Procesar respuesta automática
-            const autoResponse = processAutoResponse(message);
+            // Procesar respuesta con IA avanzada
+            const enhancedResponse = processEnhancedResponse(message, userId);
             
             // Crear respuesta del asistente
             const assistantMessageData = {
                 id: Date.now() + Math.random() + 1,
-                user: 'Asistente DevsTopia',
-                message: autoResponse,
+                user: 'Asistente IA DevsTopia',
+                message: enhancedResponse.response,
                 timestamp: firebase.serverTimestamp(),
-                userId: 'auto-assistant',
-                type: 'assistant'
+                userId: 'ai-assistant',
+                type: 'assistant',
+                sentiment: enhancedResponse.sentiment,
+                shouldEscalate: enhancedResponse.shouldEscalate,
+                recommendations: enhancedResponse.recommendations
             };
             
             // Enviar respuesta del asistente a Firebase
@@ -369,7 +374,16 @@ function sendMessage() {
             // Guardar respuesta del asistente en historial local
             saveMessageToHistory(assistantMessageData);
             
-        }, 1500); // Simular 1.5 segundos de "pensamiento"
+            // Integrar analytics
+            integrateAnalytics(userMessageData);
+            integrateAnalytics(assistantMessageData);
+            
+            // Si debe escalar, mostrar notificación especial
+            if (enhancedResponse.shouldEscalate) {
+                showNotification('🚨 Conectando con especialista...', 'warning');
+            }
+            
+        }, 2000); // Simular 2 segundos de "pensamiento" para IA
         
     } else if (!chatConnected) {
         showNotification('Chat no disponible. Intenta más tarde.', 'error');
