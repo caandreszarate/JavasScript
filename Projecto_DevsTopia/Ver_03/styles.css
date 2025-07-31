@@ -1056,6 +1056,29 @@ body {
     margin-left: auto;
 }
 
+.message.system {
+    background: var(--gray-light);
+    color: var(--gray-dark);
+    text-align: center;
+    font-style: italic;
+    margin: 0.5rem auto;
+    max-width: 90%;
+}
+
+.typing-indicator {
+    background: var(--gray-hover);
+    color: var(--gray-dark);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.typing-indicator p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .chat-input {
     padding: 1rem;
     border-top: 1px solid var(--gray-light);

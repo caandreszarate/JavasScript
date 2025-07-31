@@ -422,13 +422,93 @@ function closeQuoteModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Chat en vivo
+// Chat en vivo con Socket.io
+let socket = null;
+let chatConnected = false;
+let typingTimeout = null;
+
+// Inicializar conexión del chat
+function initializeChat() {
+    // Cargar Socket.io desde CDN si no está disponible
+    if (typeof io === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
+        script.onload = () => {
+            connectToChat();
+        };
+        document.head.appendChild(script);
+    } else {
+        connectToChat();
+    }
+}
+
+function connectToChat() {
+    try {
+        socket = io('http://localhost:3001');
+        
+        socket.on('connect', () => {
+            chatConnected = true;
+            console.log('✅ Conectado al chat');
+            showChatStatus('Conectado');
+            showNotification('Chat conectado', 'success');
+        });
+        
+        socket.on('disconnect', () => {
+            chatConnected = false;
+            console.log('❌ Desconectado del chat');
+            showChatStatus('Desconectado');
+            showNotification('Chat desconectado', 'error');
+        });
+        
+        socket.on('chat-message', (data) => {
+            displayMessage(data);
+        });
+        
+        socket.on('chat-history', (messages) => {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = ''; // Limpiar mensajes existentes
+            
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+        });
+        
+        socket.on('user-typing', (data) => {
+            showTypingIndicator(data.user);
+        });
+        
+        socket.on('user-stop-typing', (data) => {
+            hideTypingIndicator();
+        });
+        
+        socket.on('chat-stats', (stats) => {
+            updateChatStats(stats);
+        });
+        
+        socket.on('agent-request-confirmed', (data) => {
+            showNotification(data.message, 'success');
+        });
+        
+    } catch (error) {
+        console.error('Error al conectar al chat:', error);
+        showNotification('Error al conectar al chat', 'error');
+    }
+}
+
 function toggleChat() {
     const chatContainer = document.getElementById('chat-container');
     chatOpen = !chatOpen;
     
     if (chatOpen) {
         chatContainer.classList.add('show');
+        
+        // Inicializar chat si no está conectado
+        if (!socket || !chatConnected) {
+            initializeChat();
+        }
+        
+        // Cargar historial local
+        loadChatHistory();
     } else {
         chatContainer.classList.remove('show');
     }
@@ -436,27 +516,144 @@ function toggleChat() {
 
 function sendMessage() {
     const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
     const message = chatInput.value.trim();
     
-    if (message) {
-        // Agregar mensaje del usuario
-        const userMessage = document.createElement('div');
-        userMessage.className = 'message user';
-        userMessage.innerHTML = `<p>${message}</p>`;
-        chatMessages.appendChild(userMessage);
+    if (message && chatConnected) {
+        // Enviar mensaje al servidor
+        socket.emit('chat-message', {
+            user: 'Usuario',
+            message: message,
+            timestamp: new Date()
+        });
         
-        // Simular respuesta del bot
-        setTimeout(() => {
-            const botMessage = document.createElement('div');
-            botMessage.className = 'message bot';
-            botMessage.innerHTML = `<p>Gracias por tu mensaje. Te responderemos pronto.</p>`;
-            chatMessages.appendChild(botMessage);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-        
+        // Limpiar input
         chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Guardar en historial local
+        saveMessageToHistory({
+            user: 'Usuario',
+            message: message,
+            timestamp: new Date().toISOString()
+        });
+        
+    } else if (!chatConnected) {
+        showNotification('Chat no disponible. Intenta más tarde.', 'error');
+    } else if (!message) {
+        showNotification('Por favor escribe un mensaje', 'error');
+    }
+}
+
+// Mostrar estado del chat
+function showChatStatus(status) {
+    const chatHeader = document.querySelector('.chat-header h3');
+    if (chatHeader) {
+        chatHeader.textContent = `Chat en Vivo - ${status}`;
+    }
+}
+
+// Función para mostrar mensajes
+function displayMessage(data) {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${data.user === 'Usuario' ? 'user' : 'bot'}`;
+    
+    const time = new Date(data.timestamp).toLocaleTimeString();
+    const isSystem = data.type === 'system';
+    
+    if (isSystem) {
+        messageDiv.className = 'message system';
+    }
+    
+    messageDiv.innerHTML = `
+        <p>${data.message}</p>
+        <small>${time}</small>
+    `;
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Guardar en historial local
+    saveMessageToHistory(data);
+}
+
+// Indicador de escritura
+function showTypingIndicator(user) {
+    const chatMessages = document.getElementById('chat-messages');
+    let typingIndicator = document.querySelector('.typing-indicator');
+    
+    if (!typingIndicator) {
+        typingIndicator = document.createElement('div');
+        typingIndicator.className = 'message bot typing-indicator';
+        typingIndicator.innerHTML = '<p>🔄 Alguien está escribiendo...</p>';
+        chatMessages.appendChild(typingIndicator);
+    }
+    
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const typingIndicator = document.querySelector('.typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// Manejar escritura en tiempo real
+function handleTyping() {
+    if (chatConnected && socket) {
+        socket.emit('typing-start');
+        
+        // Limpiar timeout anterior
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+        }
+        
+        // Detener indicador después de 2 segundos
+        typingTimeout = setTimeout(() => {
+            socket.emit('typing-stop');
+        }, 2000);
+    }
+}
+
+// Historial de chat
+function saveMessageToHistory(message) {
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    chatHistory.push(message);
+    
+    // Mantener solo los últimos 50 mensajes
+    if (chatHistory.length > 50) {
+        chatHistory = chatHistory.slice(-50);
+    }
+    
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+function loadChatHistory() {
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Solo cargar si no hay mensajes del servidor
+    if (chatMessages.children.length <= 1) {
+        chatHistory.forEach(message => {
+            displayMessage(message);
+        });
+    }
+}
+
+// Actualizar estadísticas del chat
+function updateChatStats(stats) {
+    const chatHeader = document.querySelector('.chat-header h3');
+    if (chatHeader) {
+        chatHeader.textContent = `Chat en Vivo - ${stats.connectedUsers} usuarios`;
+    }
+}
+
+// Solicitar atención del agente
+function requestAgent(reason = 'Atención general') {
+    if (chatConnected && socket) {
+        socket.emit('request-agent', { reason });
+    } else {
+        showNotification('Chat no disponible', 'error');
     }
 }
 
@@ -685,6 +882,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Inicializar chat al cargar la página
+    setTimeout(() => {
+        initializeChat();
+    }, 2000); // Esperar 2 segundos para que la página cargue completamente
     
     // Animación de carga inicial
     setTimeout(() => {

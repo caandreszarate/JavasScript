@@ -420,7 +420,7 @@
                 </div>
             </div>
             <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje">
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje" oninput="handleTyping()">
                 <button onclick="sendMessage()" aria-label="Enviar mensaje">
                     <i class="fas fa-paper-plane"></i>
                 </button>
