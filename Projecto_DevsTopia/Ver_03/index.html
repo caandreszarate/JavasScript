@@ -42,6 +42,16 @@
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#3B71FF">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Inicializar EmailJS con tu clave pública
+            // REEMPLAZA "TU_CLAVE_PUBLICA_AQUI" con tu Public Key real de EmailJS
+            emailjs.init("OTZ5gASq10owKV46z");
+        })();
+    </script>
 </head>
 <body>
     <!-- Skip to main content for accessibility -->

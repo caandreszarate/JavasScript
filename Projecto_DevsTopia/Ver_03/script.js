@@ -464,7 +464,17 @@ function sendMessage() {
 function handleContactForm(event) {
     event.preventDefault();
     
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitText = document.getElementById('submit-text');
+    const loadingText = document.getElementById('loading-text');
+    
+    // Mostrar estado de carga
+    submitText.style.display = 'none';
+    loadingText.style.display = 'inline';
+    submitBtn.disabled = true;
+    
+    const formData = new FormData(form);
     const data = {
         nombre: formData.get('nombre'),
         email: formData.get('email'),
@@ -475,12 +485,44 @@ function handleContactForm(event) {
     // Validación básica
     if (!data.nombre || !data.email || !data.asunto || !data.mensaje) {
         showNotification('Por favor completa todos los campos', 'error');
+        resetFormState();
         return;
     }
     
-    // Simular envío
-    showNotification('¡Mensaje enviado! Te contactaremos pronto.', 'success');
-    event.target.reset();
+    // Configuración de EmailJS
+    const templateParams = {
+        from_name: data.nombre,
+        from_email: data.email,
+        subject: data.asunto,
+        message: data.mensaje,
+        to_email: 'info@devstopia.com' // Tu email de destino
+    };
+    
+    // Enviar email usando EmailJS
+    // REEMPLAZA 'TU_SERVICE_ID' con tu Service ID real de EmailJS
+    // REEMPLAZA 'TU_TEMPLATE_ID' con tu Template ID real de EmailJS
+    emailjs.send('OTZ5gASq10owKV46z', 'template_qspw0l4', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
+            form.reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            showNotification('Error al enviar el mensaje. Por favor intenta nuevamente.', 'error');
+        })
+        .finally(function() {
+            resetFormState();
+        });
+}
+
+function resetFormState() {
+    const submitText = document.getElementById('submit-text');
+    const loadingText = document.getElementById('loading-text');
+    const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+    
+    submitText.style.display = 'inline';
+    loadingText.style.display = 'none';
+    submitBtn.disabled = false;
 }
 
 function handleQuoteForm(event) {
