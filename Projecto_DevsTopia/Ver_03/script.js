@@ -489,19 +489,18 @@ function handleContactForm(event) {
         return;
     }
     
-    // Configuración de EmailJS
+    // Configuración de EmailJS - Variables corregidas
     const templateParams = {
-        from_name: data.nombre,
-        from_email: data.email,
+        name: data.nombre,
+        email: data.email,
         subject: data.asunto,
-        message: data.mensaje,
-        to_email: 'info@devstopia.com' // Tu email de destino
+        message: data.mensaje
     };
     
     // Enviar email usando EmailJS
     // REEMPLAZA 'TU_SERVICE_ID' con tu Service ID real de EmailJS
     // REEMPLAZA 'TU_TEMPLATE_ID' con tu Template ID real de EmailJS
-    emailjs.send('OTZ5gASq10owKV46z', 'template_qspw0l4', templateParams)
+    emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
             showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Template EmailJS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #3B71FF;
+            text-align: center;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .error-box {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #3B71FF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2a5fd9;
+        }
+        .console-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("InSUx70NIu3r1_L5V");
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnóstico Template EmailJS</h1>
+        
+        <div class="info-box">
+            <h3>📋 Información Actual</h3>
+            <p><strong>Public Key:</strong> InSUx70NIu3r1_L5V</p>
+            <p><strong>Service ID:</strong> service_kgnumgb</p>
+            <p><strong>Template ID:</strong> template_ojoaqyd</p>
+        </div>
+        
+        <div class="error-box">
+            <h3>❌ Problema Identificado</h3>
+            <p>Error 422: Los parámetros no coinciden con las variables del template.</p>
+            <p>Necesitamos identificar exactamente qué variables tiene tu template.</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Pruebas de Variables Comunes</h3>
+            <p>Vamos a probar con las variables más comunes que se usan en templates de EmailJS:</p>
+            
+            <button onclick="testVariables1()">Prueba 1: Variables Básicas</button>
+            <button onclick="testVariables2()">Prueba 2: Variables Alternativas</button>
+            <button onclick="testVariables3()">Prueba 3: Variables Simples</button>
+            <button onclick="testVariables4()">Prueba 4: Variables con Guiones</button>
+            <button onclick="testVariables5()">Prueba 5: Variables Mínimas</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 Resultados de las Pruebas</h3>
+            <div id="results" class="console-output">
+                Esperando pruebas...
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h3>📝 Instrucciones</h3>
+            <ol>
+                <li>Haz clic en cada botón de prueba</li>
+                <li>Revisa los resultados en la consola (F12 → Console)</li>
+                <li>Si alguna prueba funciona, anota qué variables usó</li>
+                <li>Si todas fallan, necesitamos revisar tu template en EmailJS</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function logResult(message, isSuccess = false) {
+            const resultsDiv = document.getElementById('results');
+            const timestamp = new Date().toLocaleTimeString();
+            const status = isSuccess ? '✅' : '❌';
+            resultsDiv.innerHTML += `<div>[${timestamp}] ${status} ${message}</div>`;
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+        
+        function testVariables1() {
+            logResult('Iniciando Prueba 1: Variables Básicas');
+            
+            const templateParams = {
+                from_name: 'Test User',
+                from_email: 'test@example.com',
+                subject: 'Test desde DevsTopia',
+                message: 'Este es un mensaje de prueba.',
+                to_email: 'andrewsogemer@gmail.com'
+            };
+            
+            console.log('Prueba 1 - Variables básicas:', templateParams);
+            
+            emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Prueba 1!', response);
+                    logResult('Prueba 1 EXITOSA - Variables básicas funcionan', true);
+                }, function(error) {
+                    console.log('FAILED Prueba 1...', error);
+                    logResult(`Prueba 1 FALLIDA: ${error.text}`);
+                });
+        }
+        
+        function testVariables2() {
+            logResult('Iniciando Prueba 2: Variables Alternativas');
+            
+            const templateParams = {
+                user_name: 'Test User',
+                user_email: 'test@example.com',
+                message_subject: 'Test desde DevsTopia',
+                message_body: 'Este es un mensaje de prueba.',
+                recipient_email: 'andrewsogemer@gmail.com'
+            };
+            
+            console.log('Prueba 2 - Variables alternativas:', templateParams);
+            
+            emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Prueba 2!', response);
+                    logResult('Prueba 2 EXITOSA - Variables alternativas funcionan', true);
+                }, function(error) {
+                    console.log('FAILED Prueba 2...', error);
+                    logResult(`Prueba 2 FALLIDA: ${error.text}`);
+                });
+        }
+        
+        function testVariables3() {
+            logResult('Iniciando Prueba 3: Variables Simples');
+            
+            const templateParams = {
+                name: 'Test User',
+                email: 'test@example.com',
+                subject: 'Test desde DevsTopia',
+                message: 'Este es un mensaje de prueba.'
+            };
+            
+            console.log('Prueba 3 - Variables simples:', templateParams);
+            
+            emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Prueba 3!', response);
+                    logResult('Prueba 3 EXITOSA - Variables simples funcionan', true);
+                }, function(error) {
+                    console.log('FAILED Prueba 3...', error);
+                    logResult(`Prueba 3 FALLIDA: ${error.text}`);
+                });
+        }
+        
+        function testVariables4() {
+            logResult('Iniciando Prueba 4: Variables con Guiones');
+            
+            const templateParams = {
+                'from-name': 'Test User',
+                'from-email': 'test@example.com',
+                'message-subject': 'Test desde DevsTopia',
+                'message-content': 'Este es un mensaje de prueba.'
+            };
+            
+            console.log('Prueba 4 - Variables con guiones:', templateParams);
+            
+            emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Prueba 4!', response);
+                    logResult('Prueba 4 EXITOSA - Variables con guiones funcionan', true);
+                }, function(error) {
+                    console.log('FAILED Prueba 4...', error);
+                    logResult(`Prueba 4 FALLIDA: ${error.text}`);
+                });
+        }
+        
+        function testVariables5() {
+            logResult('Iniciando Prueba 5: Variables Mínimas');
+            
+            const templateParams = {
+                name: 'Test User',
+                email: 'test@example.com',
+                message: 'Este es un mensaje de prueba desde DevsTopia.'
+            };
+            
+            console.log('Prueba 5 - Variables mínimas:', templateParams);
+            
+            emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Prueba 5!', response);
+                    logResult('Prueba 5 EXITOSA - Variables mínimas funcionan', true);
+                }, function(error) {
+                    console.log('FAILED Prueba 5...', error);
+                    logResult(`Prueba 5 FALLIDA: ${error.text}`);
+                });
+        }
+    </script>
+</body>
+</html> 
