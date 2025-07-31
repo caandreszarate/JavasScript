@@ -25,6 +25,7 @@
     <title>DevsTopia - Desarrollo de Software a Medida | Bogotá, Colombia</title>
     
     <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon_devstopia_redonda.png" type="image/x-icon">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -41,6 +42,53 @@
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#3B71FF">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Inicializar EmailJS con tu clave pública
+            // REEMPLAZA "TU_CLAVE_PUBLICA_AQUI" con tu Public Key real de EmailJS
+            emailjs.init("InSUx70NIu3r1_L5V");
+        })();
+    </script>
+    
+    <!-- Firebase SDKs -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+      import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAJVPhymRFYqeloz1Tvw6MEPlCB6fXyriw",
+        authDomain: "devstopia-chat.firebaseapp.com",
+        databaseURL: "https://devstopia-chat-default-rtdb.firebaseio.com",
+        projectId: "devstopia-chat",
+        storageBucket: "devstopia-chat.firebasestorage.app",
+        messagingSenderId: "582874854559",
+        appId: "1:582874854559:web:82eb6e07bb0920dd2b5eaa"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth(app);
+
+      // Make Firebase available globally
+      window.firebase = {
+        app: app,
+        database: database,
+        auth: auth,
+        ref: ref,
+        push: push,
+        onValue: onValue,
+        serverTimestamp: serverTimestamp
+      };
+
+      console.log('🔥 Firebase inicializado para DevsTopia Chat');
+    </script>
 </head>
 <body>
     <!-- Skip to main content for accessibility -->
@@ -143,16 +191,16 @@
                         
                         <div class="about-stats">
                             <div class="stat">
-                                <h3>50+</h3>
-                                <p>Proyectos Completados</p>
+                                <h3>100%</h3>
+                                <p>Enfoque Personalizado en cada proyecto</p>
                             </div>
                             <div class="stat">
-                                <h3>30+</h3>
-                                <p>Clientes Satisfechos</p>
+                                <h3><24h</h3>
+                                <p>Tiempo de respuesta promedio</p>
                             </div>
                             <div class="stat">
-                                <h3>5+</h3>
-                                <p>Años de Experiencia</p>
+                                <h3>95%</h3>
+                                <p>Satisfaccion de Nuestros clientes</p>
                             </div>
                         </div>
                     </div>
@@ -245,14 +293,15 @@
                             <i class="fas fa-envelope" aria-hidden="true"></i>
                             <div>
                                 <h3>Email</h3>
-                                <p><a href="mailto:contacto@devstopia.com">contacto@devstopia.com</a></p>
+                                <p><a href="mailto:info@devstopia.com">info@devstopia.com</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone" aria-hidden="true"></i>
                             <div>
                                 <h3>Teléfono</h3>
-                                <p><a href="tel:+571234567890">+57 123 456 7890</a></p>
+                                <p><a href="tel:+571234567890">+240 222 311 498 (Guinea Ecuatorial)</a></p>
+                                <p><a href="tel:+571234567890">+57 315 057 07 42 (Colombia)</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -299,9 +348,10 @@
                     <h3>DevsTopia</h3>
                     <p>Transformamos ideas en soluciones digitales innovadoras y escalables.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/devstopia" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/devs.topia/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/devstopia" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        
                     </div>
                 </div>
                 <div class="footer-section">
@@ -324,8 +374,9 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <p>contacto@devstopia.com</p>
-                    <p>+57 123 456 7890</p>
+                    <p>info@devstopia.com</p>
+                    <p>+240 222 331 498</p>
+                    <p>+57 315 057 0742</p>
                     <p>Bogotá - Colombia</p>
                 </div>
             </div>
@@ -406,7 +457,7 @@
                 </div>
             </div>
             <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje">
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje" oninput="handleTyping()">
                 <button onclick="sendMessage()" aria-label="Enviar mensaje">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -414,7 +465,8 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+            <!-- Scripts -->
+        <script src="script-firebase.js?v=2.0"></script>
+        <script src="chat-auto-responses.js"></script>
 </body>
 </html> 

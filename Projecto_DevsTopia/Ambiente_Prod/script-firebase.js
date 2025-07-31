@@ -199,6 +199,11 @@ const devsTopiaData = {
 let currentTheme = localStorage.getItem('theme') || 'light';
 let chatOpen = false;
 
+// Chat en vivo con Firebase
+let chatConnected = false;
+let messagesRef = null;
+let typingRef = null;
+
 // Funciones de utilidad
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -248,6 +253,306 @@ function toggleTheme() {
     const themeIcon = document.querySelector('.theme-toggle i');
     if (themeIcon) {
         themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+}
+
+// Inicializar conexión del chat con Firebase
+function initializeChat() {
+    try {
+        // Verificar que Firebase esté disponible
+        if (typeof firebase === 'undefined' || !firebase.database) {
+            console.error('Firebase no está cargado');
+            showNotification('Error: Firebase no disponible', 'error');
+            return;
+        }
+
+        // Obtener referencia a la base de datos usando la nueva API
+        messagesRef = firebase.ref(firebase.database, 'chat/messages');
+        typingRef = firebase.ref(firebase.database, 'chat/typing');
+        
+        // Configurar listeners
+        setupFirebaseListeners();
+        
+        chatConnected = true;
+        console.log('✅ Conectado a Firebase');
+        showChatStatus('Conectado');
+        showNotification('Chat conectado', 'success');
+        
+    } catch (error) {
+        console.error('Error al conectar a Firebase:', error);
+        showNotification('Error al conectar al chat', 'error');
+    }
+}
+
+// Configurar listeners de Firebase
+function setupFirebaseListeners() {
+    // Escuchar nuevos mensajes usando la nueva API
+    const messagesQuery = firebase.ref(firebase.database, 'chat/messages');
+    firebase.onValue(messagesQuery, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            // Obtener los últimos 50 mensajes
+            const messages = Object.values(data).slice(-50);
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+        }
+    });
+    
+    // Escuchar cambios en el indicador de escritura
+    const typingQuery = firebase.ref(firebase.database, 'chat/typing');
+    firebase.onValue(typingQuery, (snapshot) => {
+        const typingUsers = snapshot.val();
+        if (typingUsers) {
+            const typingUserIds = Object.keys(typingUsers);
+            if (typingUserIds.length > 0) {
+                showTypingIndicator();
+            } else {
+                hideTypingIndicator();
+            }
+        } else {
+            hideTypingIndicator();
+        }
+    });
+}
+
+// Función para enviar mensajes con respuestas automáticas
+function sendMessage() {
+    const chatInput = document.getElementById('chat-input');
+    const message = chatInput.value.trim();
+    
+    if (message && chatConnected) {
+        // Crear mensaje del usuario
+        const userMessageData = {
+            id: Date.now() + Math.random(),
+            user: 'Usuario',
+            message: message,
+            timestamp: firebase.serverTimestamp(),
+            userId: generateUserId(),
+            type: 'user'
+        };
+        
+        // Enviar mensaje del usuario a Firebase
+        const messagesRef = firebase.ref(firebase.database, 'chat/messages');
+        firebase.push(messagesRef, userMessageData);
+        
+        // Limpiar input
+        chatInput.value = '';
+        
+        // Guardar mensaje del usuario en historial local
+        saveMessageToHistory(userMessageData);
+        
+        // Mostrar indicador de "escribiendo" del asistente
+        showAutoResponseThinking();
+        
+        // Simular tiempo de procesamiento y generar respuesta automática
+        setTimeout(() => {
+            // Ocultar indicador de "escribiendo"
+            hideAutoResponseThinking();
+            
+            // Procesar respuesta automática
+            const autoResponse = processAutoResponse(message);
+            
+            // Crear respuesta del asistente
+            const assistantMessageData = {
+                id: Date.now() + Math.random() + 1,
+                user: 'Asistente DevsTopia',
+                message: autoResponse,
+                timestamp: firebase.serverTimestamp(),
+                userId: 'auto-assistant',
+                type: 'assistant'
+            };
+            
+            // Enviar respuesta del asistente a Firebase
+            firebase.push(messagesRef, assistantMessageData);
+            
+            // Guardar respuesta del asistente en historial local
+            saveMessageToHistory(assistantMessageData);
+            
+        }, 1500); // Simular 1.5 segundos de "pensamiento"
+        
+    } else if (!chatConnected) {
+        showNotification('Chat no disponible. Intenta más tarde.', 'error');
+    } else if (!message) {
+        showNotification('Por favor escribe un mensaje', 'error');
+    }
+}
+
+// Generar ID único para el usuario
+function generateUserId() {
+    let userId = localStorage.getItem('chatUserId');
+    if (!userId) {
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('chatUserId', userId);
+    }
+    return userId;
+}
+
+// Manejar escritura en tiempo real
+function handleTyping() {
+    if (chatConnected) {
+        const userId = generateUserId();
+        
+        // Indicar que el usuario está escribiendo usando la nueva API
+        const typingRef = firebase.ref(firebase.database, `chat/typing/${userId}`);
+        const typingData = {
+            user: 'Usuario',
+            timestamp: firebase.serverTimestamp()
+        };
+        
+        // Usar set para escribir datos
+        import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js').then(({ set }) => {
+            set(typingRef, typingData);
+        });
+        
+        // Limpiar timeout anterior
+        if (window.typingTimeout) {
+            clearTimeout(window.typingTimeout);
+        }
+        
+        // Detener indicador después de 3 segundos
+        window.typingTimeout = setTimeout(() => {
+            import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js').then(({ remove }) => {
+                remove(typingRef);
+            });
+        }, 3000);
+    }
+}
+
+// Función para mostrar mensajes con diferentes estilos
+function displayMessage(data) {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageDiv = document.createElement('div');
+    
+    const time = new Date(data.timestamp).toLocaleTimeString();
+    const isSystem = data.type === 'system';
+    
+    if (isSystem) {
+        messageDiv.className = 'message system';
+        messageDiv.innerHTML = `
+            <p>${data.message}</p>
+            <small>${time}</small>
+        `;
+    } else if (data.type === 'assistant') {
+        messageDiv.className = 'message assistant-message';
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="assistant-avatar">🤖</div>
+                <div class="message-text">
+                    <strong>${data.user}:</strong> ${data.message}
+                    <small>${time}</small>
+                </div>
+            </div>
+        `;
+    } else {
+        messageDiv.className = 'message user-message';
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">
+                    <strong>${data.user}:</strong> ${data.message}
+                    <small>${time}</small>
+                </div>
+                <div class="user-avatar">👤</div>
+            </div>
+        `;
+    }
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Guardar en historial local
+    saveMessageToHistory(data);
+}
+
+// Indicador de escritura
+function showTypingIndicator() {
+    const chatMessages = document.getElementById('chat-messages');
+    let typingIndicator = document.querySelector('.typing-indicator');
+    
+    if (!typingIndicator) {
+        typingIndicator = document.createElement('div');
+        typingIndicator.className = 'message bot typing-indicator';
+        typingIndicator.innerHTML = '<p>🔄 Alguien está escribiendo...</p>';
+        chatMessages.appendChild(typingIndicator);
+    }
+    
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const typingIndicator = document.querySelector('.typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// Mostrar estado del chat
+function showChatStatus(status) {
+    const chatHeader = document.querySelector('.chat-header h3');
+    if (chatHeader) {
+        chatHeader.textContent = `Chat en Vivo - ${status}`;
+    }
+}
+
+// Historial de chat
+function saveMessageToHistory(message) {
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    chatHistory.push(message);
+    
+    // Mantener solo los últimos 50 mensajes
+    if (chatHistory.length > 50) {
+        chatHistory = chatHistory.slice(-50);
+    }
+    
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+function loadChatHistory() {
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Solo cargar si no hay mensajes de Firebase
+    if (chatMessages.children.length <= 1) {
+        chatHistory.forEach(message => {
+            displayMessage(message);
+        });
+    }
+}
+
+// Solicitar atención del agente
+function requestAgent(reason = 'Atención general') {
+    if (chatConnected) {
+        const agentRequestRef = firebase.ref(firebase.database, 'chat/agent-requests');
+        const requestData = {
+            reason: reason,
+            userId: generateUserId(),
+            timestamp: firebase.serverTimestamp()
+        };
+        
+        firebase.push(agentRequestRef, requestData);
+        
+        showNotification('Solicitud enviada. Un agente te contactará pronto.', 'success');
+    } else {
+        showNotification('Chat no disponible', 'error');
+    }
+}
+
+function toggleChat() {
+    const chatContainer = document.getElementById('chat-container');
+    chatOpen = !chatOpen;
+    
+    if (chatOpen) {
+        chatContainer.classList.add('show');
+        
+        // Inicializar chat si no está conectado
+        if (!chatConnected) {
+            initializeChat();
+        }
+        
+        // Cargar historial local
+        loadChatHistory();
+    } else {
+        chatContainer.classList.remove('show');
     }
 }
 
@@ -335,7 +640,6 @@ function showServiceDetails(serviceName) {
     const service = devsTopiaData.servicios.find(s => s.nombre === serviceName);
     if (service) {
         showNotification(`Servicio: ${service.nombre}`, 'success');
-        // Aquí podrías abrir un modal con más detalles
     }
 }
 
@@ -422,49 +726,22 @@ function closeQuoteModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Chat en vivo
-function toggleChat() {
-    const chatContainer = document.getElementById('chat-container');
-    chatOpen = !chatOpen;
-    
-    if (chatOpen) {
-        chatContainer.classList.add('show');
-    } else {
-        chatContainer.classList.remove('show');
-    }
-}
-
-function sendMessage() {
-    const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
-    const message = chatInput.value.trim();
-    
-    if (message) {
-        // Agregar mensaje del usuario
-        const userMessage = document.createElement('div');
-        userMessage.className = 'message user';
-        userMessage.innerHTML = `<p>${message}</p>`;
-        chatMessages.appendChild(userMessage);
-        
-        // Simular respuesta del bot
-        setTimeout(() => {
-            const botMessage = document.createElement('div');
-            botMessage.className = 'message bot';
-            botMessage.innerHTML = `<p>Gracias por tu mensaje. Te responderemos pronto.</p>`;
-            chatMessages.appendChild(botMessage);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-        
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-}
-
 // Formularios
 function handleContactForm(event) {
     event.preventDefault();
     
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitText = submitBtn.querySelector('span');
+    
+    // Guardar texto original
+    const originalText = submitText.textContent;
+    
+    // Mostrar estado de carga
+    submitText.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+    
+    const formData = new FormData(form);
     const data = {
         nombre: formData.get('nombre'),
         email: formData.get('email'),
@@ -475,12 +752,40 @@ function handleContactForm(event) {
     // Validación básica
     if (!data.nombre || !data.email || !data.asunto || !data.mensaje) {
         showNotification('Por favor completa todos los campos', 'error');
+        resetFormState(originalText);
         return;
     }
     
-    // Simular envío
-    showNotification('¡Mensaje enviado! Te contactaremos pronto.', 'success');
-    event.target.reset();
+    // Configuración de EmailJS
+    const templateParams = {
+        name: data.nombre,
+        email: data.email,
+        subject: data.asunto,
+        message: data.mensaje
+    };
+    
+    // Enviar email usando EmailJS
+    emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
+            form.reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            showNotification('Error al enviar el mensaje. Por favor intenta nuevamente.', 'error');
+        })
+        .finally(function() {
+            resetFormState(originalText);
+        });
+}
+
+function resetFormState(originalText = 'Enviar Mensaje') {
+    const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+    const submitText = submitBtn.querySelector('span');
+    
+    // Restaurar texto original
+    submitText.textContent = originalText;
+    submitBtn.disabled = false;
 }
 
 function handleQuoteForm(event) {
@@ -643,6 +948,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Inicializar chat al cargar la página
+    setTimeout(() => {
+        initializeChat();
+    }, 2000); // Esperar 2 segundos para que la página cargue completamente
+    
     // Animación de carga inicial
     setTimeout(() => {
         document.body.style.opacity = '1';
@@ -659,4 +969,5 @@ window.scrollToTop = scrollToTop;
 window.openQuoteModal = openQuoteModal;
 window.closeQuoteModal = closeQuoteModal;
 window.toggleChat = toggleChat;
-window.sendMessage = sendMessage; 
+window.sendMessage = sendMessage;
+window.handleTyping = handleTyping; 

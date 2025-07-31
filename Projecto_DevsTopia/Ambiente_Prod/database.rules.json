@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "chat": {
+      "messages": {
+        ".read": true,
+        ".write": true,
+        "$messageId": {
+          ".validate": "newData.hasChildren(['user', 'message', 'timestamp'])"
+        }
+      },
+      "typing": {
+        ".read": true,
+        ".write": true,
+        "$userId": {
+          ".validate": "newData.hasChildren(['user', 'timestamp'])"
+        }
+      },
+      "agent-requests": {
+        ".read": "auth != null && auth.token.admin === true",
+        ".write": true,
+        "$requestId": {
+          ".validate": "newData.hasChildren(['reason', 'userId', 'timestamp'])"
+        }
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": true,
+        ".write": "$uid === auth.uid",
+        ".validate": "newData.hasChildren(['name', 'email'])"
+      }
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+} 
