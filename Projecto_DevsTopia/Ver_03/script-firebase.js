@@ -260,15 +260,15 @@ function toggleTheme() {
 function initializeChat() {
     try {
         // Verificar que Firebase esté disponible
-        if (typeof firebase === 'undefined') {
+        if (typeof firebase === 'undefined' || !firebase.database) {
             console.error('Firebase no está cargado');
             showNotification('Error: Firebase no disponible', 'error');
             return;
         }
 
-        // Obtener referencia a la base de datos
-        messagesRef = firebase.database().ref('chat/messages');
-        typingRef = firebase.database().ref('chat/typing');
+        // Obtener referencia a la base de datos usando la nueva API
+        messagesRef = firebase.ref(firebase.database, 'chat/messages');
+        typingRef = firebase.ref(firebase.database, 'chat/typing');
         
         // Configurar listeners
         setupFirebaseListeners();
@@ -286,14 +286,22 @@ function initializeChat() {
 
 // Configurar listeners de Firebase
 function setupFirebaseListeners() {
-    // Escuchar nuevos mensajes
-    messagesRef.limitToLast(50).on('child_added', (snapshot) => {
-        const message = snapshot.val();
-        displayMessage(message);
+    // Escuchar nuevos mensajes usando la nueva API
+    const messagesQuery = firebase.ref(firebase.database, 'chat/messages');
+    firebase.onValue(messagesQuery, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            // Obtener los últimos 50 mensajes
+            const messages = Object.values(data).slice(-50);
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+        }
     });
     
     // Escuchar cambios en el indicador de escritura
-    typingRef.on('value', (snapshot) => {
+    const typingQuery = firebase.ref(firebase.database, 'chat/typing');
+    firebase.onValue(typingQuery, (snapshot) => {
         const typingUsers = snapshot.val();
         if (typingUsers) {
             const typingUserIds = Object.keys(typingUsers);
@@ -319,12 +327,13 @@ function sendMessage() {
             id: Date.now() + Math.random(),
             user: 'Usuario',
             message: message,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: firebase.serverTimestamp(),
             userId: generateUserId()
         };
         
-        // Enviar a Firebase
-        messagesRef.push(messageData);
+        // Enviar a Firebase usando la nueva API
+        const messagesRef = firebase.ref(firebase.database, 'chat/messages');
+        firebase.push(messagesRef, messageData);
         
         // Limpiar input
         chatInput.value = '';
@@ -354,10 +363,16 @@ function handleTyping() {
     if (chatConnected) {
         const userId = generateUserId();
         
-        // Indicar que el usuario está escribiendo
-        typingRef.child(userId).set({
+        // Indicar que el usuario está escribiendo usando la nueva API
+        const typingRef = firebase.ref(firebase.database, `chat/typing/${userId}`);
+        const typingData = {
             user: 'Usuario',
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+            timestamp: firebase.serverTimestamp()
+        };
+        
+        // Usar set para escribir datos
+        import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js').then(({ set }) => {
+            set(typingRef, typingData);
         });
         
         // Limpiar timeout anterior
@@ -367,7 +382,9 @@ function handleTyping() {
         
         // Detener indicador después de 3 segundos
         window.typingTimeout = setTimeout(() => {
-            typingRef.child(userId).remove();
+            import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js').then(({ remove }) => {
+                remove(typingRef);
+            });
         }, 3000);
     }
 }
@@ -455,12 +472,14 @@ function loadChatHistory() {
 // Solicitar atención del agente
 function requestAgent(reason = 'Atención general') {
     if (chatConnected) {
-        const agentRequestRef = firebase.database().ref('chat/agent-requests');
-        agentRequestRef.push({
+        const agentRequestRef = firebase.ref(firebase.database, 'chat/agent-requests');
+        const requestData = {
             reason: reason,
             userId: generateUserId(),
-            timestamp: firebase.database.ServerValue.TIMESTAMP
-        });
+            timestamp: firebase.serverTimestamp()
+        };
+        
+        firebase.push(agentRequestRef, requestData);
         
         showNotification('Solicitud enviada. Un agente te contactará pronto.', 'success');
     } else {
