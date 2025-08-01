@@ -63,13 +63,13 @@ class AdminAuth {
                 box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             ">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <h3 style="color: #3B71FF; margin: 0;">🔐 Acceso Administrador</h3>
-                    <p style="color: #666; font-size: 14px; margin: 10px 0;">Ingresa las credenciales para acceder al dashboard</p>
+                    <h3 style="color: #3B71FF; margin: 0;">🔐 <span data-i18n="admin_login">Acceso Administrador</span></h3>
+                    <p style="color: #666; font-size: 14px; margin: 10px 0;" data-i18n="admin_login_desc">Ingresa las credenciales para acceder al dashboard</p>
                 </div>
                 
                 <form id="admin-login-form">
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; color: #333; font-weight: 500;">Usuario:</label>
+                        <label style="display: block; margin-bottom: 5px; color: #333; font-weight: 500;" data-i18n="admin_username">Usuario:</label>
                         <input type="text" id="admin-username" style="
                             width: 100%;
                             padding: 10px;
@@ -77,11 +77,11 @@ class AdminAuth {
                             border-radius: 5px;
                             font-size: 14px;
                             box-sizing: border-box;
-                        " placeholder="Ingresa tu usuario">
+                        " data-i18n-placeholder="admin_username_placeholder" placeholder="Ingresa tu usuario">
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 5px; color: #333; font-weight: 500;">Contraseña:</label>
+                        <label style="display: block; margin-bottom: 5px; color: #333; font-weight: 500;" data-i18n="admin_password">Contraseña:</label>
                         <input type="password" id="admin-password" style="
                             width: 100%;
                             padding: 10px;
@@ -89,7 +89,7 @@ class AdminAuth {
                             border-radius: 5px;
                             font-size: 14px;
                             box-sizing: border-box;
-                        " placeholder="Ingresa tu contraseña">
+                        " data-i18n-placeholder="admin_password_placeholder" placeholder="Ingresa tu contraseña">
                     </div>
                     
                     <div style="display: flex; gap: 10px;">
@@ -102,7 +102,7 @@ class AdminAuth {
                             border-radius: 5px;
                             cursor: pointer;
                             font-weight: 500;
-                        ">Ingresar</button>
+                        " data-i18n="admin_login_btn">Ingresar</button>
                         <button type="button" onclick="adminAuth.closeLoginModal()" style="
                             flex: 1;
                             padding: 12px;
@@ -112,7 +112,7 @@ class AdminAuth {
                             border-radius: 5px;
                             cursor: pointer;
                             font-weight: 500;
-                        ">Cancelar</button>
+                        " data-i18n="btn_close">Cancelar</button>
                     </div>
                 </form>
                 

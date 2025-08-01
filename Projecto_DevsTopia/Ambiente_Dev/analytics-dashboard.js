@@ -395,71 +395,43 @@ function toggleAnalyticsDashboard() {
     }
 }
 
-// Crear botón para mostrar dashboard (solo administradores)
-function createAnalyticsButton() {
-    const button = document.createElement('button');
-    button.innerHTML = '👨‍💼 Admin';
-    button.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        background: linear-gradient(135deg, #3B71FF, #1e40af);
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-family: 'Inter', sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        z-index: 9999;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    `;
+// Actualizar botón del footer según estado de autenticación
+function updateFooterAdminButton() {
+    const adminBtn = document.getElementById('admin-access-btn');
+    if (!adminBtn) return;
     
-    // Efectos hover
-    button.onmouseenter = () => {
-        button.style.transform = 'scale(1.05)';
-        button.style.boxShadow = '0 4px 15px rgba(59, 113, 255, 0.4)';
-    };
-    
-    button.onmouseleave = () => {
-        button.style.transform = 'scale(1)';
-        button.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-    };
-    
-    // Verificar si ya está autenticado
     if (adminAuth.checkAdminAccess()) {
-        button.innerHTML = '👨‍💼 Admin ✓';
-        button.style.background = 'linear-gradient(135deg, #28a745, #1e7e34)';
-        button.onclick = () => adminAuth.showAdminPanel();
+        adminBtn.innerHTML = '<i class="fas fa-user-shield"></i><span>Admin ✓</span>';
+        adminBtn.className = 'admin-btn authenticated';
+        adminBtn.onclick = () => adminAuth.showAdminPanel();
+        adminBtn.title = 'Panel de Administrador';
     } else {
-        button.onclick = () => adminAuth.showLoginModal();
+        adminBtn.innerHTML = '<i class="fas fa-user-shield"></i><span>Admin</span>';
+        adminBtn.className = 'admin-btn';
+        adminBtn.onclick = () => adminAuth.showLoginModal();
+        adminBtn.title = 'Acceso Administrador';
     }
-    
-    document.body.appendChild(button);
-    
-    // Actualizar botón cuando cambie el estado de autenticación
-    setInterval(() => {
-        if (adminAuth.checkAdminAccess()) {
-            button.innerHTML = '👨‍💼 Admin ✓';
-            button.style.background = 'linear-gradient(135deg, #28a745, #1e7e34)';
-            button.onclick = () => adminAuth.showAdminPanel();
-        } else {
-            button.innerHTML = '👨‍💼 Admin';
-            button.style.background = 'linear-gradient(135deg, #3B71FF, #1e40af)';
-            button.onclick = () => adminAuth.showLoginModal();
-        }
-    }, 5000); // Verificar cada 5 segundos
+}
+
+// Función para inicializar el botón del footer
+function initializeFooterAdminButton() {
+    // Esperar a que el DOM esté listo
+    setTimeout(() => {
+        updateFooterAdminButton();
+        
+        // Actualizar cada 5 segundos
+        setInterval(updateFooterAdminButton, 5000);
+    }, 1000);
 }
 
 // ===== EXPORTAR FUNCIONES =====
 window.chatAnalytics = chatAnalytics;
 window.integrateAnalytics = integrateAnalytics;
 window.toggleAnalyticsDashboard = toggleAnalyticsDashboard;
-window.createAnalyticsButton = createAnalyticsButton;
+window.updateFooterAdminButton = updateFooterAdminButton;
+window.initializeFooterAdminButton = initializeFooterAdminButton;
 
-// Crear botón cuando se carga la página
+// Inicializar botón del footer cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(createAnalyticsButton, 2000); // Aparece después de 2 segundos
+    initializeFooterAdminButton();
 }); 

@@ -274,7 +274,7 @@ function initializeChat() {
         setupFirebaseListeners();
         
         chatConnected = true;
-        console.log('✅ Conectado a Firebase');
+        // Conectado a Firebase
         showChatStatus('Conectado');
         showNotification('Chat conectado', 'success');
         
@@ -781,11 +781,11 @@ function handleContactForm(event) {
     // Enviar email usando EmailJS
     emailjs.send('service_kgnumgb', 'template_ojoaqyd', templateParams)
         .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
+            // Email enviado exitosamente
             showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
             form.reset();
         }, function(error) {
-            console.log('FAILED...', error);
+            // Error al enviar email
             showNotification('Error al enviar el mensaje. Por favor intenta nuevamente.', 'error');
         })
         .finally(function() {

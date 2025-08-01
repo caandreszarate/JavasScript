@@ -33,9 +33,9 @@
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
     
     <!-- Stylesheets -->
+    <!-- Font Awesome loaded normally to avoid preload warnings -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -87,7 +87,7 @@
         serverTimestamp: serverTimestamp
       };
 
-      console.log('🔥 Firebase inicializado para DevsTopia Chat');
+              // Firebase inicializado para DevsTopia Chat
     </script>
 </head>
 <body>
@@ -104,22 +104,22 @@
                 
                 <ul class="nav-menu" id="nav-menu" role="menubar">
                     <li class="nav-item" role="none">
-                        <a href="#inicio" class="nav-link" role="menuitem">Inicio</a>
+                        <a href="#inicio" class="nav-link" role="menuitem" data-i18n="nav_home">Inicio</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#nosotros" class="nav-link" role="menuitem">Nosotros</a>
+                        <a href="#nosotros" class="nav-link" role="menuitem" data-i18n="nav_about">Nosotros</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#servicios" class="nav-link" role="menuitem">Servicios</a>
+                        <a href="#servicios" class="nav-link" role="menuitem" data-i18n="nav_services">Servicios</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#portafolio" class="nav-link" role="menuitem">Portafolio</a>
+                        <a href="#portafolio" class="nav-link" role="menuitem" data-i18n="nav_portfolio">Portafolio</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#blog" class="nav-link" role="menuitem">Blog</a>
+                        <a href="#blog" class="nav-link" role="menuitem" data-i18n="nav_blog">Blog</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#contacto" class="nav-link" role="menuitem">Contacto</a>
+                        <a href="#contacto" class="nav-link" role="menuitem" data-i18n="nav_contact">Contacto</a>
                     </li>
                 </ul>
                 
@@ -127,6 +127,7 @@
                     <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
                         <i class="fas fa-moon"></i>
                     </button>
+
                     <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
                         <span class="bar"></span>
                         <span class="bar"></span>
@@ -143,15 +144,15 @@
         <section id="inicio" class="hero" aria-labelledby="hero-title">
             <div class="hero-container">
                 <div class="hero-content">
-                    <h1 id="hero-title" class="hero-title">Transformamos Ideas en Soluciones Digitales</h1>
-                    <p class="hero-subtitle">Desarrollo de software innovador, funcional y escalable para impulsar tu negocio hacia el futuro digital</p>
+                    <h1 id="hero-title" class="hero-title" data-i18n="hero_title">Transformamos Ideas en Soluciones Digitales</h1>
+                    <p class="hero-subtitle" data-i18n="hero_subtitle">Desarrollo de software innovador, funcional y escalable para impulsar tu negocio hacia el futuro digital</p>
                     <div class="hero-buttons">
                         <button class="btn btn-primary" onclick="scrollToSection('servicios')" aria-label="Ver nuestros servicios">
-                            <span>Nuestros Servicios</span>
+                            <span data-i18n="hero_cta_primary">Nuestros Servicios</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                         <button class="btn btn-secondary" onclick="openQuoteModal()" aria-label="Solicitar cotización">
-                            <span>Solicitar Cotización</span>
+                            <span data-i18n="quote_title">Solicitar Cotización</span>
                             <i class="fas fa-calculator"></i>
                         </button>
                     </div>
@@ -168,39 +169,39 @@
         <section id="nosotros" class="about" aria-labelledby="about-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="about-title" class="section-title">Sobre DevsTopia</h2>
-                    <p class="section-subtitle">Somos expertos en transformación digital</p>
+                    <h2 id="about-title" class="section-title" data-i18n="about_title">Sobre DevsTopia</h2>
+                    <p class="section-subtitle" data-i18n="about_subtitle">Somos expertos en transformación digital</p>
                 </header>
                 
                 <div class="about-content">
                     <div class="about-text">
-                        <p class="about-description">
+                        <p class="about-description" data-i18n="about_description">
                             DevsTopia es una empresa de desarrollo de software que transforma ideas en soluciones digitales innovadoras, funcionales y escalables. Nos especializamos en crear aplicaciones web y móviles a la medida, plataformas tecnológicas y sistemas inteligentes que impulsan la eficiencia y el crecimiento de empresas en distintos sectores.
                         </p>
                         
                         <div class="diferenciales">
-                            <h3>Nuestros Diferenciales</h3>
+                            <h3 data-i18n="about_differentials_title">Nuestros Diferenciales</h3>
                             <ul class="diferenciales-list">
-                                <li>Enfoque minimalista e intuitivo en diseño UX/UI</li>
-                                <li>Equipo multidisciplinario y 100% enfocado en calidad</li>
-                                <li>Desarrollo ágil, flexible y centrado en resultados</li>
-                                <li>Soluciones tecnológicas personalizadas y escalables</li>
-                                <li>Compromiso real con el éxito de nuestros clientes</li>
+                                <li data-i18n="about_differential_1">Enfoque minimalista e intuitivo en diseño UX/UI</li>
+                                <li data-i18n="about_differential_2">Equipo multidisciplinario y 100% enfocado en calidad</li>
+                                <li data-i18n="about_differential_3">Desarrollo ágil, flexible y centrado en resultados</li>
+                                <li data-i18n="about_differential_4">Soluciones tecnológicas personalizadas y escalables</li>
+                                <li data-i18n="about_differential_5">Compromiso real con el éxito de nuestros clientes</li>
                             </ul>
                         </div>
                         
                         <div class="about-stats">
                             <div class="stat">
                                 <h3>100%</h3>
-                                <p>Enfoque Personalizado en cada proyecto</p>
+                                <p data-i18n="about_stat_1">Enfoque Personalizado en cada proyecto</p>
                             </div>
                             <div class="stat">
                                 <h3><24h</h3>
-                                <p>Tiempo de respuesta promedio</p>
+                                <p data-i18n="about_stat_2">Tiempo de respuesta promedio</p>
                             </div>
                             <div class="stat">
                                 <h3>95%</h3>
-                                <p>Satisfaccion de Nuestros clientes</p>
+                                <p data-i18n="about_stat_3">Satisfaccion de Nuestros clientes</p>
                             </div>
                         </div>
                     </div>
@@ -218,11 +219,11 @@
         <section id="servicios" class="services" aria-labelledby="services-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="services-title" class="section-title">Nuestros Servicios</h2>
-                    <p class="section-subtitle">Soluciones tecnológicas integrales para tu negocio</p>
+                    <h2 id="services-title" class="section-title" data-i18n="services_title">Nuestros Servicios</h2>
+                    <p class="section-subtitle" data-i18n="services_subtitle">Soluciones tecnológicas integrales para tu negocio</p>
                 </header>
                 
-                <div class="services-grid" id="services-grid" role="grid">
+                <div class="services-grid" id="services-container" role="grid">
                     <!-- Los servicios se cargarán dinámicamente con JavaScript -->
                 </div>
             </div>
@@ -232,20 +233,20 @@
         <section id="portafolio" class="portfolio" aria-labelledby="portfolio-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="portfolio-title" class="section-title">Nuestro Portafolio</h2>
-                    <p class="section-subtitle">Proyectos que hablan por sí mismos</p>
+                    <h2 id="portfolio-title" class="section-title" data-i18n="portfolio_title">Nuestro Portafolio</h2>
+                    <p class="section-subtitle" data-i18n="portfolio_subtitle">Proyectos que hablan por sí mismos</p>
                 </header>
                 
                 <div class="portfolio-controls">
                     <div class="portfolio-filters" role="tablist" aria-label="Filtrar proyectos">
-                        <button class="filter-btn active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
-                        <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
-                        <button class="filter-btn" data-filter="movil" role="tab" aria-selected="false">Móvil</button>
-                        <button class="filter-btn" data-filter="software" role="tab" aria-selected="false">Software</button>
+                        <button class="filter-btn active" data-filter="todos" role="tab" aria-selected="true" data-i18n="portfolio_filter_all">Todos</button>
+                        <button class="filter-btn" data-filter="web" role="tab" aria-selected="false" data-i18n="portfolio_filter_web">Web</button>
+                        <button class="filter-btn" data-filter="movil" role="tab" aria-selected="false" data-i18n="portfolio_filter_mobile">Móvil</button>
+                        <button class="filter-btn" data-filter="software" role="tab" aria-selected="false" data-i18n="portfolio_filter_software">Software</button>
                     </div>
                 </div>
                 
-                <div class="portfolio-grid" id="portfolio-grid" role="grid">
+                <div class="portfolio-grid" id="portfolio-container" role="grid">
                     <!-- Los proyectos se cargarán dinámicamente con JavaScript -->
                 </div>
             </div>
@@ -255,11 +256,11 @@
         <section id="blog" class="blog" aria-labelledby="blog-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="blog-title" class="section-title">Blog & Noticias</h2>
-                    <p class="section-subtitle">Mantente actualizado con las últimas tendencias</p>
+                    <h2 id="blog-title" class="section-title" data-i18n="blog_title">Blog & Noticias</h2>
+                    <p class="section-subtitle" data-i18n="blog_subtitle">Mantente actualizado con las últimas tendencias</p>
                 </header>
                 
-                <div class="blog-grid" id="blog-grid">
+                <div class="blog-grid" id="blog-container">
                     <!-- Los artículos del blog se cargarán dinámicamente con JavaScript -->
                 </div>
             </div>
@@ -269,8 +270,8 @@
         <section class="faq" aria-labelledby="faq-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="faq-title" class="section-title">Preguntas Frecuentes</h2>
-                    <p class="section-subtitle">Resolvemos tus dudas más comunes</p>
+                    <h2 id="faq-title" class="section-title" data-i18n="faq_title">Preguntas Frecuentes</h2>
+                    <p class="section-subtitle" data-i18n="faq_subtitle">Resolvemos tus dudas más comunes</p>
                 </header>
                 
                 <div class="faq-container" id="faq-container" role="region" aria-labelledby="faq-title">
@@ -283,8 +284,8 @@
         <section id="contacto" class="contact" aria-labelledby="contact-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 id="contact-title" class="section-title">Contáctanos</h2>
-                    <p class="section-subtitle">Estamos aquí para ayudarte a hacer realidad tu proyecto</p>
+                    <h2 id="contact-title" class="section-title" data-i18n="contact_title">Contáctanos</h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">Estamos aquí para ayudarte a hacer realidad tu proyecto</p>
                 </header>
                 
                 <div class="contact-content">
@@ -292,14 +293,14 @@
                         <div class="contact-item">
                             <i class="fas fa-envelope" aria-hidden="true"></i>
                             <div>
-                                <h3>Email</h3>
+                                <h3 data-i18n="contact_email_label">Email</h3>
                                 <p><a href="mailto:info@devstopia.com">info@devstopia.com</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone" aria-hidden="true"></i>
                             <div>
-                                <h3>Teléfono</h3>
+                                <h3 data-i18n="contact_phone">Teléfono</h3>
                                 <p><a href="tel:+571234567890">+240 222 311 498 (Guinea Ecuatorial)</a></p>
                                 <p><a href="tel:+571234567890">+57 315 057 07 42 (Colombia)</a></p>
                             </div>
@@ -307,7 +308,7 @@
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                             <div>
-                                <h3>Ubicación</h3>
+                                <h3 data-i18n="contact_address">Ubicación</h3>
                                 <p>Bogotá - Colombia</p>
                             </div>
                         </div>
@@ -315,23 +316,23 @@
                     
                     <form class="contact-form" id="contact-form" role="form" aria-labelledby="contact-title">
                         <div class="form-group">
-                            <label for="nombre" class="form-label">Nombre completo *</label>
+                            <label for="nombre" class="form-label" data-i18n="contact_name">Nombre completo *</label>
                             <input type="text" id="nombre" name="nombre" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="email" class="form-label">Email *</label>
+                            <label for="email" class="form-label" data-i18n="contact_email">Email *</label>
                             <input type="email" id="email" name="email" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="asunto" class="form-label">Asunto *</label>
+                            <label for="asunto" class="form-label" data-i18n="contact_subject">Asunto *</label>
                             <input type="text" id="asunto" name="asunto" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <label for="mensaje" class="form-label">Mensaje *</label>
+                            <label for="mensaje" class="form-label" data-i18n="contact_message">Mensaje *</label>
                             <textarea id="mensaje" name="mensaje" rows="5" required aria-required="true"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            <span>Enviar Mensaje</span>
+                            <span data-i18n="contact_send">Enviar Mensaje</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </form>
@@ -346,7 +347,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>DevsTopia</h3>
-                    <p>Transformamos ideas en soluciones digitales innovadoras y escalables.</p>
+                    <p data-i18n="footer_description">Transformamos ideas en soluciones digitales innovadoras y escalables.</p>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/in/devstopia" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="https://www.instagram.com/devs.topia/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -355,21 +356,21 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Servicios</h4>
+                    <h4 data-i18n="footer_services">Servicios</h4>
                     <ul>
-                        <li><a href="#servicios">Desarrollo Web</a></li>
-                        <li><a href="#servicios">Apps Móviles</a></li>
-                        <li><a href="#servicios">Software a Medida</a></li>
-                        <li><a href="#servicios">Consultoría</a></li>
+                        <li><a href="#servicios" data-i18n="service_web_dev">Desarrollo Web</a></li>
+                        <li><a href="#servicios" data-i18n="service_mobile">Apps Móviles</a></li>
+                        <li><a href="#servicios" data-i18n="service_software">Software a Medida</a></li>
+                        <li><a href="#servicios" data-i18n="service_consulting">Consultoría</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Empresa</h4>
+                    <h4 data-i18n="footer_company">Empresa</h4>
                     <ul>
-                        <li><a href="#nosotros">Sobre Nosotros</a></li>
-                        <li><a href="#portafolio">Portafolio</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#nosotros" data-i18n="nav_about">Sobre Nosotros</a></li>
+                        <li><a href="#portafolio" data-i18n="nav_portfolio">Portafolio</a></li>
+                        <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+                        <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -381,7 +382,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 DevsTopia. Todos los derechos reservados.</p>
+                <p data-i18n="footer_copyright">&copy; 2024 DevsTopia. Todos los derechos reservados.</p>
+                <div class="admin-access">
+                    <button id="admin-access-btn" onclick="showAdminPanel()" class="admin-btn" title="Acceso Administrador">
+                        <i class="fas fa-user-shield"></i>
+                        <span data-i18n="footer_admin">Admin</span>
+                    </button>
+
+                </div>
             </div>
         </div>
     </footer>
@@ -395,46 +403,46 @@
     <div id="quote-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title">Solicitar Cotización</h2>
+                <h2 id="modal-title" data-i18n="quote_title">Solicitar Cotización</h2>
                 <button class="modal-close" onclick="closeQuoteModal()" aria-label="Cerrar modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form class="quote-form" id="quote-form">
                 <div class="form-group">
-                    <label for="quote-nombre">Nombre completo *</label>
+                    <label for="quote-nombre" data-i18n="quote_name">Nombre completo *</label>
                     <input type="text" id="quote-nombre" name="nombre" required>
                 </div>
                 <div class="form-group">
-                    <label for="quote-email">Email *</label>
+                    <label for="quote-email" data-i18n="quote_email">Email *</label>
                     <input type="email" id="quote-email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="quote-servicio">Servicio de interés *</label>
+                    <label for="quote-servicio" data-i18n="quote_service">Servicio de interés *</label>
                     <select id="quote-servicio" name="servicio" required>
-                        <option value="">Selecciona un servicio</option>
-                        <option value="desarrollo-web">Desarrollo Web</option>
-                        <option value="app-movil">Aplicación Móvil</option>
-                        <option value="software-medida">Software a Medida</option>
-                        <option value="consultoria">Consultoría</option>
-                        <option value="otros">Otros</option>
+                        <option value="" data-i18n="quote_service_placeholder">Selecciona un servicio</option>
+                        <option value="desarrollo-web" data-i18n="quote_service_web">Desarrollo Web</option>
+                        <option value="app-movil" data-i18n="quote_service_mobile">Aplicación Móvil</option>
+                        <option value="software-medida" data-i18n="quote_service_software">Software a Medida</option>
+                        <option value="consultoria" data-i18n="quote_service_consulting">Consultoría</option>
+                        <option value="otros" data-i18n="quote_service_other">Otros</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="quote-descripcion">Descripción del proyecto *</label>
+                    <label for="quote-descripcion" data-i18n="quote_description">Descripción del proyecto *</label>
                     <textarea id="quote-descripcion" name="descripcion" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="quote-presupuesto">Presupuesto estimado</label>
+                    <label for="quote-presupuesto" data-i18n="quote_budget">Presupuesto estimado</label>
                     <select id="quote-presupuesto" name="presupuesto">
-                        <option value="">Selecciona un rango</option>
-                        <option value="menos-5000">Menos de $5,000 USD</option>
-                        <option value="5000-15000">$5,000 - $15,000 USD</option>
-                        <option value="15000-50000">$15,000 - $50,000 USD</option>
-                        <option value="mas-50000">Más de $50,000 USD</option>
+                        <option value="" data-i18n="quote_budget_placeholder">Selecciona un rango</option>
+                        <option value="menos-5000" data-i18n="quote_budget_less_5k">Menos de $5,000 USD</option>
+                        <option value="5000-15000" data-i18n="quote_budget_5k_15k">$5,000 - $15,000 USD</option>
+                        <option value="15000-50000" data-i18n="quote_budget_15k_50k">$15,000 - $50,000 USD</option>
+                        <option value="mas-50000" data-i18n="quote_budget_more_50k">Más de $50,000 USD</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                <button type="submit" class="btn btn-primary" data-i18n="quote_submit">Enviar Solicitud</button>
             </form>
         </div>
     </div>
@@ -446,18 +454,18 @@
         </button>
         <div class="chat-container" id="chat-container">
             <div class="chat-header">
-                <h3>Chat en Vivo</h3>
+                <h3 data-i18n="chat_title">Chat en Vivo</h3>
                 <button class="chat-close" onclick="toggleChat()" aria-label="Cerrar chat">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="chat-messages" id="chat-messages">
                 <div class="message bot">
-                    <p>¡Hola! ¿En qué podemos ayudarte hoy?</p>
+                    <p data-i18n="chat_greeting">¡Hola! ¿En qué podemos ayudarte hoy?</p>
                 </div>
             </div>
             <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje" oninput="handleTyping()">
+                <input type="text" id="chat-input" data-i18n-placeholder="chat_placeholder" placeholder="Escribe tu mensaje..." aria-label="Mensaje" oninput="handleTyping()">
                 <button onclick="sendMessage()" aria-label="Enviar mensaje">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -466,6 +474,8 @@
     </div>
 
             <!-- Scripts -->
+        <script src="translations.js"></script>
+        <script src="dynamic-content.js"></script>
         <script src="script-firebase.js?v=3.0"></script>
         <script src="chat-auto-responses.js"></script>
         <script src="chat-ai-enhanced.js"></script>
