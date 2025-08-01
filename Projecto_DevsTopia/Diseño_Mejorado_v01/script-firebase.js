@@ -862,6 +862,11 @@ function setupScrollAnimations() {
 
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar sistema de traducciones
+    if (typeof initializeLanguage === 'function') {
+        initializeLanguage();
+    }
+    
     // Configurar tema inicial
     document.documentElement.setAttribute('data-theme', currentTheme);
     const themeIcon = document.querySelector('.theme-toggle i');

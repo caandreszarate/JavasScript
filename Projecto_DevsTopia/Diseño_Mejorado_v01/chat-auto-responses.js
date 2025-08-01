@@ -113,20 +113,19 @@ function sendMessageWithAutoResponse() {
     const chatInput = document.getElementById('chat-input');
     const message = chatInput.value.trim();
     
-    if (message && chatConnected) {
+    if (message) {
         // Mostrar mensaje del usuario
         const userMessageData = {
             id: Date.now() + Math.random(),
             user: 'Usuario',
             message: message,
-            timestamp: firebase.serverTimestamp(),
-            userId: generateUserId(),
+            timestamp: new Date(),
+            userId: 'user-' + Date.now(),
             type: 'user'
         };
         
-        // Enviar mensaje del usuario a Firebase
-        const messagesRef = firebase.ref(firebase.database, 'chat/messages');
-        firebase.push(messagesRef, userMessageData);
+        // Mostrar mensaje del usuario en el chat
+        displayMessage(userMessageData);
         
         // Limpiar input
         chatInput.value = '';
@@ -147,22 +146,16 @@ function sendMessageWithAutoResponse() {
                 id: Date.now() + Math.random() + 1,
                 user: 'Asistente DevsTopia',
                 message: autoResponse,
-                timestamp: firebase.serverTimestamp(),
+                timestamp: new Date(),
                 userId: 'auto-assistant',
                 type: 'auto'
             };
             
-            // Enviar respuesta automática a Firebase
-            firebase.push(messagesRef, autoResponseData);
-            
-            // Guardar en historial local
-            saveMessageToHistory(userMessageData);
-            saveMessageToHistory(autoResponseData);
+            // Mostrar respuesta automática en el chat
+            displayMessage(autoResponseData);
             
         }, 1500); // Simular 1.5 segundos de "pensamiento"
         
-    } else if (!chatConnected) {
-        showNotification('Chat no disponible. Intenta más tarde.', 'error');
     } else if (!message) {
         showNotification('Por favor escribe un mensaje', 'error');
     }
@@ -172,11 +165,10 @@ function sendMessageWithAutoResponse() {
 function showAutoResponseThinking() {
     const chatMessages = document.getElementById('chat-messages');
     const thinkingDiv = document.createElement('div');
-    thinkingDiv.className = 'message auto-thinking';
+    thinkingDiv.className = 'message bot';
     thinkingDiv.id = 'auto-thinking';
     thinkingDiv.innerHTML = `
         <div class="message-content">
-            <div class="auto-avatar">💬</div>
             <div class="message-text">
                 <div class="thinking-dots">
                     <span></span>
