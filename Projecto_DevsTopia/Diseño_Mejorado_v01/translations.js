@@ -24,6 +24,34 @@ const translations = {
             contacto: "Contacto"
         },
         
+        // Portafolio
+        portafolio: {
+            ecommerce: {
+                titulo: "Plataforma E-commerce",
+                descripcion: "Plataforma de comercio electrónico completa con gestión de inventario y pagos."
+            },
+            delivery: {
+                titulo: "App de Delivery",
+                descripcion: "Aplicación móvil para entrega de alimentos con geolocalización."
+            },
+            erp: {
+                titulo: "Sistema de Gestión ERP",
+                descripcion: "Software empresarial para gestión integral de recursos."
+            },
+            dashboard: {
+                titulo: "Dashboard Analytics",
+                descripcion: "Panel de control con análisis de datos en tiempo real."
+            },
+            fitness: {
+                titulo: "App de Fitness",
+                descripcion: "Aplicación para seguimiento de rutinas y nutrición."
+            },
+            facturacion: {
+                titulo: "Sistema de Facturación",
+                descripcion: "Software para gestión de facturas y contabilidad."
+            }
+        },
+        
         // Servicios
         servicios: {
             desarrolloSoftware: {
@@ -134,6 +162,34 @@ const translations = {
             servicios: "Services",
             portafolio: "Portfolio",
             contacto: "Contact"
+        },
+        
+        // Portfolio
+        portafolio: {
+            ecommerce: {
+                titulo: "E-commerce Platform",
+                descripcion: "Complete e-commerce platform with inventory and payment management."
+            },
+            delivery: {
+                titulo: "Delivery App",
+                descripcion: "Mobile application for food delivery with geolocation."
+            },
+            erp: {
+                titulo: "ERP Management System",
+                descripcion: "Enterprise software for comprehensive resource management."
+            },
+            dashboard: {
+                titulo: "Dashboard Analytics",
+                descripcion: "Control panel with real-time data analysis."
+            },
+            fitness: {
+                titulo: "Fitness App",
+                descripcion: "Application for routine and nutrition tracking."
+            },
+            facturacion: {
+                titulo: "Billing System",
+                descripcion: "Software for invoice and accounting management."
+            }
         },
         
         // Services
@@ -295,6 +351,34 @@ function changeLanguage(lang) {
     // Actualizar chat
     updateChatLanguage(currentLang);
     
+    // Recargar contenido dinámico
+    setTimeout(() => {
+        if (typeof loadServices === 'function') {
+            console.log('Recargando servicios...');
+            loadServices();
+        }
+        if (typeof loadPortfolio === 'function') {
+            console.log('Recargando portafolio...');
+            loadPortfolio();
+        }
+        
+        // Forzar actualización de elementos estáticos
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            const keys = key.split('.');
+            let value = langData;
+            
+            for (const k of keys) {
+                value = value[k];
+            }
+            
+            if (value) {
+                element.textContent = value;
+            }
+        });
+    }, 50);
+    
     console.log('Idioma cambiado exitosamente a:', currentLang);
 }
 
@@ -330,10 +414,12 @@ function initializeLanguage() {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             debugTranslationElements();
+            debugTranslations();
             changeLanguage(currentLang);
         });
     } else {
         debugTranslationElements();
+        debugTranslations();
         changeLanguage(currentLang);
     }
     
@@ -365,9 +451,30 @@ function debugTranslationElements() {
     console.log('=== FIN DEBUG ===');
 }
 
+// Función de debug para verificar traducciones disponibles
+function debugTranslations() {
+    const currentLang = getCurrentLanguage();
+    const langData = window.translations ? window.translations[currentLang] : null;
+    
+    console.log('=== DEBUG: Traducciones Disponibles ===');
+    console.log('Idioma actual:', currentLang);
+    console.log('Datos de idioma:', langData);
+    
+    if (langData && langData.servicios) {
+        console.log('Servicios disponibles:', Object.keys(langData.servicios));
+    }
+    
+    if (langData && langData.portafolio) {
+        console.log('Portafolio disponible:', Object.keys(langData.portafolio));
+    }
+    
+    console.log('=== FIN DEBUG ===');
+}
+
 // Exportar funciones
 window.changeLanguage = changeLanguage;
 window.getCurrentLanguage = getCurrentLanguage;
 window.initializeLanguage = initializeLanguage;
 window.debugTranslationElements = debugTranslationElements;
+window.debugTranslations = debugTranslations;
 window.translations = translations; 

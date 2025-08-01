@@ -561,20 +561,41 @@ function loadServices() {
     const servicesGrid = document.getElementById('services-grid');
     if (!servicesGrid) return;
     
-    servicesGrid.innerHTML = devsTopiaData.servicios.map(servicio => `
-        <div class="service-card" onclick="showServiceDetails('${servicio.nombre}')" role="gridcell">
-            <div class="service-icon">
-                <i class="${servicio.icono}" aria-hidden="true"></i>
+    const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'es';
+    const langData = window.translations ? window.translations[currentLang] : null;
+    
+    console.log('Cargando servicios en idioma:', currentLang);
+    console.log('Datos de idioma disponibles:', langData);
+    
+    servicesGrid.innerHTML = devsTopiaData.servicios.map((servicio, index) => {
+        // Obtener traducción si está disponible
+        const serviceKeys = ['desarrolloSoftware', 'desarrolloWeb', 'aplicacionesMoviles', 'automatizacion', 'cloudDevops', 'ciberseguridad', 'analisisDatos', 'qaTesting', 'soporte', 'consultoria'];
+        const serviceKey = serviceKeys[index];
+        
+        let translatedName = servicio.nombre;
+        let translatedDesc = servicio.descripcion;
+        
+        if (langData && langData.servicios && langData.servicios[serviceKey]) {
+            translatedName = langData.servicios[serviceKey].nombre;
+            translatedDesc = langData.servicios[serviceKey].descripcion;
+            console.log(`Traduciendo servicio ${index}: ${servicio.nombre} -> ${translatedName}`);
+        }
+        
+        return `
+            <div class="service-card" onclick="showServiceDetails('${translatedName}')" role="gridcell">
+                <div class="service-icon">
+                    <i class="${servicio.icono}" aria-hidden="true"></i>
+                </div>
+                <h3>${translatedName}</h3>
+                <p>${translatedDesc}</p>
+                <div class="service-details" style="display: none;">
+                    <ul>
+                        ${servicio.detalles.map(detalle => `<li>${detalle}</li>`).join('')}
+                    </ul>
+                </div>
             </div>
-            <h3>${servicio.nombre}</h3>
-            <p>${servicio.descripcion}</p>
-            <div class="service-details" style="display: none;">
-                <ul>
-                    ${servicio.detalles.map(detalle => `<li>${detalle}</li>`).join('')}
-                </ul>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Cargar portafolio
@@ -582,20 +603,44 @@ function loadPortfolio() {
     const portfolioGrid = document.getElementById('portfolio-grid');
     if (!portfolioGrid) return;
     
-    portfolioGrid.innerHTML = devsTopiaData.portafolio.map(proyecto => `
-        <div class="portfolio-item" data-category="${proyecto.categoria}" role="gridcell">
-            <div class="portfolio-image">
-                <i class="${proyecto.icono}" aria-hidden="true"></i>
-            </div>
-            <div class="portfolio-content">
-                <h3>${proyecto.titulo}</h3>
-                <p>${proyecto.descripcion}</p>
-                <div class="portfolio-tags">
-                    ${proyecto.tecnologias.map(tech => `<span class="portfolio-tag">${tech}</span>`).join('')}
+    const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'es';
+    const langData = window.translations ? window.translations[currentLang] : null;
+    
+    console.log('Cargando portafolio en idioma:', currentLang);
+    console.log('Datos de idioma disponibles:', langData);
+    
+    portfolioGrid.innerHTML = devsTopiaData.portafolio.map((proyecto, index) => {
+        // Obtener traducción si está disponible
+        const projectKeys = ['ecommerce', 'delivery', 'erp', 'dashboard', 'fitness', 'facturacion'];
+        const projectKey = projectKeys[index];
+        
+        let translatedTitle = proyecto.titulo;
+        let translatedDesc = proyecto.descripcion;
+        
+        if (langData && langData.portafolio && langData.portafolio[projectKey]) {
+            translatedTitle = langData.portafolio[projectKey].titulo;
+            translatedDesc = langData.portafolio[projectKey].descripcion;
+            console.log(`Traduciendo proyecto ${index}: ${proyecto.titulo} -> ${translatedTitle}`);
+        }
+        
+        return `
+            <div class="portfolio-item" data-category="${proyecto.categoria}" role="gridcell">
+                <div class="portfolio-image">
+                    <i class="${proyecto.icono}" aria-hidden="true"></i>
+                </div>
+                <div class="portfolio-content">
+                    <h3>${translatedTitle}</h3>
+                    <p>${translatedDesc}</p>
+                    <div class="portfolio-tags">
+                        ${proyecto.tecnologias.map(tech => {
+                            const techKey = tech.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                            return `<span class="portfolio-tag" data-tech="${techKey}">${tech}</span>`;
+                        }).join('')}
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Cargar blog
@@ -879,11 +924,13 @@ document.addEventListener('DOMContentLoaded', function() {
         themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
     
-    // Cargar contenido dinámico
-    loadServices();
-    loadPortfolio();
-    loadBlog();
-    loadFAQs();
+    // Cargar contenido dinámico después de que las traducciones estén listas
+    setTimeout(() => {
+        loadServices();
+        loadPortfolio();
+        loadBlog();
+        loadFAQs();
+    }, 100);
     
     // Configurar eventos
     setupSmoothScrolling();
@@ -980,4 +1027,6 @@ window.openQuoteModal = openQuoteModal;
 window.closeQuoteModal = closeQuoteModal;
 window.toggleChat = toggleChat;
 window.sendMessage = sendMessage;
-window.handleTyping = handleTyping; 
+window.handleTyping = handleTyping;
+window.loadServices = loadServices;
+window.loadPortfolio = loadPortfolio; 
