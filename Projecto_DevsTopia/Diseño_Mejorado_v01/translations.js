@@ -230,11 +230,16 @@ function changeLanguage(lang) {
     const currentLang = lang || 'es';
     const langData = translations[currentLang];
     
+    console.log('Cambiando idioma a:', currentLang);
+    console.log('Datos de idioma:', langData);
+    
     // Actualizar navegación
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
         const keys = key.split('.');
         let value = langData;
+        
+        console.log('Procesando elemento:', element, 'con clave:', key);
         
         for (const k of keys) {
             value = value[k];
@@ -242,6 +247,9 @@ function changeLanguage(lang) {
         
         if (value) {
             element.textContent = value;
+            console.log('Traducido:', key, '->', value);
+        } else {
+            console.warn('No se encontró traducción para:', key);
         }
     });
     
@@ -286,6 +294,8 @@ function changeLanguage(lang) {
     
     // Actualizar chat
     updateChatLanguage(currentLang);
+    
+    console.log('Idioma cambiado exitosamente a:', currentLang);
 }
 
 // Función para actualizar idioma del chat
@@ -311,8 +321,21 @@ function getCurrentLanguage() {
 
 // Función para inicializar idioma
 function initializeLanguage() {
+    console.log('Inicializando sistema de traducciones...');
+    
     const currentLang = getCurrentLanguage();
-    changeLanguage(currentLang);
+    console.log('Idioma actual:', currentLang);
+    
+    // Esperar a que el DOM esté completamente cargado
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            debugTranslationElements();
+            changeLanguage(currentLang);
+        });
+    } else {
+        debugTranslationElements();
+        changeLanguage(currentLang);
+    }
     
     // Configurar evento del botón de idioma
     const langToggle = document.getElementById('language-toggle');
@@ -320,13 +343,31 @@ function initializeLanguage() {
         langToggle.addEventListener('click', () => {
             const currentLang = getCurrentLanguage();
             const newLang = currentLang === 'es' ? 'en' : 'es';
+            console.log('Cambiando de', currentLang, 'a', newLang);
             changeLanguage(newLang);
         });
     }
+    
+    console.log('Sistema de traducciones inicializado');
+}
+
+// Función de debug para verificar elementos traducibles
+function debugTranslationElements() {
+    console.log('=== DEBUG: Elementos con data-translate ===');
+    const elements = document.querySelectorAll('[data-translate]');
+    console.log('Total de elementos encontrados:', elements.length);
+    
+    elements.forEach((element, index) => {
+        const key = element.getAttribute('data-translate');
+        console.log(`${index + 1}. Elemento:`, element.tagName, 'Clave:', key, 'Texto actual:', element.textContent);
+    });
+    
+    console.log('=== FIN DEBUG ===');
 }
 
 // Exportar funciones
 window.changeLanguage = changeLanguage;
 window.getCurrentLanguage = getCurrentLanguage;
 window.initializeLanguage = initializeLanguage;
+window.debugTranslationElements = debugTranslationElements;
 window.translations = translations; 

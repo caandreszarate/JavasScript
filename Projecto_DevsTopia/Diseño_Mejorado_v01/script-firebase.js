@@ -862,9 +862,14 @@ function setupScrollAnimations() {
 
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM cargado, inicializando aplicaciones...');
+    
     // Inicializar sistema de traducciones
     if (typeof initializeLanguage === 'function') {
+        console.log('Función initializeLanguage encontrada, inicializando...');
         initializeLanguage();
+    } else {
+        console.warn('Función initializeLanguage no encontrada');
     }
     
     // Configurar tema inicial
