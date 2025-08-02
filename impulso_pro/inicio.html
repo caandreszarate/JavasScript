@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Impulso Pro - Menú de Navegación</title>
+    <title>Inicio - Impulso Pro</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
@@ -22,7 +22,7 @@
             <div class="nav-container">
                 <!-- Logo -->
                 <div class="nav-logo">
-                    <a href="#" class="logo-link">
+                    <a href="index.html" class="logo-link">
                         <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
                     </a>
                 </div>
@@ -110,39 +110,34 @@
             </div>
         </section>
 
-        <!-- Secciones de contenido -->
-        <section id="inicio" class="content-section">
+        <!-- Contenido específico de la página Inicio -->
+        <section class="content-section">
             <div class="container">
-                <h2 data-es="Inicio" data-en="Home">Inicio</h2>
-                <p data-es="Esta es la sección de inicio de Impulso Pro." data-en="This is the home section of Impulso Pro.">Esta es la sección de inicio de Impulso Pro.</p>
+                <h2 data-es="¿Qué es Impulso Pro?" data-en="What is Impulso Pro?">¿Qué es Impulso Pro?</h2>
+                <p data-es="Impulso Pro es tu plataforma integral para el desarrollo profesional. Ofrecemos programas de formación, oportunidades laborales y recursos especializados para impulsar tu carrera." data-en="Impulso Pro is your comprehensive platform for professional development. We offer training programs, job opportunities and specialized resources to boost your career.">Impulso Pro es tu plataforma integral para el desarrollo profesional. Ofrecemos programas de formación, oportunidades laborales y recursos especializados para impulsar tu carrera.</p>
             </div>
         </section>
 
-        <section id="ofertas" class="content-section">
+        <section class="content-section">
             <div class="container">
-                <h2 data-es="Ofertas" data-en="Offers">Ofertas</h2>
-                <p data-es="Explora nuestras mejores ofertas y promociones." data-en="Explore our best offers and promotions.">Explora nuestras mejores ofertas y promociones.</p>
-            </div>
-        </section>
-
-        <section id="entidades" class="content-section">
-            <div class="container">
-                <h2 data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</h2>
-                <p data-es="Conoce nuestras entidades aliadas y colaboradores." data-en="Meet our allied entities and collaborators.">Conoce nuestras entidades aliadas y colaboradores.</p>
-            </div>
-        </section>
-
-        <section id="requisitos" class="content-section">
-            <div class="container">
-                <h2 data-es="Requisitos" data-en="Requirements">Requisitos</h2>
-                <p data-es="Información sobre los requisitos necesarios." data-en="Information about the necessary requirements.">Información sobre los requisitos necesarios.</p>
-            </div>
-        </section>
-
-        <section id="formacion" class="content-section">
-            <div class="container">
-                <h2 data-es="Formación" data-en="Training">Formación</h2>
-                <p data-es="Programas de formación y desarrollo profesional." data-en="Training programs and professional development.">Programas de formación y desarrollo profesional.</p>
+                <h2 data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3 data-es="Formación Profesional" data-en="Professional Training">Formación Profesional</h3>
+                        <p data-es="Programas especializados para desarrollar tus habilidades" data-en="Specialized programs to develop your skills">Programas especializados para desarrollar tus habilidades</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3 data-es="Oportunidades Laborales" data-en="Job Opportunities">Oportunidades Laborales</h3>
+                        <p data-es="Conectamos talento con empresas líderes" data-en="We connect talent with leading companies">Conectamos talento con empresas líderes</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-users"></i>
+                        <h3 data-es="Networking" data-en="Networking">Networking</h3>
+                        <p data-es="Construye tu red profesional" data-en="Build your professional network">Construye tu red profesional</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -172,46 +167,5 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // Script inmediato para forzar estilos del menú
-        (function() {
-            function applyNavStyles() {
-                const header = document.querySelector('.header');
-                const navLinks = document.querySelectorAll('.nav-link');
-                const logoLink = document.querySelector('.logo-link');
-                const logoIcon = document.querySelector('.logo-link i');
-                
-                if (header) {
-                    header.style.background = '#256294';
-                    header.style.color = '#ffffff';
-                }
-                
-                navLinks.forEach(link => {
-                    link.style.color = '#ffffff';
-                });
-                
-                if (logoLink) {
-                    logoLink.style.color = '#ffffff';
-                }
-                
-                if (logoIcon) {
-                    logoIcon.style.color = '#ffffff';
-                }
-            }
-            
-            // Aplicar estilos inmediatamente
-            applyNavStyles();
-            
-            // Aplicar estilos después de que el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', applyNavStyles);
-            } else {
-                applyNavStyles();
-            }
-            
-            // Aplicar estilos después de la carga completa
-            window.addEventListener('load', applyNavStyles);
-        })();
-    </script>
 </body>
 </html> 

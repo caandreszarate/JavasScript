@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Requisitos - Impulso Pro</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header con navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo -->
+                <div class="nav-logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
+                    </a>
+                </div>
+
+                <!-- Menú de navegación principal -->
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="inicio.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span data-es="Inicio" data-en="Home">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ofertas.html" class="nav-link">
+                            <i class="fas fa-tags"></i>
+                            <span data-es="Ofertas" data-en="Offers">Ofertas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="entidades.html" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            <span data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="requisitos.html" class="nav-link active">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span data-es="Requisitos" data-en="Requirements">Requisitos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="formacion.html" class="nav-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-es="Formación" data-en="Training">Formación</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Botón de inicio de sesión -->
+                <div class="nav-auth">
+                    <button class="btn-login" id="btn-login">
+                        <i class="fas fa-user"></i>
+                        <span data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</span>
+                    </button>
+                </div>
+
+                <!-- Botón de idioma -->
+                <div class="nav-language">
+                    <button class="btn-language" id="btn-language">
+                        <i class="fas fa-globe"></i>
+                        <span data-es="ES" data-en="EN">ES</span>
+                    </button>
+                    <div class="language-menu" id="language-menu">
+                        <div class="menu-item" data-type="indicator">
+                            <i class="fas fa-circle"></i>
+                            <span data-es="Indicador Sutil" data-en="Subtle Indicator">Indicador Sutil</span>
+                        </div>
+                        <div class="menu-item" data-type="elegant">
+                            <i class="fas fa-bell"></i>
+                            <span data-es="Notificación Elegante" data-en="Elegant Notification">Notificación Elegante</span>
+                        </div>
+                        <div class="menu-item" data-type="none">
+                            <i class="fas fa-times"></i>
+                            <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón hamburguesa para móvil -->
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1 data-es="Requisitos de Admisión" data-en="Admission Requirements">Requisitos de Admisión</h1>
+                <p data-es="Conoce los requisitos necesarios para acceder a nuestros programas de formación" data-en="Learn about the requirements needed to access our training programs">Conoce los requisitos necesarios para acceder a nuestros programas de formación</p>
+            </div>
+        </section>
+
+        <!-- Contenido específico de la página Requisitos -->
+        <section class="content-section">
+            <div class="container">
+                <h2 data-es="Requisitos Generales" data-en="General Requirements">Requisitos Generales</h2>
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 data-es="Educación Básica" data-en="Basic Education">Educación Básica</h3>
+                        <ul class="requirement-list">
+                            <li data-es="Título de bachiller o equivalente" data-en="High school diploma or equivalent">Título de bachiller o equivalente</li>
+                            <li data-es="Certificado de estudios" data-en="Certificate of studies">Certificado de estudios</li>
+                            <li data-es="Promedio mínimo de 3.0" data-en="Minimum GPA of 3.0">Promedio mínimo de 3.0</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 data-es="Idiomas" data-en="Languages">Idiomas</h3>
+                        <ul class="requirement-list">
+                            <li data-es="Español nativo o avanzado" data-en="Native or advanced Spanish">Español nativo o avanzado</li>
+                            <li data-es="Inglés intermedio (B1)" data-en="Intermediate English (B1)">Inglés intermedio (B1)</li>
+                            <li data-es="Certificación opcional" data-en="Optional certification">Certificación opcional</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 data-es="Tecnología" data-en="Technology">Tecnología</h3>
+                        <ul class="requirement-list">
+                            <li data-es="Computador con internet" data-en="Computer with internet">Computador con internet</li>
+                            <li data-es="Cámara web y micrófono" data-en="Webcam and microphone">Cámara web y micrófono</li>
+                            <li data-es="Software básico" data-en="Basic software">Software básico</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 data-es="Requisitos Específicos por Programa" data-en="Specific Requirements by Program">Requisitos Específicos por Programa</h2>
+                <div class="program-requirements">
+                    <div class="program-card">
+                        <h3 data-es="Marketing Digital" data-en="Digital Marketing">Marketing Digital</h3>
+                        <div class="program-details">
+                            <p data-es="Conocimientos básicos de redes sociales" data-en="Basic knowledge of social networks">Conocimientos básicos de redes sociales</p>
+                            <p data-es="Experiencia en ventas (opcional)" data-en="Sales experience (optional)">Experiencia en ventas (opcional)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <h3 data-es="Programación Web" data-en="Web Programming">Programación Web</h3>
+                        <div class="program-details">
+                            <p data-es="Lógica de programación básica" data-en="Basic programming logic">Lógica de programación básica</p>
+                            <p data-es="Matemáticas de nivel medio" data-en="Intermediate level mathematics">Matemáticas de nivel medio</p>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <h3 data-es="Análisis de Datos" data-en="Data Analysis">Análisis de Datos</h3>
+                        <div class="program-details">
+                            <p data-es="Estadística básica" data-en="Basic statistics">Estadística básica</p>
+                            <p data-es="Excel intermedio" data-en="Intermediate Excel">Excel intermedio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 data-es="Documentación Requerida" data-en="Required Documentation">Documentación Requerida</h2>
+                <div class="documentation-grid">
+                    <div class="doc-item">
+                        <i class="fas fa-id-card"></i>
+                        <h3 data-es="Documentos de Identidad" data-en="Identity Documents">Documentos de Identidad</h3>
+                        <p data-es="Cédula de ciudadanía o pasaporte vigente" data-en="Valid citizenship card or passport">Cédula de ciudadanía o pasaporte vigente</p>
+                    </div>
+                    <div class="doc-item">
+                        <i class="fas fa-file-alt"></i>
+                        <h3 data-es="Certificados Académicos" data-en="Academic Certificates">Certificados Académicos</h3>
+                        <p data-es="Títulos y certificados de estudios previos" data-en="Degrees and certificates from previous studies">Títulos y certificados de estudios previos</p>
+                    </div>
+                    <div class="doc-item">
+                        <i class="fas fa-camera"></i>
+                        <h3 data-es="Foto Reciente" data-en="Recent Photo">Foto Reciente</h3>
+                        <p data-es="Foto tipo documento en formato digital" data-en="Document-type photo in digital format">Foto tipo documento en formato digital</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de inicio de sesión -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p data-es="Funcionalidad de inicio de sesión en desarrollo..." data-en="Login functionality in development...">Funcionalidad de inicio de sesión en desarrollo...</p>
+                <div class="form-group">
+                    <label for="email" data-es="Email:" data-en="Email:">Email:</label>
+                    <input type="email" id="email" placeholder="tu@email.com" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="password" data-es="Contraseña:" data-en="Password:">Contraseña:</label>
+                    <input type="password" id="password" placeholder="••••••••" disabled>
+                </div>
+                <button class="btn-primary" disabled data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Impulso Pro - Menú de Navegación</title>
+    <title>Ofertas - Impulso Pro</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
@@ -22,7 +22,7 @@
             <div class="nav-container">
                 <!-- Logo -->
                 <div class="nav-logo">
-                    <a href="#" class="logo-link">
+                    <a href="index.html" class="logo-link">
                         <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
                     </a>
                 </div>
@@ -30,13 +30,13 @@
                 <!-- Menú de navegación principal -->
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
-                        <a href="inicio.html" class="nav-link active">
+                        <a href="inicio.html" class="nav-link">
                             <i class="fas fa-home"></i>
                             <span data-es="Inicio" data-en="Home">Inicio</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="ofertas.html" class="nav-link">
+                        <a href="ofertas.html" class="nav-link active">
                             <i class="fas fa-tags"></i>
                             <span data-es="Ofertas" data-en="Offers">Ofertas</span>
                         </a>
@@ -105,44 +105,66 @@
     <main class="main-content">
         <section class="hero-section">
             <div class="container">
-                <h1 data-es="Bienvenido a Impulso Pro" data-en="Welcome to Impulso Pro">Bienvenido a Impulso Pro</h1>
-                <p data-es="Descubre las mejores oportunidades y recursos para tu crecimiento profesional" data-en="Discover the best opportunities and resources for your professional growth">Descubre las mejores oportunidades y recursos para tu crecimiento profesional</p>
+                <h1 data-es="Ofertas Especiales" data-en="Special Offers">Ofertas Especiales</h1>
+                <p data-es="Descubre las mejores oportunidades y promociones para tu desarrollo profesional" data-en="Discover the best opportunities and promotions for your professional development">Descubre las mejores oportunidades y promociones para tu desarrollo profesional</p>
             </div>
         </section>
 
-        <!-- Secciones de contenido -->
-        <section id="inicio" class="content-section">
+        <!-- Contenido específico de la página Ofertas -->
+        <section class="content-section">
             <div class="container">
-                <h2 data-es="Inicio" data-en="Home">Inicio</h2>
-                <p data-es="Esta es la sección de inicio de Impulso Pro." data-en="This is the home section of Impulso Pro.">Esta es la sección de inicio de Impulso Pro.</p>
+                <h2 data-es="Ofertas Destacadas" data-en="Featured Offers">Ofertas Destacadas</h2>
+                <div class="offers-grid">
+                    <div class="offer-card">
+                        <div class="offer-badge">50% OFF</div>
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3 data-es="Curso de Marketing Digital" data-en="Digital Marketing Course">Curso de Marketing Digital</h3>
+                        <p data-es="Aprende las estrategias más efectivas del marketing digital" data-en="Learn the most effective digital marketing strategies">Aprende las estrategias más efectivas del marketing digital</p>
+                        <div class="offer-price">
+                            <span class="original-price">$200</span>
+                            <span class="discount-price">$100</span>
+                        </div>
+                        <button class="btn-offer" data-es="Ver Detalles" data-en="View Details">Ver Detalles</button>
+                    </div>
+                    
+                    <div class="offer-card">
+                        <div class="offer-badge">30% OFF</div>
+                        <i class="fas fa-code"></i>
+                        <h3 data-es="Programación Web Full Stack" data-en="Full Stack Web Programming">Programación Web Full Stack</h3>
+                        <p data-es="Domina el desarrollo web completo desde cero" data-en="Master complete web development from scratch">Domina el desarrollo web completo desde cero</p>
+                        <div class="offer-price">
+                            <span class="original-price">$300</span>
+                            <span class="discount-price">$210</span>
+                        </div>
+                        <button class="btn-offer" data-es="Ver Detalles" data-en="View Details">Ver Detalles</button>
+                    </div>
+                    
+                    <div class="offer-card">
+                        <div class="offer-badge">NUEVO</div>
+                        <i class="fas fa-chart-line"></i>
+                        <h3 data-es="Análisis de Datos" data-en="Data Analysis">Análisis de Datos</h3>
+                        <p data-es="Convierte datos en decisiones estratégicas" data-en="Turn data into strategic decisions">Convierte datos en decisiones estratégicas</p>
+                        <div class="offer-price">
+                            <span class="original-price">$250</span>
+                            <span class="discount-price">$250</span>
+                        </div>
+                        <button class="btn-offer" data-es="Ver Detalles" data-en="View Details">Ver Detalles</button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="ofertas" class="content-section">
+        <section class="content-section">
             <div class="container">
-                <h2 data-es="Ofertas" data-en="Offers">Ofertas</h2>
-                <p data-es="Explora nuestras mejores ofertas y promociones." data-en="Explore our best offers and promotions.">Explora nuestras mejores ofertas y promociones.</p>
-            </div>
-        </section>
-
-        <section id="entidades" class="content-section">
-            <div class="container">
-                <h2 data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</h2>
-                <p data-es="Conoce nuestras entidades aliadas y colaboradores." data-en="Meet our allied entities and collaborators.">Conoce nuestras entidades aliadas y colaboradores.</p>
-            </div>
-        </section>
-
-        <section id="requisitos" class="content-section">
-            <div class="container">
-                <h2 data-es="Requisitos" data-en="Requirements">Requisitos</h2>
-                <p data-es="Información sobre los requisitos necesarios." data-en="Information about the necessary requirements.">Información sobre los requisitos necesarios.</p>
-            </div>
-        </section>
-
-        <section id="formacion" class="content-section">
-            <div class="container">
-                <h2 data-es="Formación" data-en="Training">Formación</h2>
-                <p data-es="Programas de formación y desarrollo profesional." data-en="Training programs and professional development.">Programas de formación y desarrollo profesional.</p>
+                <h2 data-es="Promociones Temporales" data-en="Temporary Promotions">Promociones Temporales</h2>
+                <div class="promo-grid">
+                    <div class="promo-card">
+                        <h3 data-es="Pack Completo" data-en="Complete Pack">Pack Completo</h3>
+                        <p data-es="Acceso a todos nuestros cursos por 6 meses" data-en="Access to all our courses for 6 months">Acceso a todos nuestros cursos por 6 meses</p>
+                        <div class="promo-price">$500</div>
+                        <button class="btn-promo" data-es="Aprovechar Oferta" data-en="Take Advantage">Aprovechar Oferta</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -172,46 +194,5 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // Script inmediato para forzar estilos del menú
-        (function() {
-            function applyNavStyles() {
-                const header = document.querySelector('.header');
-                const navLinks = document.querySelectorAll('.nav-link');
-                const logoLink = document.querySelector('.logo-link');
-                const logoIcon = document.querySelector('.logo-link i');
-                
-                if (header) {
-                    header.style.background = '#256294';
-                    header.style.color = '#ffffff';
-                }
-                
-                navLinks.forEach(link => {
-                    link.style.color = '#ffffff';
-                });
-                
-                if (logoLink) {
-                    logoLink.style.color = '#ffffff';
-                }
-                
-                if (logoIcon) {
-                    logoIcon.style.color = '#ffffff';
-                }
-            }
-            
-            // Aplicar estilos inmediatamente
-            applyNavStyles();
-            
-            // Aplicar estilos después de que el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', applyNavStyles);
-            } else {
-                applyNavStyles();
-            }
-            
-            // Aplicar estilos después de la carga completa
-            window.addEventListener('load', applyNavStyles);
-        })();
-    </script>
 </body>
 </html> 

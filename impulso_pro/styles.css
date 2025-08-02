@@ -71,7 +71,7 @@ body {
 .logo-link {
     display: flex !important;
     align-items: center !important;
-    gap: 0.6rem !important;
+    gap: 0.5rem !important;
     text-decoration: none !important;
     color: var(--nav-text-color) !important;
     font-weight: 700 !important;
@@ -85,25 +85,24 @@ body {
     transform: translateY(-1px);
 }
 
-.logo-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    padding: 6px;
-    transition: var(--transition);
-    flex-shrink: 0;
+/* Estilos para elementos del logo temporal (ya no necesarios) */
+.logo-bulb {
+    display: none;
 }
 
-.logo-icon svg {
-    width: 100%;
-    height: 100%;
-    max-width: 36px;
-    max-height: 36px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+/* Estilos para la imagen del logo original */
+.logo-image {
+    height: 45px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    transition: var(--transition);
+    filter: brightness(1) contrast(1);
+}
+
+.logo-link:hover .logo-image {
+    transform: scale(1.02);
+    filter: brightness(1.1) contrast(1.05);
 }
 
 .logo-link:hover .logo-icon {
@@ -111,35 +110,27 @@ body {
     transform: scale(1.05);
 }
 
+/* Estilos para elementos del logo temporal (ya no necesarios) */
 .logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
+    display: none;
 }
 
+/* Estilos para elementos del logo temporal (ya no necesarios) */
 .logo-main {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--nav-text-color);
-    transition: var(--transition);
-    line-height: 1;
+    display: none;
 }
 
 .logo-sub {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--nav-text-color);
-    margin-top: -3px;
-    transition: var(--transition);
-    line-height: 1;
+    display: none;
 }
 
+/* Estilos hover para elementos del logo temporal (ya no necesarios) */
 .logo-link:hover .logo-main {
-    color: var(--primary-light);
+    display: none;
 }
 
 .logo-link:hover .logo-sub {
-    color: rgba(255, 255, 255, 0.9);
+    display: none;
 }
 
 /* Menú de navegación */
@@ -710,19 +701,14 @@ body {
     }
     
     /* Logo responsive */
-    .logo-text {
-        display: none;
+    .logo-image {
+        height: 38px;
+        max-width: 140px;
     }
     
-    .logo-icon {
-        width: 40px;
-        height: 40px;
-        padding: 4px;
-    }
-    
-    .logo-icon svg {
-        max-width: 28px;
-        max-height: 28px;
+    .logo-image {
+        height: 38px;
+        max-width: 140px;
     }
 
     .content-section h2 {
@@ -771,15 +757,9 @@ body {
     }
     
     /* Logo para pantallas muy pequeñas */
-    .logo-icon {
-        width: 36px;
-        height: 36px;
-        padding: 3px;
-    }
-    
-    .logo-icon svg {
-        max-width: 24px;
-        max-height: 24px;
+    .logo-image {
+        height: 32px;
+        max-width: 110px;
     }
     
     .logo-link {
@@ -807,4 +787,670 @@ body {
 /* Scroll suave */
 html {
     scroll-behavior: smooth;
+}
+
+/* Estilos para las nuevas páginas */
+
+/* Grid de servicios */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.service-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Grid de ofertas */
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.offer-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.offer-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.offer-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.offer-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.offer-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.offer-price {
+    margin-bottom: 1.5rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+.discount-price {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.btn-offer {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-offer:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Grid de promociones */
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.promo-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.promo-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.promo-card p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.promo-price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.btn-promo {
+    background: var(--white);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-promo:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+}
+
+/* Responsive para las nuevas páginas */
+@media (max-width: 768px) {
+    .services-grid,
+    .offers-grid,
+    .promo-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .service-card,
+    .offer-card,
+    .promo-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Estilos para la página de Requisitos */
+
+/* Grid de requisitos */
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.requirement-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.requirement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.requirement-icon {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.requirement-icon i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.requirement-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.requirement-list {
+    list-style: none;
+    padding: 0;
+}
+
+.requirement-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.requirement-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Programas específicos */
+.program-requirements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.program-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.program-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.program-details p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Documentación */
+.documentation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.doc-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.doc-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.doc-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.doc-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.doc-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Estilos para la página de Formación */
+
+/* Grid de cursos */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.course-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.course-header i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.course-level {
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.course-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.course-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.course-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.detail-item i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.btn-course {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-course:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Metodología */
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.methodology-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.methodology-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.methodology-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.methodology-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.methodology-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Lista de beneficios */
+.benefits-list {
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.benefit-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.benefit-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 0.5rem;
+}
+
+.benefit-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.benefit-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Estilos para la página de Entidades Aliadas */
+
+/* Grid de aliados */
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.partner-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.partner-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.partner-logo i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.partner-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.partner-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.partner-list {
+    list-style: none;
+    padding: 0;
+}
+
+.partner-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.partner-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Grid de beneficios */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(100, 197, 230, 0.1);
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.benefit-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.benefit-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.benefit-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Responsive para las nuevas páginas */
+@media (max-width: 768px) {
+    .requirements-grid,
+    .program-requirements,
+    .documentation-grid,
+    .courses-grid,
+    .methodology-grid,
+    .partners-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .requirement-card,
+    .program-card,
+    .doc-item,
+    .course-card,
+    .methodology-item,
+    .partner-card,
+    .benefit-item {
+        padding: 1.5rem;
+    }
+    
+    .course-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
 } 
