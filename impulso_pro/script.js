@@ -549,6 +549,15 @@ const additionalStyles = `
     .btn-login {
         background: linear-gradient(135deg, #64c5e6, #4ba8c9) !important;
         color: #ffffff !important;
+        border-radius: 20px !important;
+        font-size: 0.85rem !important;
+        padding: 0.6rem 1.2rem !important;
+    }
+    
+    .btn-language {
+        border-radius: 16px !important;
+        font-size: 0.8rem !important;
+        padding: 0.5rem 0.8rem !important;
     }
 `;
 

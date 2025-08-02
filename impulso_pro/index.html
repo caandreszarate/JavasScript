@@ -21,8 +21,24 @@
                 <!-- Logo -->
                 <div class="nav-logo">
                     <a href="#" class="logo-link">
-                        <i class="fas fa-rocket"></i>
-                        <span>Impulso Pro</span>
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Bombilla verde más precisa -->
+                                <path d="M20 6C15.582 6 12 9.582 12 14C12 16.5 13.5 19 15.5 20.5V22C15.5 23.1 16.4 24 17.5 24H22.5C23.6 24 24.5 23.1 24.5 22V20.5C26.5 19 28 16.5 28 14C28 9.582 24.418 6 20 6Z" fill="#4CAF50"/>
+                                <!-- Base de la bombilla con líneas horizontales -->
+                                <rect x="17" y="24" width="6" height="2" fill="#4CAF50"/>
+                                <rect x="16" y="26" width="8" height="1" fill="#4CAF50"/>
+                                <rect x="15" y="27" width="10" height="1" fill="#4CAF50"/>
+                                <rect x="14" y="28" width="12" height="1" fill="#4CAF50"/>
+                                <!-- Chispa/idea desde la parte superior -->
+                                <path d="M25 10C25.5 9.5 26 9 26.5 8.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M26 9C26.3 8.7 26.6 8.4 26.9 8.1" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main">Impulso</span>
+                            <span class="logo-sub">Profesional</span>
+                        </div>
                     </a>
                 </div>
 
@@ -60,6 +76,14 @@
                     </li>
                 </ul>
 
+                <!-- Botón de inicio de sesión -->
+                <div class="nav-auth">
+                    <button class="btn-login" id="btn-login">
+                        <i class="fas fa-user"></i>
+                        <span data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</span>
+                    </button>
+                </div>
+
                 <!-- Botón de idioma -->
                 <div class="nav-language">
                     <button class="btn-language" id="btn-language">
@@ -80,14 +104,6 @@
                             <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Botón de inicio de sesión -->
-                <div class="nav-auth">
-                    <button class="btn-login" id="btn-login">
-                        <i class="fas fa-user"></i>
-                        <span data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</span>
-                    </button>
                 </div>
 
                 <!-- Botón hamburguesa para móvil -->
