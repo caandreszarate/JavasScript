@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevsTopia - Desarrollo de software a medida. Transformamos ideas en soluciones digitales innovadoras y escalables.">
+    <meta name="keywords" content="desarrollo de software, aplicaciones web, apps móviles, consultoría digital, Bogotá">
+    <meta name="author" content="DevsTopia">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://devstopia.com/">
+    <meta property="og:title" content="DevsTopia - Desarrollo de Software a Medida">
+    <meta property="og:description" content="Transformamos ideas en soluciones digitales innovadoras, funcionales y escalables.">
+    <meta property="og:image" content="https://devstopia.com/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://devstopia.com/">
+    <meta property="twitter:title" content="DevsTopia - Desarrollo de Software a Medida">
+    <meta property="twitter:description" content="Transformamos ideas en soluciones digitales innovadoras, funcionales y escalables.">
+    <meta property="twitter:image" content="https://devstopia.com/images/twitter-image.jpg">
+
+    <title>DevsTopia - Desarrollo de Software a Medida | Bogotá, Colombia</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon_devstopia_redonda.png" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#1a1a2e">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("InSUx70NIu3r1_L5V");
+        })();
+    </script>
+    
+    <!-- Firebase SDKs -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+      import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      
+      const firebaseConfig = {
+        apiKey: "AIzaSyAJVPhymRFYqeloz1Tvw6MEPlCB6fXyriw",
+        authDomain: "devstopia-chat.firebaseapp.com",
+        databaseURL: "https://devstopia-chat-default-rtdb.firebaseio.com",
+        projectId: "devstopia-chat",
+        storageBucket: "devstopia-chat.firebasestorage.app",
+        messagingSenderId: "582874854559",
+        appId: "1:582874854559:web:82eb6e07bb0920dd2b5eaa"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth(app);
+
+      window.firebase = {
+        app: app,
+        database: database,
+        auth: auth,
+        ref: ref,
+        push: push,
+        onValue: onValue,
+        serverTimestamp: serverTimestamp
+      };
+
+      console.log('🔥 Firebase inicializado para DevsTopia Chat');
+    </script>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Navegación principal">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1 class="logo-text">DevsTopia</h1>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a href="#inicio" class="nav-link" role="menuitem" data-translate="nav.inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#servicios" class="nav-link" role="menuitem" data-translate="nav.servicios">Servicios</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#portafolio" class="nav-link" role="menuitem" data-translate="nav.portafolio">Portafolio</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#contacto" class="nav-link" role="menuitem" data-translate="nav.contacto">Contacto</a>
+                    </li>
+                </ul>
+                
+                <div class="nav-controls">
+                    <button class="language-toggle" id="language-toggle" aria-label="Cambiar idioma">
+                        <span class="lang-text">ES</span>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="demo-btn" onclick="openQuoteModal()">
+                        <span data-translate="nav.demo">Obtener Demo</span>
+                    </button>
+                    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Section - Inspirado en Tabnine -->
+        <section id="inicio" class="hero" aria-labelledby="hero-title">
+            <div class="hero-background">
+                <div class="gradient-blob blob-1"></div>
+                <div class="gradient-blob blob-2"></div>
+                <div class="gradient-blob blob-3"></div>
+            </div>
+            
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span data-translate="hero.badge">Privado. Personalizado. Protegido.</span>
+                    </div>
+                    
+                    <h1 id="hero-title" class="hero-title">
+                        <span data-translate="hero.mainTitle">Cualquier desarrollador puede escribir código.</span>
+                        <span class="title-highlight" data-translate="hero.highlightTitle">El nuestro gana tu confianza.</span>
+                    </h1>
+                    
+                    <p class="hero-description" data-translate="hero.description">
+                        DevsTopia es la plataforma de desarrollo de software más consciente del contexto del mundo, 
+                        ayudando a equipos de ingeniería maduros a acelerar y simplificar todo su proceso de desarrollo.
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="openQuoteModal()">
+                            <span data-translate="hero.btnDemo">Obtener Demo en Vivo</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('contacto')">
+                            <span data-translate="hero.btnExpert">Hablar con un Experto</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Logos de clientes -->
+                    <div class="client-logos">
+                        <div class="logos-container">
+                            <div class="logo-item">DevCorp</div>
+                            <div class="logo-item">TechStart</div>
+                            <div class="logo-item">InnoSoft</div>
+                            <div class="logo-item">CloudTech</div>
+                            <div class="logo-item">DataPro</div>
+                            <div class="logo-item">WebFlow</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="demo-container">
+                        <div class="demo-header">
+                            <span data-translate="hero.demoTitle">Ver DevsTopia en acción</span>
+                        </div>
+                        <div class="demo-tabs">
+                            <button class="tab-btn active" data-tab="plan">Plan</button>
+                            <button class="tab-btn" data-tab="create">Crear</button>
+                            <button class="tab-btn" data-tab="test">Probar</button>
+                            <button class="tab-btn" data-tab="review">Revisar</button>
+                            <button class="tab-btn" data-tab="deploy">Desplegar</button>
+                        </div>
+                        <div class="demo-content">
+                            <div class="code-preview">
+                                <div class="code-block">
+                                    <span class="code-line">class DevsTopia {</span>
+                                    <span class="code-line">  constructor() {</span>
+                                    <span class="code-line">    this.excellence = true;</span>
+                                    <span class="code-line">    this.innovation = 'unlimited';</span>
+                                    <span class="code-line">  }</span>
+                                    <span class="code-line"></span>
+                                    <span class="code-line">  async transformIdea(concept) {</span>
+                                    <span class="code-line">    return await this.createSolution({</span>
+                                    <span class="code-line">      quality: 'premium',</span>
+                                    <span class="code-line">      scalability: 'infinite',</span>
+                                    <span class="code-line">      security: 'enterprise'</span>
+                                    <span class="code-line">    });</span>
+                                    <span class="code-line">  }</span>
+                                    <span class="code-line">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" aria-labelledby="features-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="features-title" class="section-title" data-translate="features.title">
+                        Construye mejores aplicaciones más rápido con agentes de IA para todo el SDLC
+                    </h2>
+                    <p class="section-description" data-translate="features.description">
+                        Desde la creación de código y explicaciones, hasta la generación de pruebas y documentación,
+                        el desarrollo de aplicaciones más rápido ha entrado al chat.
+                    </p>
+                    <button class="btn btn-outline" onclick="scrollToSection('servicios')">
+                        <span data-translate="features.learnMore">Aprender Más</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personalization Section -->
+        <section class="personalization">
+            <div class="container">
+                <div class="personalization-content">
+                    <div class="content-left">
+                        <h2 class="section-title" data-translate="personalization.title">
+                            IA altamente personalizada que se adapta a tu forma de trabajar
+                        </h2>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="personalization.feature1">Sugerencias conscientes del contexto basadas en tu código y patrones</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="personalization.feature2">Soporte para los lenguajes, librerías e IDEs más populares</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="personalization.feature3">Capacidad de crear modelos personalizados entrenados en tu base de código</span>
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary">
+                            <span data-translate="personalization.learnMore">Aprender Más</span>
+                        </button>
+                    </div>
+                    <div class="content-right">
+                        <div class="feature-visual">
+                            <div class="visual-card">
+                                <div class="card-header">
+                                    <i class="fas fa-brain"></i>
+                                    <span>IA Personalizada</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 95%"></div>
+                                    </div>
+                                    <span>95% Precisión en Sugerencias</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section class="privacy">
+            <div class="container">
+                <div class="privacy-content">
+                    <div class="content-left">
+                        <div class="privacy-visual">
+                            <div class="shield-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="security-indicators">
+                                <div class="indicator active">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Cifrado End-to-End</span>
+                                </div>
+                                <div class="indicator active">
+                                    <i class="fas fa-server"></i>
+                                    <span>Servidores Privados</span>
+                                </div>
+                                <div class="indicator active">
+                                    <i class="fas fa-eye-slash"></i>
+                                    <span>Cero Retención de Datos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <h2 class="section-title" data-translate="privacy.title">
+                            Privacidad completa del código con cero retención de datos
+                        </h2>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="privacy.feature1">Despliega DevsTopia a tu manera: on-premises, VPC o SaaS seguro</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="privacy.feature2">Nuestros modelos propietarios nunca se entrenan con tu código</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span data-translate="privacy.feature3">Tu código nunca se almacena o comparte sin tu permiso explícito</span>
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary">
+                            <span data-translate="privacy.learnMore">Aprender Más</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicios" class="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="services-title" class="section-title" data-translate="sections.servicios">
+                        Delega tareas a los agentes de IA de DevsTopia para ahorrar tiempo y esfuerzo
+                    </h2>
+                </div>
+                
+                <div class="services-grid" id="services-grid" role="grid">
+                    <!-- Los servicios se cargarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-translate="testimonials.title">
+                        DevsTopia es el asistente de código IA original de confianza para millones de desarrolladores
+                    </h2>
+                </div>
+                
+                <div class="testimonials-grid" id="testimonials-grid">
+                    <!-- Los testimonios se cargarán dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portafolio" class="portfolio" aria-labelledby="portfolio-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="portfolio-title" class="section-title" data-translate="sections.portafolio">Portafolio</h2>
+                    <p class="section-description" data-translate="portfolio.description">
+                        Descubre algunos de nuestros proyectos más destacados
+                    </p>
+                </div>
+                
+                <div class="portfolio-grid" id="portfolio-grid" role="grid">
+                    <!-- Los proyectos se cargarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto" class="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="contact-title" class="section-title" data-translate="sections.contacto">Contacto</h2>
+                    <p class="section-description" data-translate="contact.description">
+                        ¿Listo para transformar tu idea en realidad? Hablemos.
+                    </p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3 data-translate="contacto.email">Email</h3>
+                                <p><a href="mailto:info@devstopia.com">info@devstopia.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3 data-translate="contacto.telefono">Teléfono</h3>
+                                <p><a href="tel:+240222311498">+240 222 311 498</a></p>
+                                <p><a href="tel:+573150570742">+57 315 057 0742</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3 data-translate="contacto.ubicacion">Ubicación</h3>
+                                <p>Bogotá - Colombia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contact-form" role="form" aria-labelledby="contact-title">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre" class="form-label" data-translate="contacto.nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" required aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="asunto" class="form-label" data-translate="contacto.asunto">Asunto</label>
+                            <input type="text" id="asunto" name="asunto" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje" class="form-label" data-translate="contacto.mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span data-translate="contacto.enviar">Enviar Mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">DevsTopia</h3>
+                    <p class="footer-description" data-translate="footer.descripcion">
+                        DevsTopia es el asistente de código IA que acelera y simplifica el desarrollo de software 
+                        manteniendo tu código privado, seguro y conforme.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/devstopia" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.instagram.com/devs.topia/" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://x.com/devstopia" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://github.com/devstopia" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle" data-translate="footer.producto">Producto</h4>
+                    <ul class="footer-links">
+                        <li><a href="#servicios" data-translate="footer.precios">Planes y Precios</a></li>
+                        <li><a href="#servicios" data-translate="footer.ides">IDEs Soportados</a></li>
+                        <li><a href="#portafolio" data-translate="footer.documentacion">Documentación</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle" data-translate="footer.recursos">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-translate="footer.privacidad">Privacidad del Código</a></li>
+                        <li><a href="#" data-translate="footer.politicas">Política de Privacidad</a></li>
+                        <li><a href="#" data-translate="footer.terminos">Términos de Uso</a></li>
+                        <li><a href="#" data-translate="footer.seguridad">Centro de Confianza</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle" data-translate="footer.conocimiento">Centro de Conocimiento</h4>
+                    <ul class="footer-links">
+                        <li><a href="#servicios" data-translate="footer.generacionCodigo">Generación de Código IA</a></li>
+                        <li><a href="#servicios" data-translate="footer.refactoring">Refactorización de Código</a></li>
+                        <li><a href="#servicios" data-translate="footer.debugging">Debugging de Código</a></li>
+                        <li><a href="#servicios" data-translate="footer.documentacionCodigo">Documentación de Código</a></li>
+                        <li><a href="#servicios" data-translate="footer.testing">Pruebas Unitarias</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2024 DevsTopia. <span data-translate="footer.derechos">Todos los derechos reservados.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Quote Modal -->
+    <div id="quote-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title" data-translate="modal.cotizacion">Obtener Demo en Vivo</h2>
+                <button class="modal-close" onclick="closeQuoteModal()" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="quote-form" id="quote-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quote-nombre" data-translate="modal.nombre">Nombre</label>
+                        <input type="text" id="quote-nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quote-email">Email</label>
+                        <input type="email" id="quote-email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="quote-empresa" data-translate="modal.empresa">Empresa</label>
+                    <input type="text" id="quote-empresa" name="empresa" required>
+                </div>
+                <div class="form-group">
+                    <label for="quote-servicio" data-translate="modal.servicio">Servicio de Interés</label>
+                    <select id="quote-servicio" name="servicio" required>
+                        <option value="" data-translate="modal.seleccionarServicio">Selecciona un servicio</option>
+                        <option value="desarrollo-web" data-translate="modal.desarrolloWeb">Desarrollo Web</option>
+                        <option value="app-movil" data-translate="modal.appMovil">Aplicación Móvil</option>
+                        <option value="software-medida" data-translate="modal.softwareMedida">Software a Medida</option>
+                        <option value="consultoria" data-translate="modal.consultoria">Consultoría</option>
+                        <option value="otros" data-translate="modal.otros">Otros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quote-descripcion" data-translate="modal.descripcion">Descripción del proyecto</label>
+                    <textarea id="quote-descripcion" name="descripcion" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span data-translate="modal.programarDemo">Programar Demo</span>
+                    <i class="fas fa-calendar-plus"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget" id="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()" aria-label="Abrir chat">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chat-container" id="chat-container">
+            <div class="chat-header">
+                <div class="chat-info">
+                    <h3 data-translate="chat.titulo">Chat con DevsTopia</h3>
+                    <span class="chat-status">En línea</span>
+                </div>
+                <button class="chat-close" onclick="toggleChat()" aria-label="Cerrar chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p data-translate="chat.mensajeInicial">
+                            ¡Hola! Soy el asistente de DevsTopia. ¿En qué puedo ayudarte hoy?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" data-translate-placeholder="chat.placeholder" 
+                       placeholder="Escribe tu mensaje..." aria-label="Mensaje" oninput="handleTyping()">
+                <button onclick="sendMessage()" aria-label="Enviar mensaje">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="script-firebase.js?v=3.0"></script>
+    <script src="chat-auto-responses.js"></script>
+</body>
+</html>
