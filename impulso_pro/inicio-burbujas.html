@@ -6,16 +6,11 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="description" content="Impulso Profesional - Programa de excelencia para jóvenes profesionales. Formación intensiva y prácticas laborales en empresas privadas nacionales.">
-    <meta name="keywords" content="empleabilidad, jóvenes profesionales, formación, prácticas laborales, Impulso Pro">
-    <meta name="author" content="Impulso Profesional">
-    <meta name="theme-color" content="#0B4F87">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Inicio - Impulso Pro</title>
+    <title>Impulso Pro - Inicio con Efectos Burbuja</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-burbujas.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +23,7 @@
             <div class="nav-container">
                 <!-- Logo -->
                 <div class="nav-logo">
-                    <a href="inicio.html" class="logo-link">
+                    <a href="index.html" class="logo-link">
                         <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
                     </a>
                 </div>
@@ -36,7 +31,7 @@
                 <!-- Menú de navegación principal -->
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
-                        <a href="inicio.html" class="nav-link active">
+                        <a href="inicio-burbujas.html" class="nav-link active">
                             <i class="fas fa-home"></i>
                             <span data-es="Inicio" data-en="Home">Inicio</span>
                         </a>
@@ -75,11 +70,9 @@
                     </button>
                 </div>
 
-                <!-- Botones de idioma y tema -->
-                <div class="nav-controls">
                 <!-- Botón de idioma -->
                 <div class="nav-language">
-                    <button class="btn-language" id="btn-language" data-tooltip="Cambiar idioma (Ctrl+L)">
+                    <button class="btn-language" id="btn-language">
                         <i class="fas fa-globe"></i>
                         <span data-es="ES" data-en="EN">ES</span>
                     </button>
@@ -96,14 +89,6 @@
                             <i class="fas fa-times"></i>
                             <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
                         </div>
-                        </div>
-                    </div>
-
-                    <!-- Botón de cambio de tema -->
-                    <div class="nav-theme">
-                        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema" data-tooltip="Cambiar entre modo claro y oscuro (Ctrl+T)">
-                            <i class="fas fa-sun" id="theme-icon"></i>
-                        </button>
                     </div>
                 </div>
 
@@ -117,21 +102,6 @@
         </nav>
     </header>
 
-    <!-- Botón flotante de WhatsApp -->
-    <div class="whatsapp-float" id="whatsapp-float">
-        <div class="whatsapp-container">
-            <a href="https://wa.me/635551212" target="_blank" class="whatsapp-link" aria-label="Contactar por WhatsApp">
-                <div class="whatsapp-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
-                <div class="whatsapp-tooltip">
-                    <span class="tooltip-text">¡Chatea con nosotros!</span>
-                    <span class="tooltip-number">(+63) 555 1212</span>
-                </div>
-            </a>
-        </div>
-    </div>
-
     <!-- Contenido principal -->
     <main class="main-content">
         <!-- Carrusel Hero -->
@@ -143,25 +113,30 @@
                     </div>
                     <div class="carousel-content">
                         <div class="carousel-text">
-                            <h1 data-es="Impulsa tu Carrera Profesional" data-en="Boost Your Professional Career">Impulsa tu Carrera Profesional</h1>
-                            <p data-es="Descubre las mejores oportunidades para tu crecimiento profesional" data-en="Discover the best opportunities for your professional growth">Descubre las mejores oportunidades para tu crecimiento profesional</p>
+                            <h1 data-es="Impulso Profesional" data-en="Professional Impulse">Impulso Profesional</h1>
+                            <p data-es="Descubre oportunidades únicas para tu crecimiento profesional" data-en="Discover unique opportunities for your professional growth">Descubre oportunidades únicas para tu crecimiento profesional</p>
+                            <div class="professions-list">
+                                <span class="profession-tag" data-es="Marketing Digital" data-en="Digital Marketing">Marketing Digital</span>
+                                <span class="profession-tag" data-es="Desarrollo Web" data-en="Web Development">Desarrollo Web</span>
+                                <span class="profession-tag" data-es="Análisis de Datos" data-en="Data Analysis">Análisis de Datos</span>
+                            </div>
                         </div>
                         <div class="carousel-cta">
-                            <button class="btn-cta" data-es="Inscríbete Ahora" data-en="Sign Up Now">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
                                 <i class="fas fa-rocket"></i>
-                                <span data-es="Inscríbete Ahora" data-en="Sign Up Now">Inscríbete Ahora</span>
-                            </button>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-slide" data-slide="2">
                     <div class="carousel-image">
-                        <img src="assets/carrusel_2.png" alt="Profesionales en Cocina, Telecomunicaciones y Servicios">
+                        <img src="assets/carrusel_2.png" alt="Impulso Pro - Profesionales Requeridos">
                     </div>
                     <div class="carousel-content">
                         <div class="carousel-text">
-                            <h1 data-es="Requerimos Profesionales en:" data-en="We Require Professionals in:">Requerimos Profesionales en:</h1>
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
                             <div class="professions-list">
                                 <span class="profession-tag" data-es="Cocina" data-en="Kitchen">Cocina</span>
                                 <span class="profession-tag" data-es="Técnico de Telecomunicaciones" data-en="Telecommunications Technician">Técnico de Telecomunicaciones</span>
@@ -170,45 +145,45 @@
                             </div>
                         </div>
                         <div class="carousel-cta">
-                            <button class="btn-cta" data-es="Inscríbete Ahora" data-en="Sign Up Now">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
                                 <i class="fas fa-rocket"></i>
-                                <span data-es="Inscríbete Ahora" data-en="Sign Up Now">Inscríbete Ahora</span>
-                            </button>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-slide" data-slide="3">
                     <div class="carousel-image">
-                        <img src="assets/carrusel_3.png" alt="Profesionales en Recursos Humanos, Administración y Marketing">
+                        <img src="assets/carrusel_3.png" alt="Impulso Pro - Oportunidades Administrativas">
                     </div>
                     <div class="carousel-content">
                         <div class="carousel-text">
-                            <h1 data-es="Requerimos Profesionales en:" data-en="We Require Professionals in:">Requerimos Profesionales en:</h1>
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
                             <div class="professions-list">
                                 <span class="profession-tag" data-es="Asistentes de Recursos Humanos" data-en="HR Assistants">Asistentes de Recursos Humanos</span>
                                 <span class="profession-tag" data-es="Asistentes Administrativos" data-en="Administrative Assistants">Asistentes Administrativos</span>
                                 <span class="profession-tag" data-es="Estadísticos" data-en="Statisticians">Estadísticos</span>
-                                <span class="profession-tag" data-es="Financieros" data-en="Financial Professionals">Financieros</span>
+                                <span class="profession-tag" data-es="Financieros" data-en="Financial">Financieros</span>
                                 <span class="profession-tag" data-es="Trade Marketing" data-en="Trade Marketing">Trade Marketing</span>
                             </div>
                         </div>
                         <div class="carousel-cta">
-                            <button class="btn-cta" data-es="Inscríbete Ahora" data-en="Sign Up Now">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
                                 <i class="fas fa-rocket"></i>
-                                <span data-es="Inscríbete Ahora" data-en="Sign Up Now">Inscríbete Ahora</span>
-                            </button>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-slide" data-slide="4">
                     <div class="carousel-image">
-                        <img src="assets/carrusel_4.png" alt="Profesionales en Análisis de Datos, Banca y Dirección">
+                        <img src="assets/carrusel_4.png" alt="Impulso Pro - Oportunidades Especializadas">
                     </div>
                     <div class="carousel-content">
                         <div class="carousel-text">
-                            <h1 data-es="Requerimos Profesionales en:" data-en="We Require Professionals in:">Requerimos Profesionales en:</h1>
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
                             <div class="professions-list">
                                 <span class="profession-tag" data-es="Analista de Datos" data-en="Data Analyst">Analista de Datos</span>
                                 <span class="profession-tag" data-es="Agentes Corporativos" data-en="Corporate Agents">Agentes Corporativos</span>
@@ -218,10 +193,10 @@
                             </div>
                         </div>
                         <div class="carousel-cta">
-                            <button class="btn-cta" data-es="Inscríbete Ahora" data-en="Sign Up Now">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
                                 <i class="fas fa-rocket"></i>
-                                <span data-es="Inscríbete Ahora" data-en="Sign Up Now">Inscríbete Ahora</span>
-                            </button>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -250,28 +225,40 @@
             </div>
         </section>
 
-        <!-- Sección ¿Quiénes somos? -->
-        <section class="quienes-somos-section">
+        <!-- Sección ¿Quiénes somos? con Efectos Burbuja 4D -->
+        <section class="quienes-somos-section-burbujas">
+            <!-- Burbujas flotantes 4D -->
+            <div class="bubbles-container">
+                <div class="bubble bubble-1"></div>
+                <div class="bubble bubble-2"></div>
+                <div class="bubble bubble-3"></div>
+                <div class="bubble bubble-4"></div>
+                <div class="bubble bubble-5"></div>
+                <div class="bubble bubble-6"></div>
+                <div class="bubble bubble-7"></div>
+                <div class="bubble bubble-8"></div>
+                <div class="bubble bubble-9"></div>
+                <div class="bubble bubble-10"></div>
+            </div>
+
             <div class="container">
-                <div class="quienes-somos-content">
-                    <div class="quienes-somos-text">
+                <div class="quienes-somos-content-burbujas">
+                    <div class="quienes-somos-text-burbujas">
                         <h2 data-es="¿Quiénes somos?" data-en="Who are we?">¿Quiénes somos?</h2>
                         <div class="quienes-somos-description">
-                            <p data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Impulso Profesional is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.</p>
-                            <p data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales." data-en="It is an excellence program, with an intensive training component and another of work practices within National Private Companies.">Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales.</p>
+                            <p data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Professional Impulse is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.</p>
+                            <p data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales." data-en="It is an excellence program, with an intensive training part and another of labor practices within National Private Companies.">Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales.</p>
                         </div>
                         
-                        <!-- Contadores -->
-                        <div class="counters-grid">
-                            <div class="counter-item">
+                        <div class="counters-grid-burbujas">
+                            <div class="counter-item-burbujas">
                                 <div class="counter-icon">
                                     <i class="fas fa-users"></i>
                                 </div>
                                 <div class="counter-number" data-target="350" data-prefix="+">0</div>
                                 <div class="counter-label" data-es="Profesionales Beneficiados" data-en="Benefited Professionals">Profesionales Beneficiados</div>
                             </div>
-                            
-                            <div class="counter-item">
+                            <div class="counter-item-burbujas">
                                 <div class="counter-icon">
                                     <i class="fas fa-handshake"></i>
                                 </div>
@@ -280,9 +267,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="quienes-somos-image">
-                        <img src="assets/img_quienes_somos.png" alt="Impulso Profesional - ¿Quiénes somos?" class="quienes-somos-img">
+                    <div class="quienes-somos-image-burbujas">
+                        <img src="assets/img_quienes_somos.png" alt="Impulso Profesional - ¿Quiénes somos?" class="quienes-somos-img-burbujas">
                     </div>
                 </div>
             </div>
@@ -365,6 +351,37 @@
                         <i class="fas fa-handshake"></i>
                         <span data-es="Conocer Entidades" data-en="Meet Entities">Conocer Entidades</span>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Promovemos la Empleabilidad -->
+        <section class="empleabilidad-section">
+            <div class="container">
+                <div class="empleabilidad-header">
+                    <h2 data-es="Promovemos la empleabilidad de los Jóvenes" data-en="We promote youth employability">Promovemos la empleabilidad de los Jóvenes</h2>
+                </div>
+                
+                <div class="empleabilidad-content">
+                    <div class="beneficios-card">
+                        <div class="card-image">
+                            <img src="assets/persona_beneficios.png" alt="Beneficios para Jóvenes Profesionales" class="empleabilidad-img">
+                        </div>
+                        <div class="card-content">
+                            <h3 data-es="Beneficios" data-en="Benefits">Beneficios</h3>
+                            <p data-es="Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas." data-en="Young Professionals who enroll and are selected to be part of the program will be guaranteed training through Bangue Business School and PNUD, before being received by their respective companies.">Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas.</p>
+                        </div>
+                    </div>
+
+                    <div class="capacitacion-card">
+                        <div class="card-image">
+                            <img src="assets/capacitacion_continua.png" alt="Capacitación Continua" class="empleabilidad-img">
+                        </div>
+                        <div class="card-content">
+                            <h3 data-es="Capacitación Continua" data-en="Continuous Training">Capacitación Continua</h3>
+                            <p data-es="El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas." data-en="The program will guarantee continuous training for selected young professionals during their internship stay in companies.">El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -455,118 +472,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección Promovemos la Empleabilidad -->
-        <section class="empleabilidad-section">
-            <div class="container">
-                <div class="empleabilidad-header">
-                    <h2 data-es="Promovemos la empleabilidad de los Jóvenes" data-en="We promote youth employability">Promovemos la empleabilidad de los Jóvenes</h2>
-                </div>
-                
-                <div class="empleabilidad-content">
-                    <div class="beneficios-card">
-                        <div class="card-image">
-                            <img src="assets/beneficios.jpeg" alt="Beneficios para Jóvenes Profesionales" class="empleabilidad-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 data-es="Beneficios" data-en="Benefits">Beneficios</h3>
-                            <p data-es="Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas." data-en="Young Professionals who enroll and are selected to be part of the program will be guaranteed training through Bangue Business School and PNUD, before being received by their respective companies.">Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas.</p>
-                        </div>
-                    </div>
-
-                    <div class="capacitacion-card">
-                        <div class="card-image">
-                            <img src="assets/capacitacion_continua.jpeg" alt="Capacitación Continua" class="empleabilidad-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 data-es="Capacitación Continua" data-en="Continuous Training">Capacitación Continua</h3>
-                            <p data-es="El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas." data-en="The program will guarantee continuous training for selected young professionals during their internship stay in companies.">El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <!-- Logo y Descripción -->
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="footer-logo-img">
-                    </div>
-                    <p class="footer-description" data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Professional Impulse is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.</p>
-                    <p class="footer-description" data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales." data-en="It is an excellence program, with an intensive training part and another of labor practices within National Private Companies and International Organizations.">Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales.</p>
-                </div>
-
-                <!-- Información de Contacto -->
-                <div class="footer-section">
-                    <h3 data-es="Información de Contacto" data-en="Contact Information">Información de Contacto</h3>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span data-es="Teléfono:" data-en="Phone:">Teléfono:</span>
-                            <a href="tel:+635551212">(+63) 555 1212</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span data-es="Móvil:" data-en="Mobile:">Móvil:</span>
-                            <a href="tel:+635550100">(+63) 555 0100</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span data-es="Email:" data-en="Email:">Email:</span>
-                            <a href="mailto:info@impulsoprofesionalge.org">info@impulsoprofesionalge.org</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Logos Institucionales -->
-                <div class="footer-section">
-                    <h3 data-es="Organizaciones" data-en="Organizations">Organizaciones</h3>
-                    <div class="institutional-logos">
-                        <div class="logo-item">
-                            <img src="assets/escudoge.png" alt="Escudo Guinea Ecuatorial" class="institutional-logo">
-                        </div>
-                        <div class="logo-item">
-                            <img src="assets/escudopnud.jpg" alt="Logo PNUD" class="institutional-logo">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Redes Sociales -->
-            <div class="social-media">
-                <div class="social-icons">
-                    <a href="#" class="social-icon" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="X (Twitter)">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="TikTok">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="Discord">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="footer-bottom">
-                <p data-es="© 2024 Impulso Profesional. Todos los derechos reservados." data-en="© 2024 Professional Impulse. All rights reserved.">© 2024 Impulso Profesional. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
 
     <!-- Modal de inicio de sesión -->
     <div class="modal" id="login-modal">

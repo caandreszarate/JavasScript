@@ -22,7 +22,7 @@
             <div class="nav-container">
                 <!-- Logo -->
                 <div class="nav-logo">
-                    <a href="#" class="logo-link">
+                    <a href="inicio.html" class="logo-link">
                         <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
                     </a>
                 </div>
@@ -69,25 +69,35 @@
                     </button>
                 </div>
 
-                <!-- Botón de idioma -->
-                <div class="nav-language">
-                    <button class="btn-language" id="btn-language">
-                        <i class="fas fa-globe"></i>
-                        <span data-es="ES" data-en="EN">ES</span>
-                    </button>
-                    <div class="language-menu" id="language-menu">
-                        <div class="menu-item" data-type="indicator">
-                            <i class="fas fa-circle"></i>
-                            <span data-es="Indicador Sutil" data-en="Subtle Indicator">Indicador Sutil</span>
+                <!-- Botones de idioma y tema -->
+                <div class="nav-controls">
+                    <!-- Botón de idioma -->
+                    <div class="nav-language">
+                        <button class="btn-language" id="btn-language">
+                            <i class="fas fa-globe"></i>
+                            <span data-es="ES" data-en="EN">ES</span>
+                        </button>
+                        <div class="language-menu" id="language-menu">
+                            <div class="menu-item" data-type="indicator">
+                                <i class="fas fa-circle"></i>
+                                <span data-es="Indicador Sutil" data-en="Subtle Indicator">Indicador Sutil</span>
+                            </div>
+                            <div class="menu-item" data-type="elegant">
+                                <i class="fas fa-bell"></i>
+                                <span data-es="Notificación Elegante" data-en="Elegant Notification">Notificación Elegante</span>
+                            </div>
+                            <div class="menu-item" data-type="none">
+                                <i class="fas fa-times"></i>
+                                <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
+                            </div>
                         </div>
-                        <div class="menu-item" data-type="elegant">
-                            <i class="fas fa-bell"></i>
-                            <span data-es="Notificación Elegante" data-en="Elegant Notification">Notificación Elegante</span>
-                        </div>
-                        <div class="menu-item" data-type="none">
-                            <i class="fas fa-times"></i>
-                            <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
-                        </div>
+                    </div>
+
+                    <!-- Botón de cambio de tema -->
+                    <div class="nav-theme">
+                        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+                            <i class="fas fa-sun" id="theme-icon"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -100,6 +110,21 @@
             </div>
         </nav>
     </header>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float" id="whatsapp-float">
+        <div class="whatsapp-container">
+            <a href="https://wa.me/635551212" target="_blank" class="whatsapp-link" aria-label="Contactar por WhatsApp">
+                <div class="whatsapp-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="whatsapp-tooltip">
+                    <span class="tooltip-text">¡Chatea con nosotros!</span>
+                    <span class="tooltip-number">(+63) 555 1212</span>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <!-- Contenido principal -->
     <main class="main-content">
@@ -146,6 +171,86 @@
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Logo y Descripción -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="footer-logo-img">
+                    </div>
+                    <p class="footer-description" data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Professional Impulse is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.</p>
+                    <p class="footer-description" data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales." data-en="It is an excellence program, with an intensive training part and another of labor practices within National Private Companies and International Organizations.">Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales.</p>
+                </div>
+
+                <!-- Información de Contacto -->
+                <div class="footer-section">
+                    <h3 data-es="Información de Contacto" data-en="Contact Information">Información de Contacto</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span data-es="Teléfono:" data-en="Phone:">Teléfono:</span>
+                            <a href="tel:+635551212">(+63) 555 1212</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span data-es="Móvil:" data-en="Mobile:">Móvil:</span>
+                            <a href="tel:+635550100">(+63) 555 0100</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span data-es="Email:" data-en="Email:">Email:</span>
+                            <a href="mailto:info@impulsoprofesionalge.org">info@impulsoprofesionalge.org</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logos Institucionales -->
+                <div class="footer-section">
+                    <h3 data-es="Organizaciones" data-en="Organizations">Organizaciones</h3>
+                    <div class="institutional-logos">
+                        <div class="logo-item">
+                            <img src="assets/escudoge.png" alt="Escudo Guinea Ecuatorial" class="institutional-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="assets/escudopnud.jpg" alt="Logo PNUD" class="institutional-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="social-media">
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="X (Twitter)">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p data-es="© 2024 Impulso Profesional. Todos los derechos reservados." data-en="© 2024 Professional Impulse. All rights reserved.">© 2024 Impulso Profesional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Modal de inicio de sesión -->
     <div class="modal" id="login-modal">

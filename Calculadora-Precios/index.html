@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Precios de Productos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+        
+        .form-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .results-section {
+            padding: 40px;
+            background: white;
+            border-left: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group input:invalid {
+            border-color: #e74c3c;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+        
+        .results-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            display: none;
+        }
+        
+        .results-card.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .results-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #667eea;
+        }
+        
+        .result-label {
+            color: #666;
+        }
+        
+        .result-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #e74c3c;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .ventas-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .ventas-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-section {
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏷️ Calculadora de Precios</h1>
+            <p>Calcula el precio final de tus productos y proyecta tus ganancias</p>
+        </div>
+        
+        <div class="content">
+            <!-- Sección de Formulario -->
+            <div class="form-section">
+                <h2 class="section-title">📝 Datos del Producto</h2>
+                
+                <div id="error-message" class="error-message">
+                    <strong>⚠️ Error:</strong> <span id="error-text"></span>
+                </div>
+                
+                <div id="success-message" class="success-message">
+                    <strong>✅ Éxito:</strong> <span id="success-text"></span>
+                </div>
+                
+                <form id="producto-form">
+                    <div class="form-group">
+                        <label for="nombre-producto">
+                            <span class="icon">🏷️</span>Nombre del Producto
+                        </label>
+                        <input 
+                            type="text" 
+                            id="nombre-producto" 
+                            placeholder="Ej: Camiseta Premium"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="costo-materia">
+                            <span class="icon">💰</span>Costo de Materia Prima ($)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="costo-materia" 
+                            placeholder="Ej: 15.50"
+                            step="0.01"
+                            min="0"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="margen-ganancia">
+                            <span class="icon">📈</span>Margen de Ganancia (%)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="margen-ganancia" 
+                            placeholder="Ej: 40"
+                            step="0.1"
+                            min="0"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="impuestos">
+                            <span class="icon">🏛️</span>Impuestos (%)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="impuestos" 
+                            placeholder="Ej: 16"
+                            step="0.1"
+                            min="0"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        🧮 Calcular Precio Final
+                    </button>
+                </form>
+                
+                <!-- Sección de Ventas (aparece después del cálculo) -->
+                <div id="ventas-section" class="ventas-section">
+                    <h3 class="section-title">📊 Proyección de Ventas</h3>
+                    
+                    <div class="form-group">
+                        <label for="ventas-esperadas">
+                            <span class="icon">📦</span>Ventas Esperadas (unidades)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="ventas-esperadas" 
+                            placeholder="Ej: 100"
+                            min="1"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="button" class="btn btn-secondary" onclick="calcularGanancias()">
+                        💹 Calcular Ganancias
+                    </button>
+                </div>
+                
+                <button type="button" class="btn" onclick="limpiarFormulario()" style="background: #6c757d;">
+                    🔄 Nuevo Cálculo
+                </button>
+            </div>
+            
+            <!-- Sección de Resultados -->
+            <div class="results-section">
+                <h2 class="section-title">📋 Resultados</h2>
+                
+                <div id="no-results" style="text-align: center; color: #666; padding: 50px 0;">
+                    <div style="font-size: 3em; margin-bottom: 20px;">🔍</div>
+                    <p>Ingresa los datos del producto para ver los resultados aquí</p>
+                </div>
+                
+                <!-- Resultados del Precio -->
+                <div id="precio-results" class="results-card">
+                    <h3>💰 Cálculo de Precio Final</h3>
+                    <div id="producto-nombre" class="highlight"></div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Costo Materia Prima:</span>
+                        <span class="result-value" id="costo-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Margen de Ganancia:</span>
+                        <span class="result-value" id="margen-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Precio con Margen:</span>
+                        <span class="result-value" id="precio-margen-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Impuestos:</span>
+                        <span class="result-value" id="impuestos-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">🏷️ PRECIO FINAL:</span>
+                        <span class="result-value" id="precio-final-display">$0.00</span>
+                    </div>
+                </div>
+                
+                <!-- Resultados de Ganancias -->
+                <div id="ganancias-results" class="results-card">
+                    <h3>📊 Proyección de Ganancias</h3>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Ventas Proyectadas:</span>
+                        <span class="result-value" id="ventas-display">0 unidades</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Ingresos Totales:</span>
+                        <span class="result-value" id="ingresos-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Costos Totales:</span>
+                        <span class="result-value" id="costos-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">Margen por Unidad:</span>
+                        <span class="result-value" id="margen-unidad-display">$0.00</span>
+                    </div>
+                    
+                    <div class="result-row">
+                        <span class="result-label">💰 GANANCIA TOTAL:</span>
+                        <span class="result-value" id="ganancia-total-display">$0.00</span>
+                    </div>
+                    
+                    <div class="highlight" id="porcentaje-ganancia">
+                        📈 Margen sobre ventas: 0.00%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

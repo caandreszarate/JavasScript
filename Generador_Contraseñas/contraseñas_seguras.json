@@ -1,0 +1,104 @@
+{
+  "generador_info": {
+    "version": "1.0",
+    "fecha_generacion": "2025-08-04T20:28:25.193037",
+    "total_contraseñas": 5
+  },
+  "contraseñas": [
+    {
+      "id": 1,
+      "propósito": "Administrador_Sistema",
+      "contraseña": "HME26g-anY!Sk:Q{jbo>",
+      "longitud": 20,
+      "evaluacion": {
+        "longitud_suficiente": true,
+        "tiene_mayusculas": true,
+        "tiene_minusculas": true,
+        "tiene_numeros": true,
+        "tiene_especiales": true,
+        "sin_secuencias_prohibidas": true,
+        "sin_palabras_comunes": true,
+        "sin_repeticiones_excesivas": true,
+        "puntuacion": 100.0,
+        "nivel": "Muy Fuerte"
+      },
+      "fecha_creacion": "2025-08-04T20:28:25.193152"
+    },
+    {
+      "id": 2,
+      "propósito": "Usuario_Normal",
+      "contraseña": "U.hl()hCXPx)a2",
+      "longitud": 14,
+      "evaluacion": {
+        "longitud_suficiente": true,
+        "tiene_mayusculas": true,
+        "tiene_minusculas": true,
+        "tiene_numeros": true,
+        "tiene_especiales": true,
+        "sin_secuencias_prohibidas": true,
+        "sin_palabras_comunes": true,
+        "sin_repeticiones_excesivas": true,
+        "puntuacion": 100.0,
+        "nivel": "Muy Fuerte"
+      },
+      "fecha_creacion": "2025-08-04T20:28:25.193238"
+    },
+    {
+      "id": 3,
+      "propósito": "API_Token",
+      "contraseña": "JchOU13-en+6,M{Gz{,;|w5cNCJ:CU)Y",
+      "longitud": 32,
+      "evaluacion": {
+        "longitud_suficiente": true,
+        "tiene_mayusculas": true,
+        "tiene_minusculas": true,
+        "tiene_numeros": true,
+        "tiene_especiales": true,
+        "sin_secuencias_prohibidas": true,
+        "sin_palabras_comunes": true,
+        "sin_repeticiones_excesivas": true,
+        "puntuacion": 100.0,
+        "nivel": "Muy Fuerte"
+      },
+      "fecha_creacion": "2025-08-04T20:28:25.193385"
+    },
+    {
+      "id": 4,
+      "propósito": "Base_Datos",
+      "contraseña": "xIwbpPmo4,EwX5IJ&n",
+      "longitud": 18,
+      "evaluacion": {
+        "longitud_suficiente": true,
+        "tiene_mayusculas": true,
+        "tiene_minusculas": true,
+        "tiene_numeros": true,
+        "tiene_especiales": true,
+        "sin_secuencias_prohibidas": true,
+        "sin_palabras_comunes": true,
+        "sin_repeticiones_excesivas": true,
+        "puntuacion": 100.0,
+        "nivel": "Muy Fuerte"
+      },
+      "fecha_creacion": "2025-08-04T20:28:25.193495"
+    },
+    {
+      "id": 5,
+      "propósito": "Backup_Seguridad",
+      "contraseña": "$d%xfQ6NKw6E|!Mjy$fW<EXP",
+      "longitud": 24,
+      "evaluacion": {
+        "longitud_suficiente": true,
+        "tiene_mayusculas": true,
+        "tiene_minusculas": true,
+        "tiene_numeros": true,
+        "tiene_especiales": true,
+        "sin_secuencias_prohibidas": true,
+        "sin_palabras_comunes": true,
+        "sin_repeticiones_excesivas": true,
+        "puntuacion": 100.0,
+        "nivel": "Muy Fuerte"
+      },
+      "fecha_creacion": "2025-08-04T20:28:25.193617"
+    }
+  ]
+}

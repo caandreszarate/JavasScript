@@ -841,4 +841,1027 @@ window.ImpulsoPro = {
     setNotificationType,
     openLoginModal,
     closeLoginModal
-}; 
+};
+
+// ===== CARRUSEL FUNCTIONALITY =====
+
+// Elementos del carrusel
+const carouselSlides = document.querySelectorAll('.carousel-slide');
+const carouselPrev = document.getElementById('carousel-prev');
+const carouselNext = document.getElementById('carousel-next');
+const carouselIndicators = document.querySelectorAll('.indicator');
+
+// Variables del carrusel
+let currentSlide = 0;
+let isAutoPlaying = true;
+let autoPlayInterval;
+let pauseIndicator;
+
+// Función para mostrar una slide específica
+function showSlide(slideIndex) {
+    // Ocultar todas las slides
+    carouselSlides.forEach(slide => slide.classList.remove('active'));
+    carouselIndicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    // Mostrar la slide actual
+    if (carouselSlides[slideIndex]) {
+        carouselSlides[slideIndex].classList.add('active');
+        carouselIndicators[slideIndex].classList.add('active');
+        currentSlide = slideIndex;
+    }
+}
+
+// Función para ir a la siguiente slide
+function nextSlide() {
+    const nextIndex = (currentSlide + 1) % carouselSlides.length;
+    showSlide(nextIndex);
+}
+
+// Función para ir a la slide anterior
+function prevSlide() {
+    const prevIndex = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+    showSlide(prevIndex);
+}
+
+// Función para ir a una slide específica
+function goToSlide(slideIndex) {
+    showSlide(slideIndex);
+    resetAutoPlay();
+}
+
+// Función para iniciar el autoplay
+function startAutoPlay() {
+    if (isAutoPlaying) {
+        autoPlayInterval = setInterval(() => {
+            nextSlide();
+        }, 15000); // Cambiar cada 15 segundos - tiempo muy lento para leer cómodamente
+    }
+}
+
+// Función para detener el autoplay
+function stopAutoPlay() {
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+    }
+    showPauseIndicator();
+}
+
+// Función para mostrar el indicador de pausa
+function showPauseIndicator() {
+    if (pauseIndicator) {
+        pauseIndicator.classList.add('show');
+        setTimeout(() => {
+            pauseIndicator.classList.remove('show');
+        }, 2000);
+    }
+}
+
+// Función para resetear el autoplay
+function resetAutoPlay() {
+    stopAutoPlay();
+    startAutoPlay();
+}
+
+// Función para manejar clicks en los controles
+function handleCarouselControls() {
+    if (carouselPrev) {
+        carouselPrev.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    if (carouselNext) {
+        carouselNext.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+    }
+}
+
+// Función para manejar clicks en los indicadores
+function handleCarouselIndicators() {
+    carouselIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+        });
+    });
+}
+
+// Función para manejar eventos de teclado
+function handleCarouselKeyboard() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetAutoPlay();
+        }
+    });
+}
+
+// Función para manejar eventos de touch (swipe)
+function handleCarouselTouch() {
+    let startX = 0;
+    let endX = 0;
+    
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+        
+        carouselContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe izquierda - siguiente slide
+                nextSlide();
+            } else {
+                // Swipe derecha - slide anterior
+                prevSlide();
+            }
+            resetAutoPlay();
+        }
+    }
+}
+
+// Función para manejar hover en el carrusel
+function handleCarouselHover() {
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => {
+            stopAutoPlay();
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            // Esperar un poco antes de reanudar para dar tiempo al usuario
+            setTimeout(() => {
+                startAutoPlay();
+            }, 1000);
+        });
+    }
+}
+
+// Función para detectar interacción del usuario con el contenido
+function handleUserInteraction() {
+    const carouselContent = document.querySelector('.carousel-content');
+    
+    if (carouselContent) {
+        // Detectar cuando el usuario hace scroll o interactúa con el contenido
+        let userActivityTimeout;
+        
+        const resetUserActivity = () => {
+            clearTimeout(userActivityTimeout);
+            stopAutoPlay();
+            
+            // Reanudar después de 3 segundos de inactividad
+            userActivityTimeout = setTimeout(() => {
+                startAutoPlay();
+            }, 3000);
+        };
+        
+        // Eventos que indican que el usuario está leyendo/interactuando
+        carouselContent.addEventListener('click', resetUserActivity);
+        carouselContent.addEventListener('scroll', resetUserActivity);
+        carouselContent.addEventListener('touchstart', resetUserActivity);
+        
+        // También detectar cuando el usuario está leyendo (movimiento del mouse)
+        let mouseActivityTimeout;
+        carouselContent.addEventListener('mousemove', () => {
+            clearTimeout(mouseActivityTimeout);
+            stopAutoPlay();
+            
+            mouseActivityTimeout = setTimeout(() => {
+                startAutoPlay();
+            }, 2000);
+        });
+    }
+}
+
+// Función para inicializar el carrusel
+function initCarousel() {
+    if (carouselSlides.length > 0) {
+        // Obtener el indicador de pausa
+        pauseIndicator = document.getElementById('pause-indicator');
+        
+        // Mostrar la primera slide
+        showSlide(0);
+        
+        // Configurar controles
+        handleCarouselControls();
+        handleCarouselIndicators();
+        handleCarouselKeyboard();
+        handleCarouselTouch();
+        handleCarouselHover();
+        handleUserInteraction();
+        
+        // Iniciar autoplay con un pequeño delay para que el usuario vea la primera slide
+        setTimeout(() => {
+            startAutoPlay();
+        }, 2000);
+        
+        // Pausar autoplay cuando la página no está visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoPlay();
+            } else {
+                setTimeout(() => {
+                    startAutoPlay();
+                }, 1000);
+            }
+        });
+    }
+}
+
+// Función para manejar clicks en los botones CTA
+function handleCTAClicks() {
+    const ctaButtons = document.querySelectorAll('.btn-cta');
+    
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Aquí puedes agregar la lógica para el registro
+            const currentLanguage = document.documentElement.lang || 'es';
+            const message = currentLanguage === 'es' 
+                ? '¡Gracias por tu interés! Te contactaremos pronto.' 
+                : 'Thank you for your interest! We will contact you soon.';
+            
+            // Mostrar notificación
+            if (window.ImpulsoPro && window.ImpulsoPro.showNotification) {
+                window.ImpulsoPro.showNotification(message, 'success');
+            } else {
+                alert(message);
+            }
+        });
+    });
+}
+
+// ===== CONTADORES ANIMADOS CONTINUOS =====
+
+// Función para animar contadores de forma continua
+function animateCounterContinuous(element, target, prefix = '', duration = 25000) {
+    let current = 0;
+    const increment = target / (duration / 16); // 60fps
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = 0; // Reiniciar desde 0
+        }
+        element.textContent = prefix + Math.floor(current);
+    }, 16);
+    
+    // Guardar el timer para poder detenerlo si es necesario
+    element.dataset.timer = timer;
+}
+
+// Función para animar contadores con efecto de rebote
+function animateCounterBounce(element, target, prefix = '', duration = 6000) {
+    let current = 0;
+    let direction = 1; // 1 para subir, -1 para bajar
+    const increment = target / (duration / 16);
+    
+    const timer = setInterval(() => {
+        current += increment * direction;
+        
+        if (current >= target) {
+            direction = -1; // Cambiar dirección hacia abajo
+        } else if (current <= 0) {
+            direction = 1; // Cambiar dirección hacia arriba
+        }
+        
+        element.textContent = prefix + Math.floor(current);
+    }, 16);
+    
+    element.dataset.timer = timer;
+}
+
+// Función para verificar si un elemento está en el viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Función para inicializar contadores continuos
+function initCounters() {
+    const counters = document.querySelectorAll('.counter-number');
+    const activeCounters = new Set();
+    
+    function startCounters() {
+        counters.forEach((counter, index) => {
+            if (isInViewport(counter) && !activeCounters.has(counter)) {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const prefix = counter.getAttribute('data-prefix') || '';
+                
+                // Usar animación continua para el primer contador y rebote para el segundo
+                if (index === 0) {
+                    animateCounterContinuous(counter, target, prefix);
+                } else {
+                    animateCounterBounce(counter, target, prefix);
+                }
+                
+                activeCounters.add(counter);
+            }
+        });
+    }
+    
+    function stopCounters() {
+        counters.forEach(counter => {
+            if (activeCounters.has(counter) && !isInViewport(counter)) {
+                const timer = counter.dataset.timer;
+                if (timer) {
+                    clearInterval(parseInt(timer));
+                    delete counter.dataset.timer;
+                }
+                activeCounters.delete(counter);
+            }
+        });
+    }
+    
+    // Iniciar contadores cuando estén en viewport
+    startCounters();
+    
+    // Manejar scroll y resize
+    window.addEventListener('scroll', () => {
+        startCounters();
+        stopCounters();
+    });
+    
+    window.addEventListener('resize', () => {
+        startCounters();
+        stopCounters();
+    });
+    
+    // Pausar contadores cuando la página no está visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            counters.forEach(counter => {
+                const timer = counter.dataset.timer;
+                if (timer) {
+                    clearInterval(parseInt(timer));
+                    delete counter.dataset.timer;
+                }
+            });
+        } else {
+            startCounters();
+        }
+    });
+}
+
+// ===== CARRUSEL DE ENTIDADES =====
+
+// Elementos del carrusel de entidades
+const entidadesSlides = document.querySelectorAll('.entidades-slide');
+const entidadesPrev = document.getElementById('entidades-prev');
+const entidadesNext = document.getElementById('entidades-next');
+const entidadesIndicators = document.querySelectorAll('.entidades-indicator');
+
+// Variables del carrusel de entidades
+let currentEntidadSlide = 0;
+let entidadesAutoPlayInterval;
+
+// Función para mostrar una slide específica de entidades
+function showEntidadSlide(slideIndex) {
+    // Ocultar todas las slides
+    entidadesSlides.forEach(slide => slide.classList.remove('active'));
+    entidadesIndicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    // Mostrar la slide actual
+    if (entidadesSlides[slideIndex]) {
+        entidadesSlides[slideIndex].classList.add('active');
+        entidadesIndicators[slideIndex].classList.add('active');
+        currentEntidadSlide = slideIndex;
+    }
+}
+
+// Función para ir a la siguiente slide de entidades
+function nextEntidadSlide() {
+    const nextIndex = (currentEntidadSlide + 1) % entidadesSlides.length;
+    showEntidadSlide(nextIndex);
+}
+
+// Función para ir a la slide anterior de entidades
+function prevEntidadSlide() {
+    const prevIndex = (currentEntidadSlide - 1 + entidadesSlides.length) % entidadesSlides.length;
+    showEntidadSlide(prevIndex);
+}
+
+// Función para ir a una slide específica de entidades
+function goToEntidadSlide(slideIndex) {
+    showEntidadSlide(slideIndex);
+    resetEntidadesAutoPlay();
+}
+
+// Función para iniciar el autoplay de entidades
+function startEntidadesAutoPlay() {
+    entidadesAutoPlayInterval = setInterval(() => {
+        nextEntidadSlide();
+    }, 6000); // Cambiar cada 6 segundos
+}
+
+// Función para detener el autoplay de entidades
+function stopEntidadesAutoPlay() {
+    if (entidadesAutoPlayInterval) {
+        clearInterval(entidadesAutoPlayInterval);
+    }
+}
+
+// Función para resetear el autoplay de entidades
+function resetEntidadesAutoPlay() {
+    stopEntidadesAutoPlay();
+    startEntidadesAutoPlay();
+}
+
+// Función para manejar controles del carrusel de entidades
+function handleEntidadesControls() {
+    if (entidadesPrev) {
+        entidadesPrev.addEventListener('click', () => {
+            prevEntidadSlide();
+            resetEntidadesAutoPlay();
+        });
+    }
+    
+    if (entidadesNext) {
+        entidadesNext.addEventListener('click', () => {
+            nextEntidadSlide();
+            resetEntidadesAutoPlay();
+        });
+    }
+}
+
+// Función para manejar indicadores del carrusel de entidades
+function handleEntidadesIndicators() {
+    entidadesIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToEntidadSlide(index);
+        });
+    });
+}
+
+// Función para manejar hover en el carrusel de entidades
+function handleEntidadesHover() {
+    const entidadesCarousel = document.querySelector('.entidades-carousel');
+    
+    if (entidadesCarousel) {
+        entidadesCarousel.addEventListener('mouseenter', () => {
+            stopEntidadesAutoPlay();
+        });
+        
+        entidadesCarousel.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                startEntidadesAutoPlay();
+            }, 1000);
+        });
+    }
+}
+
+// Función para inicializar el carrusel de entidades
+function initEntidadesCarousel() {
+    if (entidadesSlides.length > 0) {
+        // Mostrar la primera slide
+        showEntidadSlide(0);
+        
+        // Configurar controles
+        handleEntidadesControls();
+        handleEntidadesIndicators();
+        handleEntidadesHover();
+        
+        // Iniciar autoplay con delay
+        setTimeout(() => {
+            startEntidadesAutoPlay();
+        }, 2000);
+        
+        // Pausar autoplay cuando la página no está visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopEntidadesAutoPlay();
+            } else {
+                setTimeout(() => {
+                    startEntidadesAutoPlay();
+                }, 1000);
+            }
+        });
+    }
+}
+
+// ===== CARRUSEL HORIZONTAL DE LOGOS =====
+
+// Función para inicializar el carrusel horizontal de logos
+function initLogosCarousel() {
+    // El carrusel horizontal es completamente automático con CSS
+    // No necesita JavaScript adicional
+    console.log('Carrusel horizontal de logos inicializado');
+}
+
+// ===== FUNCIONALIDAD DE CAMBIO DE TEMA =====
+
+// Elementos del DOM para el tema
+const btnTheme = document.getElementById('btn-theme');
+const themeIcon = document.getElementById('theme-icon');
+
+// Función para cambiar el tema
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Cambiar el tema
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Actualizar el icono
+    updateThemeIcon(newTheme);
+    
+    // Guardar en localStorage
+    localStorage.setItem('theme', newTheme);
+}
+
+// Función para actualizar el icono del tema
+function updateThemeIcon(theme) {
+    if (themeIcon) {
+        if (theme === 'dark') {
+            themeIcon.className = 'fas fa-moon';
+        } else {
+            themeIcon.className = 'fas fa-sun';
+        }
+    }
+}
+
+
+
+// Función para cargar el tema guardado
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Usar tema guardado o preferencia del sistema
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
+}
+
+// Función para inicializar el tema
+function initTheme() {
+    // Cargar tema guardado
+    loadSavedTheme();
+    
+    // Agregar event listener al botón
+    if (btnTheme) {
+        btnTheme.addEventListener('click', toggleTheme);
+    }
+    
+    // Escuchar cambios en la preferencia del sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+    });
+}
+
+// Inicializar carrusel cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initCarousel();
+    handleCTAClicks();
+    initCounters();
+    initEntidadesCarousel();
+    initLogosCarousel();
+    initTheme();
+}); 
+
+// ===== MEJORAS UI/UX - FUNCIONALIDADES AVANZADAS =====
+
+// Función para mostrar indicador de carga
+function showLoading(message = 'Cargando...') {
+    const overlay = document.createElement('div');
+    overlay.className = 'loading-overlay';
+    overlay.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p style="margin-top: 1rem;">${message}</p>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+    
+    // Mostrar con animación
+    setTimeout(() => overlay.classList.add('show'), 10);
+    
+    return overlay;
+}
+
+// Función para ocultar indicador de carga
+function hideLoading(overlay) {
+    if (overlay) {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            if (overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }, 300);
+    }
+}
+
+// Función para crear notificaciones mejoradas
+function createNotification(message, type = 'info', duration = 5000) {
+    const container = document.querySelector('.notification-container') || createNotificationContainer();
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; color: #666; cursor: pointer; margin-left: 1rem;">
+                ×
+            </button>
+        </div>
+    `;
+    
+    container.appendChild(notification);
+    
+    // Mostrar con animación
+    setTimeout(() => notification.classList.add('show'), 10);
+    
+    // Auto-remover después del tiempo especificado
+    if (duration > 0) {
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, duration);
+    }
+    
+    return notification;
+}
+
+// Función para crear contenedor de notificaciones
+function createNotificationContainer() {
+    const container = document.createElement('div');
+    container.className = 'notification-container';
+    document.body.appendChild(container);
+    return container;
+}
+
+// Función para scroll to top
+function initScrollToTop() {
+    const scrollButton = document.createElement('button');
+    scrollButton.className = 'scroll-to-top';
+    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollButton.setAttribute('aria-label', 'Volver arriba');
+    document.body.appendChild(scrollButton);
+    
+    // Mostrar/ocultar basado en scroll
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollButton.classList.add('show');
+        } else {
+            scrollButton.classList.remove('show');
+        }
+    });
+    
+    // Scroll suave al hacer clic
+    scrollButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Función para agregar tooltips
+function initTooltips() {
+    const tooltipElements = document.querySelectorAll('[data-tooltip]');
+    
+    tooltipElements.forEach(element => {
+        const tooltipText = element.getAttribute('data-tooltip');
+        element.classList.add('tooltip');
+        
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltip-text';
+        tooltip.textContent = tooltipText;
+        element.appendChild(tooltip);
+    });
+}
+
+// Función para agregar efectos de ripple a botones
+function initRippleEffects() {
+    const buttons = document.querySelectorAll('.btn-cta, .btn-login, .btn-entidades');
+    
+    buttons.forEach(button => {
+        button.classList.add('btn-ripple');
+        
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+}
+
+// Función para mejorar accesibilidad
+function enhanceAccessibility() {
+    // Agregar skip links
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'sr-only';
+    skipLink.textContent = 'Saltar al contenido principal';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // Mejorar navegación por teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            // Cerrar modales y menús
+            const openModals = document.querySelectorAll('.modal.show');
+            openModals.forEach(modal => closeLoginModal());
+            
+            const openMenus = document.querySelectorAll('.nav-menu.active');
+            openMenus.forEach(menu => closeMobileMenu());
+        }
+    });
+    
+    // Agregar roles ARIA
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.setAttribute('role', 'main');
+        mainContent.id = 'main-content';
+    }
+    
+    // Mejorar anuncios de cambios dinámicos
+    const liveRegion = document.createElement('div');
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.className = 'sr-only';
+    document.body.appendChild(liveRegion);
+    
+    window.announceToScreenReader = function(message) {
+        liveRegion.textContent = message;
+        setTimeout(() => liveRegion.textContent = '', 1000);
+    };
+}
+
+// Función para optimizar performance
+function optimizePerformance() {
+    // Lazy loading para imágenes
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+    
+    // Debounce para eventos de scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // Optimizar operaciones costosas durante scroll
+        }, 16);
+    });
+}
+
+// Función para agregar microinteracciones
+function addMicrointeractions() {
+    // Efecto de hover en cards
+    const cards = document.querySelectorAll('.beneficios-card, .capacitacion-card, .counter-item');
+    cards.forEach(card => {
+        card.classList.add('hover-lift');
+    });
+    
+    // Efecto de pulse en CTA
+    const ctaButtons = document.querySelectorAll('.btn-cta');
+    ctaButtons.forEach(button => {
+        button.classList.add('pulse-animation');
+    });
+    
+    // Efecto de bounce en iconos importantes
+    const importantIcons = document.querySelectorAll('.counter-icon i, .whatsapp-link i');
+    importantIcons.forEach(icon => {
+        icon.classList.add('bounce-animation');
+    });
+    
+    // Mejorar interactividad del botón de WhatsApp
+    const whatsappLink = document.querySelector('.whatsapp-link');
+    if (whatsappLink) {
+        // Efectos deshabilitados para evitar burbujas
+        // Solo mantener funcionalidad básica de enlace
+    }
+}
+
+// Función para agregar skeleton loading
+function showSkeletonLoading(container) {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'skeleton';
+    skeleton.innerHTML = `
+        <div class="skeleton-title"></div>
+        <div class="skeleton-text"></div>
+        <div class="skeleton-text"></div>
+        <div class="skeleton-text" style="width: 70%;"></div>
+    `;
+    
+    container.appendChild(skeleton);
+    return skeleton;
+}
+
+// Función para remover skeleton loading
+function removeSkeletonLoading(skeleton) {
+    if (skeleton && skeleton.parentNode) {
+        skeleton.parentNode.removeChild(skeleton);
+    }
+}
+
+// Función para agregar progress indicators
+function createProgressBar(container, progress = 0) {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+    progressBar.innerHTML = '<div class="progress-fill"></div>';
+    
+    container.appendChild(progressBar);
+    
+    const progressFill = progressBar.querySelector('.progress-fill');
+    progressFill.style.width = progress + '%';
+    
+    return {
+        element: progressBar,
+        update: (newProgress) => {
+            progressFill.style.width = newProgress + '%';
+        }
+    };
+}
+
+// Función para mejorar la experiencia de carga
+function enhanceLoadingExperience() {
+    // Mostrar skeleton loading mientras se cargan las imágenes
+    const imageContainers = document.querySelectorAll('.card-image, .quienes-somos-image');
+    
+    imageContainers.forEach(container => {
+        const img = container.querySelector('img');
+        if (img && !img.complete) {
+            const skeleton = showSkeletonLoading(container);
+            
+            img.addEventListener('load', () => {
+                removeSkeletonLoading(skeleton);
+            });
+            
+            img.addEventListener('error', () => {
+                removeSkeletonLoading(skeleton);
+                img.style.display = 'none';
+                container.innerHTML = '<div style="background: #f0f0f0; height: 200px; display: flex; align-items: center; justify-content: center; color: #666;">Imagen no disponible</div>';
+            });
+        }
+    });
+}
+
+// Función para agregar feedback táctil
+function addTouchFeedback() {
+    const touchElements = document.querySelectorAll('.nav-link, .btn-cta, .btn-login, .btn-entidades');
+    
+    touchElements.forEach(element => {
+        element.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        element.addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
+    });
+}
+
+// Función para mejorar la navegación
+function enhanceNavigation() {
+    // Solo agregar breadcrumbs si no estamos en la página de inicio
+    if (!window.location.pathname.includes('inicio.html') && !window.location.pathname.endsWith('/')) {
+        const breadcrumb = document.createElement('nav');
+        breadcrumb.setAttribute('aria-label', 'Breadcrumb');
+        breadcrumb.className = 'breadcrumb';
+        breadcrumb.style.cssText = 'padding: 1rem; background: rgba(255,255,255,0.1); margin: 1rem 0; border-radius: 8px;';
+        
+        const currentPage = document.title.split(' - ')[0];
+        breadcrumb.innerHTML = `
+            <a href="inicio.html" style="color: #fff; text-decoration: none;">Inicio</a>
+            <span style="color: #fff; margin: 0 0.5rem;">/</span>
+            <span style="color: #fff;">${currentPage}</span>
+        `;
+        
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.insertBefore(breadcrumb, mainContent.firstChild);
+        }
+    }
+}
+
+// Función para agregar shortcuts de teclado
+function addKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + K para abrir búsqueda (futuro)
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            // Implementar búsqueda
+        }
+        
+        // Ctrl/Cmd + T para cambiar tema
+        if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+            e.preventDefault();
+            toggleTheme();
+        }
+        
+        // Ctrl/Cmd + L para cambiar idioma
+        if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+            e.preventDefault();
+            toggleLanguage();
+        }
+    });
+}
+
+// Función para agregar analytics básicos
+function addBasicAnalytics() {
+    // Track eventos importantes
+    const trackEvent = (eventName, data = {}) => {
+        console.log('Analytics Event:', eventName, data);
+        // Aquí se integraría con Google Analytics u otro servicio
+    };
+    
+    // Track clicks en CTA
+    document.querySelectorAll('.btn-cta').forEach(btn => {
+        btn.addEventListener('click', () => {
+            trackEvent('cta_click', {
+                location: 'hero_carousel',
+                button_text: btn.textContent.trim()
+            });
+        });
+    });
+    
+    // Track cambios de tema
+    const originalToggleTheme = window.toggleTheme;
+    window.toggleTheme = function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        trackEvent('theme_change', { from: currentTheme, to: newTheme });
+        originalToggleTheme();
+    };
+}
+
+// Inicializar todas las mejoras UI/UX
+function initUXImprovements() {
+    initScrollToTop();
+    initTooltips();
+    initRippleEffects();
+    enhanceAccessibility();
+    optimizePerformance();
+    addMicrointeractions();
+    enhanceLoadingExperience();
+    addTouchFeedback();
+    enhanceNavigation();
+    addKeyboardShortcuts();
+    addBasicAnalytics();
+    
+    // Mostrar notificación de bienvenida
+    setTimeout(() => {
+        createNotification('¡Bienvenido a Impulso Pro! 🚀', 'success', 3000);
+    }, 1000);
+}
+
+// Llamar a las mejoras cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initCarousel();
+    handleCTAClicks();
+    initCounters();
+    initEntidadesCarousel();
+    initLogosCarousel();
+    initTheme();
+    initUXImprovements(); // Nueva función agregada
+}); 

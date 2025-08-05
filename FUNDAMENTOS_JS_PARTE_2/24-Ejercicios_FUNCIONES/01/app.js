@@ -26,4 +26,9 @@ console.log(sumar(3, 4));
 console.log(sumar(5, 6));
 
 
+//ejercicio platzi
+
+
+
+
 
