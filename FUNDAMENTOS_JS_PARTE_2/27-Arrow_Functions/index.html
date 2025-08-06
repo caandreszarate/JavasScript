@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Functions - Ejemplos Prácticos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .section h2 {
+            color: #2d3748;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .output {
+            background: #1a202c;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            border: 2px solid #38a169;
+        }
+        
+        .explanation {
+            background: #ebf8ff;
+            border: 1px solid #3182ce;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .highlight {
+            background: #ffd700;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #333;
+        }
+        
+        .interactive-section {
+            background: #f0fff4;
+            border: 2px solid #48bb78;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #5a67d8;
+        }
+        
+        input {
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏹 Arrow Functions en JavaScript</h1>
+        
+        <div class="section">
+            <h2>¿Qué son las Arrow Functions?</h2>
+            <div class="explanation">
+                Las <span class="highlight">Arrow Functions</span> (funciones flecha) son una forma más concisa de escribir funciones en JavaScript (ES6+). 
+                Utilizan la sintaxis <code>=></code> y tienen algunas diferencias importantes con las funciones tradicionales.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>1. Sintaxis Básica</h2>
+            <div class="code-example">
+// Función tradicional
+function sumar(a, b) {
+    return a + b;
+}
+
+// Arrow function equivalente
+const sumar = (a, b) => {
+    return a + b;
+};
+
+// Arrow function concisa (return implícito)
+const sumar = (a, b) => a + b;
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Ejemplos Interactivos</h2>
+            <div class="interactive-section">
+                <h3>🧮 Calculadora con Arrow Functions</h3>
+                <input type="number" id="num1" placeholder="Primer número" value="5">
+                <input type="number" id="num2" placeholder="Segundo número" value="3">
+                <br>
+                <button onclick="calcularSuma()">Sumar</button>
+                <button onclick="calcularMultiplicacion()">Multiplicar</button>
+                <button onclick="calcularPotencia()">Potencia</button>
+                <div id="resultadoCalc" class="result"></div>
+            </div>
+
+            <div class="interactive-section">
+                <h3>📝 Manipulador de Texto</h3>
+                <input type="text" id="textoInput" placeholder="Escribe algo aquí..." value="hola mundo">
+                <br>
+                <button onclick="capitalizar()">Capitalizar</button>
+                <button onclick="invertir()">Invertir</button>
+                <button onclick="contarPalabras()">Contar Palabras</button>
+                <button onclick="eliminarEspacios()">Quitar Espacios</button>
+                <div id="resultadoTexto" class="result"></div>
+            </div>
+
+            <div class="interactive-section">
+                <h3>📊 Procesador de Arrays</h3>
+                <p>Array de ejemplo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</p>
+                <button onclick="filtrarPares()">Números Pares</button>
+                <button onclick="duplicarNumeros()">Duplicar Números</button>
+                <button onclick="calcularSuma()">Suma Total</button>
+                <button onclick="numerosAlCuadrado()">Al Cuadrado</button>
+                <div id="resultadoArray" class="result"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Diferencias Clave</h2>
+            <div class="explanation">
+                <h3>✅ Ventajas de Arrow Functions:</h3>
+                <ul>
+                    <li>Sintaxis más concisa y legible</li>
+                    <li>Return implícito para expresiones simples</li>
+                    <li>No crean su propio contexto 'this'</li>
+                    <li>Ideales para callbacks y métodos de array</li>
+                </ul>
+                
+                <h3>⚠️ Limitaciones:</h3>
+                <ul>
+                    <li>No pueden ser usadas como constructores</li>
+                    <li>No tienen objeto 'arguments'</li>
+                    <li>No son ideales como métodos de objeto</li>
+                    <li>No pueden ser generadores</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. Casos de Uso Comunes</h2>
+            <div class="code-example">
+// Métodos de array
+const numeros = [1, 2, 3, 4, 5];
+const pares = numeros.filter(n => n % 2 === 0);
+const dobles = numeros.map(n => n * 2);
+const suma = numeros.reduce((acc, n) => acc + n, 0);
+
+// Event handlers
+button.addEventListener('click', () => {
+    console.log('¡Botón clickeado!');
+});
+
+// Callbacks asíncronos
+setTimeout(() => {
+    console.log('Tiempo transcurrido');
+}, 1000);
+
+// API calls
+fetch('/api/data')
+    .then(response => response.json())
+    .then(data => console.log(data));
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Consola de Salida</h2>
+            <div class="explanation">
+                Abre las herramientas de desarrollador (F12) y ve a la pestaña "Console" para ver todos los ejemplos ejecutándose.
+                También puedes ver la salida aquí:
+            </div>
+            <div id="consola" class="output">
+                Cargando ejemplos...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirigir console.log a la página
+        const consolaDiv = document.getElementById('consola');
+        const originalLog = console.log;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const mensaje = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            consolaDiv.innerHTML += mensaje + '<br>';
+        };
+
+        // Funciones interactivas para la calculadora
+        const sumar = (a, b) => a + b;
+        const multiplicar = (a, b) => a * b;
+        const potencia = (base, exponente) => Math.pow(base, exponente);
+
+        function calcularSuma() {
+            const num1 = parseFloat(document.getElementById('num1').value) || 0;
+            const num2 = parseFloat(document.getElementById('num2').value) || 0;
+            const resultado = sumar(num1, num2);
+            document.getElementById('resultadoCalc').innerHTML = 
+                `${num1} + ${num2} = <strong>${resultado}</strong>`;
+        }
+
+        function calcularMultiplicacion() {
+            const num1 = parseFloat(document.getElementById('num1').value) || 0;
+            const num2 = parseFloat(document.getElementById('num2').value) || 0;
+            const resultado = multiplicar(num1, num2);
+            document.getElementById('resultadoCalc').innerHTML = 
+                `${num1} × ${num2} = <strong>${resultado}</strong>`;
+        }
+
+        function calcularPotencia() {
+            const num1 = parseFloat(document.getElementById('num1').value) || 0;
+            const num2 = parseFloat(document.getElementById('num2').value) || 0;
+            const resultado = potencia(num1, num2);
+            document.getElementById('resultadoCalc').innerHTML = 
+                `${num1}^${num2} = <strong>${resultado}</strong>`;
+        }
+
+        // Funciones para manipulación de texto
+        const capitalizarTexto = texto => texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+        const invertirTexto = texto => texto.split('').reverse().join('');
+        const contarPalabrasTexto = texto => texto.trim().split(/\s+/).filter(palabra => palabra.length > 0).length;
+        const eliminarEspaciosTexto = texto => texto.replace(/\s+/g, '');
+
+        function capitalizar() {
+            const texto = document.getElementById('textoInput').value;
+            const resultado = capitalizarTexto(texto);
+            document.getElementById('resultadoTexto').innerHTML = 
+                `Resultado: <strong>"${resultado}"</strong>`;
+        }
+
+        function invertir() {
+            const texto = document.getElementById('textoInput').value;
+            const resultado = invertirTexto(texto);
+            document.getElementById('resultadoTexto').innerHTML = 
+                `Resultado: <strong>"${resultado}"</strong>`;
+        }
+
+        function contarPalabras() {
+            const texto = document.getElementById('textoInput').value;
+            const resultado = contarPalabrasTexto(texto);
+            document.getElementById('resultadoTexto').innerHTML = 
+                `Número de palabras: <strong>${resultado}</strong>`;
+        }
+
+        function eliminarEspacios() {
+            const texto = document.getElementById('textoInput').value;
+            const resultado = eliminarEspaciosTexto(texto);
+            document.getElementById('resultadoTexto').innerHTML = 
+                `Sin espacios: <strong>"${resultado}"</strong>`;
+        }
+
+        // Funciones para arrays
+        const arrayEjemplo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        function filtrarPares() {
+            const pares = arrayEjemplo.filter(n => n % 2 === 0);
+            document.getElementById('resultadoArray').innerHTML = 
+                `Números pares: <strong>[${pares.join(', ')}]</strong>`;
+        }
+
+        function duplicarNumeros() {
+            const duplicados = arrayEjemplo.map(n => n * 2);
+            document.getElementById('resultadoArray').innerHTML = 
+                `Números duplicados: <strong>[${duplicados.join(', ')}]</strong>`;
+        }
+
+        function calcularSumaArray() {
+            const suma = arrayEjemplo.reduce((acc, n) => acc + n, 0);
+            document.getElementById('resultadoArray').innerHTML = 
+                `Suma total: <strong>${suma}</strong>`;
+        }
+
+        function numerosAlCuadrado() {
+            const cuadrados = arrayEjemplo.map(n => n ** 2);
+            document.getElementById('resultadoArray').innerHTML = 
+                `Al cuadrado: <strong>[${cuadrados.join(', ')}]</strong>`;
+        }
+
+        // Cargar el archivo principal
+        console.log('🚀 Cargando ejemplos de Arrow Functions...\n');
+    </script>
+    
+    <!-- Cargar el archivo principal con los ejemplos -->
+    <script src="app.js"></script>
+</body>
+</html>
