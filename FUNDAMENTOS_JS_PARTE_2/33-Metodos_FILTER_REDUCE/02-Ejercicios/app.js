@@ -288,6 +288,112 @@ const sumaReduce = [1,2,3,4,5];
 const suma = sumaReduce.reduce((acc, n) => acc + n, 0)
 console.log(suma);
 
+// 3. Encuentra el primer > 10 con find 
+
+const primerNumeroMayor = [1,2,3,4,15,6,7,8,9,10];
+const primerNumeroMayor10 = primerNumeroMayor.find( n => n >10)
+console.log(primerNumeroMayor)
+console.log(primerNumeroMayor10)
+
+// 4. Indice del primero multipo de 3 utilizando findIndex
+
+const indiceMultiplo3 = [1,2,3,4,6,9,12,21,23,25]
+const indiceMultiplo = indiceMultiplo3.findIndex( n => n % 3 !==0)
+console.log(indiceMultiplo3)
+console.log(indiceMultiplo);
+
+
+// 5. Sub Arreglo del indice de 2 al 5 utilizanco slice
+
+const subArreglo = [1,2,3,4,5,6,7,8,9,10];
+const subArreglo2 = subArreglo.slice(2,5);
+console.log(subArreglo);
+console.log(subArreglo2);
+
+// 6. Ordena el arreglo de forma ascendente utilizando sort
+
+const arregloOrdenado = [1,3,4,2,6,5,7,9,8];
+arregloOrdenado.sort((a,b) => a - b);
+console.log(arregloOrdenado);
+
+// 7. combinar arreglos con spread 
+
+const arreglo1 = [ 1,2,3];
+const arreglo2 = [4,5,6];
+const arregloCombinado = [...arreglo1, ...arreglo2];
+console.log(arregloCombinado);
+
+
+//8. filtrar numeros pares con filter
+
+const totalNumeros = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+const paresNumeros = totalNumeros.filter( n => n % 2 === 0);
+console.log(totalNumeros);
+console.log(paresNumeros);
+
+// 9. Suma con reduce
+
+const sumaReduceNumeros = [1,2,3,4,5];
+const sumaReduceNum = sumaReduceNumeros.reduce((acc, n) => acc + n, 0);
+console.log(sumaReduceNumeros);
+console.log(sumaReduceNum);
+
+// 10. Encuentra el primer >10 utilizando find
+
+const primerNumMayor10 = [1,2,3,11,12,15,8,9];
+const primerNumeMayor10 = primerNumMayor10.find( n => n > 10);
+console.log(primerNumMayor10);
+console.log(primerNumeMayor10);
+
+//11. indice del primer multipo de 3 utilizando findIndex
+
+const indiceMult3 = [1,2,4,6,8,12,3,14,15,18,21,24,27,30];
+const indiceMulti3 = indiceMult3.findIndex(n => n % 3 === 0);
+console.log(indiceMult3);
+console.log(indiceMulti3);
+
+//===============================================
+// NIVEL INTERMEDIO
+//===============================================
+
+//1. Palabras con 5+ letras Aplica filter para quedarte con las palabras cuya longitud sea mayor o igual a 5.
+
+const palabras = ['Juan', 'Martin', 'Santiago', 'Roberto', 'Camilo', 'Pedro', 'Miguel', 'Lorenzo', 'Luca'];
+const palabras5 = palabras.filter ( n => n.length >= 5);
+console.log(palabras);
+console.log(palabras5);
+
+//2. Conteo de ocurrencias Enunciado: Usa reduce para construir un objeto con la cantidad de veces que aparece cada palabra
+
+const palabras2 = ['sol', 'luna', 'tierra', 'mar', 'sol', 'tierra'];
+const conteoConcurrencia = palabras2.reduce((acc, p) => {acc[p] = (acc[p] || 0) +1; return acc;}, {});
+console.log(conteoConcurrencia);
+
+// 3. Primera palabra que inicia con 'mo' Enunciado: Aplica find para devolver la primera palabra que inicia con 'mo'
+
+const palabras3 = ['moto', 'coche', 'camion', 'moda', 'molino', 'morado'];
+const palabraMo = palabras3.find( p => p.startsWith('mo'));
+console.log(palabras3);
+console.log(palabraMo);
+
+//4. Índice de 'sol' Enunciado: Localiza el índice de la primera aparición exacta de 'sol'.
+
+const palabras4 = ['marte', 'luna' , 'tierra', 'sol', 'algo', 'otra'];
+const indiceSol = palabras4.findIndex( p => p === 'sol');
+console.log(palabras4);
+console.log(indiceSol);
+
+//5. Últimas 3 palabras Enunciado: Con slice(-3) obtén las tres últimas palabras.
+
+const palabras6 = ['marte', 'luna', 'perro', 'gato', 'perro', 'pajaro', 'igual'];
+const ultimas3Palabras = palabras6.slice(-3);
+console.log(ultimas3Palabras);
+
+
+
+
+
+
 
 
 
