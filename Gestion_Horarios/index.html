@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Turnos - Aeropuerto Malabo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-plane"></i>
+                    <h1 data-translate="app-title">Sistema de Gestión de Turnos</h1>
+                </div>
+                <div class="header-controls">
+                    <select id="languageSelector" class="language-selector">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                    </select>
+                    <button id="printReportBtn" class="btn btn-secondary">
+                        <i class="fas fa-print"></i>
+                        <span data-translate="print-report">Imprimir Reporte</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Panel de Control -->
+            <section class="control-panel">
+                <h2 data-translate="control-panel">Panel de Control</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalEngineers">0</span>
+                            <span class="stat-label" data-translate="total-engineers">Total Ingenieros</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalShifts">0</span>
+                            <span class="stat-label" data-translate="total-shifts">Total Turnos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-plane-departure"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="ramFlights">0</span>
+                            <span class="stat-label" data-translate="ram-flights">Vuelos RAM</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Formulario de Ingenieros -->
+            <section class="form-section">
+                <h2 data-translate="engineer-management">Gestión de Ingenieros</h2>
+                <form id="engineerForm" class="form">
+                    <div class="form-group">
+                        <label for="engineerName" data-translate="engineer-name">Nombre del Ingeniero:</label>
+                        <input type="text" id="engineerName" name="engineerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="engineerEmail" data-translate="engineer-email">Email:</label>
+                        <input type="email" id="engineerEmail" name="engineerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="engineerPhone" data-translate="engineer-phone">Teléfono:</label>
+                        <input type="tel" id="engineerPhone" name="engineerPhone">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span data-translate="add-engineer">Agregar Ingeniero</span>
+                        </button>
+                        <button type="button" id="cancelEngineerBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-times"></i>
+                            <span data-translate="cancel">Cancelar</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista de Ingenieros -->
+            <section class="engineers-section">
+                <h3 data-translate="engineers-list">Lista de Ingenieros</h3>
+                <div class="table-container">
+                    <table id="engineersTable" class="table">
+                        <thead>
+                            <tr>
+                                <th data-translate="name">Nombre</th>
+                                <th data-translate="email">Email</th>
+                                <th data-translate="phone">Teléfono</th>
+                                <th data-translate="actions">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="engineersTableBody">
+                            <!-- Los ingenieros se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Formulario de Turnos -->
+            <section class="form-section">
+                <h2 data-translate="shift-management">Gestión de Turnos</h2>
+                <form id="shiftForm" class="form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shiftEngineer" data-translate="select-engineer">Seleccionar Ingeniero:</label>
+                            <select id="shiftEngineer" name="shiftEngineer" required>
+                                <option value="" data-translate="select-option">-- Seleccionar --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="shiftArea" data-translate="area">Área:</label>
+                            <select id="shiftArea" name="shiftArea" required>
+                                <option value="" data-translate="select-option">-- Seleccionar --</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="A3">A3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shiftDate" data-translate="date">Fecha:</label>
+                            <input type="date" id="shiftDate" name="shiftDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="shiftTime" data-translate="time">Hora:</label>
+                            <select id="shiftTime" name="shiftTime" required>
+                                <option value="" data-translate="select-option">-- Seleccionar --</option>
+                                <option value="08:00">08:00 - 15:00 (Turno Mañana)</option>
+                                <option value="15:30">15:30 - 23:30 (Turno Tarde)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="flightType" data-translate="flight-type">Tipo de Vuelo:</label>
+                            <select id="flightType" name="flightType" required>
+                                <option value="" data-translate="select-option">-- Seleccionar --</option>
+                                <option value="regular" data-translate="regular-flight">Vuelo Regular</option>
+                                <option value="ram" data-translate="ram-flight">Vuelo RAM (Royal Air Maroc)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="flightNumber" data-translate="flight-number">Número de Vuelo:</label>
+                            <input type="text" id="flightNumber" name="flightNumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="shiftNotes" data-translate="notes">Notas:</label>
+                        <textarea id="shiftNotes" name="shiftNotes" rows="3"></textarea>
+                    </div>
+                    <div id="ramWarning" class="warning-message" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span data-translate="ram-warning">Atención: Para vuelos RAM, el ingeniero debe descansar el día anterior. Verificar disponibilidad.</span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span data-translate="add-shift">Agregar Turno</span>
+                        </button>
+                        <button type="button" id="cancelShiftBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-times"></i>
+                            <span data-translate="cancel">Cancelar</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Configuración de Turnos -->
+            <section class="shift-config-section">
+                <h3 data-translate="shift-configuration">Configuración de Turnos</h3>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label for="morningStart" data-translate="morning-start">Turno Mañana - Inicio:</label>
+                        <input type="time" id="morningStart" value="08:00">
+                    </div>
+                    <div class="config-item">
+                        <label for="morningEnd" data-translate="morning-end">Turno Mañana - Fin:</label>
+                        <input type="time" id="morningEnd" value="15:00">
+                    </div>
+                    <div class="config-item">
+                        <label for="afternoonStart" data-translate="afternoon-start">Turno Tarde - Inicio:</label>
+                        <input type="time" id="afternoonStart" value="15:30">
+                    </div>
+                    <div class="config-item">
+                        <label for="afternoonEnd" data-translate="afternoon-end">Turno Tarde - Fin:</label>
+                        <input type="time" id="afternoonEnd" value="23:30">
+                    </div>
+                </div>
+                <div class="config-actions">
+                    <button id="saveConfigBtn" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        <span data-translate="save-config">Guardar Configuración</span>
+                    </button>
+                    <button id="autoAssignBtn" class="btn btn-success">
+                        <i class="fas fa-magic"></i>
+                        <span data-translate="auto-assign">Auto-Asignación Inteligente</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Plantillas de Turnos -->
+            <section class="templates-section">
+                <h3 data-translate="shift-templates">Plantillas de Turnos</h3>
+                <div class="templates-controls">
+                    <div class="template-form">
+                        <input type="text" id="templateName" placeholder="Nombre de la plantilla" data-translate-placeholder="template-name">
+                        <select id="templateWeek">
+                            <option value="current" data-translate="current-week">Semana Actual</option>
+                            <option value="next" data-translate="next-week">Próxima Semana</option>
+                        </select>
+                        <button id="saveTemplateBtn" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span data-translate="save-template">Guardar Plantilla</span>
+                        </button>
+                    </div>
+                    <div class="templates-list">
+                        <select id="templateSelect">
+                            <option value="" data-translate="select-template">-- Seleccionar Plantilla --</option>
+                        </select>
+                        <button id="applyTemplateBtn" class="btn btn-success">
+                            <i class="fas fa-play"></i>
+                            <span data-translate="apply-template">Aplicar Plantilla</span>
+                        </button>
+                        <button id="deleteTemplateBtn" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                            <span data-translate="delete-template">Eliminar</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendario Interactivo -->
+            <section class="calendar-section">
+                <h3 data-translate="interactive-calendar">Calendario Interactivo</h3>
+                <div class="calendar-controls">
+                    <button id="prevMonth" class="btn btn-secondary">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="currentMonth" class="current-month"></span>
+                    <button id="nextMonth" class="btn btn-secondary">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="view-controls">
+                        <button id="monthView" class="btn btn-secondary active">
+                            <i class="fas fa-calendar"></i>
+                            <span data-translate="month-view">Vista Mes</span>
+                        </button>
+                        <button id="weekView" class="btn btn-secondary">
+                            <i class="fas fa-calendar-week"></i>
+                            <span data-translate="week-view">Vista Semana</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Vista de Calendario -->
+                <div id="calendarView" class="calendar-view">
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- El calendario se generará dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Panel de Ingenieros Disponibles -->
+                <div class="engineers-panel">
+                    <h4 data-translate="available-engineers">Ingenieros Disponibles</h4>
+                    <div id="engineersPool" class="engineers-pool">
+                        <!-- Los ingenieros se cargarán aquí para drag & drop -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Turnos (Vista Tabla) -->
+            <section class="shifts-table-section">
+                <h3 data-translate="shifts-list">Lista de Turnos</h3>
+                <div class="table-container">
+                    <table id="shiftsTable" class="table">
+                        <thead>
+                            <tr>
+                                <th data-translate="date">Fecha</th>
+                                <th data-translate="engineer">Ingeniero</th>
+                                <th data-translate="area">Área</th>
+                                <th data-translate="time">Hora</th>
+                                <th data-translate="flight-type">Tipo Vuelo</th>
+                                <th data-translate="flight-number">Nº Vuelo</th>
+                                <th data-translate="actions">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shiftsTableBody">
+                            <!-- Los turnos se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3 data-translate="confirm-action">Confirmar Acción</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button id="confirmYes" class="btn btn-danger" data-translate="yes">Sí</button>
+                <button id="confirmNo" class="btn btn-secondary" data-translate="no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de Impresión -->
+    <div id="printArea" class="print-area">
+        <div class="print-header">
+            <h1>Sistema de Gestión de Turnos - Aeropuerto Malabo</h1>
+            <p class="print-date"></p>
+        </div>
+        <div id="printContent"></div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <script src="advanced-features-fixed.js"></script>
+</body>
+</html>
