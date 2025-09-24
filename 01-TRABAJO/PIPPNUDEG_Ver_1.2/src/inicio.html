@@ -336,9 +336,6 @@
                                 <img src="/assets/Entidades/clinicadonamarta.jpeg" alt="Clínica Doña Marta" class="logo-carousel-img">
                             </div>
                             <div class="logo-item">
-                                <img src="/assets/Entidades/logo-TLC.svg" alt="TLC" class="logo-carousel-img">
-                            </div>
-                            <div class="logo-item">
                                 <img src="/assets/Entidades/pnud.jpg" alt="PNUD" class="logo-carousel-img">
                             </div>
                             <!-- Duplicar logos para efecto infinito -->
@@ -362,9 +359,6 @@
                             </div>
                             <div class="logo-item">
                                 <img src="/assets/Entidades/clinicadonamarta.jpeg" alt="Clínica Doña Marta" class="logo-carousel-img">
-                            </div>
-                            <div class="logo-item">
-                                <img src="/assets/Entidades/logo-TLC.svg" alt="TLC" class="logo-carousel-img">
                             </div>
                             <div class="logo-item">
                                 <img src="/assets/Entidades/pnud.jpg" alt="PNUD" class="logo-carousel-img">
@@ -606,11 +600,127 @@
         </div>
     </div>
 
+    <!-- Modal de Formulario de Contacto -->
+    <div class="modal" id="contact-modal">
+        <div class="modal-content contact-modal-content">
+            <div class="modal-header">
+                <h3 data-es="¡Inscríbete Ahora!" data-en="Sign Up Now!">¡Inscríbete Ahora!</h3>
+                <button class="modal-close" id="contact-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contact-form" class="contact-form" novalidate>
+                    <!-- Información Personal -->
+                    <div class="form-section">
+                        <h4 class="section-title" data-es="Información Personal" data-en="Personal Information">
+                            Información Personal
+                        </h4>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombres" data-es="Nombres *" data-en="First Names *">Nombres *</label>
+                                <input type="text" id="nombres" name="nombres" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidos" data-es="Apellidos *" data-en="Last Names *">Apellidos *</label>
+                                <input type="text" id="apellidos" name="apellidos" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fecha_nacimiento" data-es="Fecha de Nacimiento *" data-en="Date of Birth *">
+                                    Fecha de Nacimiento *
+                                </label>
+                                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="edad" data-es="Edad (18-35 años)" data-en="Age (18-35 years)">Edad (18-35 años)</label>
+                                <input type="number" id="edad" name="edad" min="18" max="35" readonly>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de Contacto -->
+                    <div class="form-section">
+                        <h4 class="section-title" data-es="Información de Contacto" data-en="Contact Information">
+                            Información de Contacto
+                        </h4>
+
+                        <div class="form-group">
+                            <label for="correo" data-es="Correo Electrónico *" data-en="Email Address *">
+                                Correo Electrónico *
+                            </label>
+                            <input type="email" id="correo" name="correo" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group phone-group">
+                                <label for="indicativo" data-es="Indicativo *" data-en="Country Code *">
+                                    Indicativo *
+                                </label>
+                                <select id="indicativo" name="indicativo" required>
+                                    <option value="">Seleccionar...</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group phone-number-group">
+                                <label for="telefono" data-es="Número Telefónico *" data-en="Phone Number *">
+                                    Número Telefónico *
+                                </label>
+                                <input type="tel" id="telefono" name="telefono" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de Ubicación -->
+                    <div class="form-section">
+                        <h4 class="section-title" data-es="Información de Ubicación" data-en="Location Information">
+                            Información de Ubicación
+                        </h4>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pais" data-es="País *" data-en="Country *">País *</label>
+                                <select id="pais" name="pais" required>
+                                    <option value="">Seleccionar país...</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ciudad" data-es="Ciudad *" data-en="City *">Ciudad *</label>
+                                <select id="ciudad" name="ciudad" required disabled>
+                                    <option value="">Primero selecciona un país...</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Envío -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" data-es="Enviar Información" data-en="Send Information">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-es="Enviar Información" data-en="Send Information">Enviar Información</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Live region for screen reader announcements -->
     <div aria-live="polite" aria-atomic="true" class="sr-only" id="live-region"></div>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">

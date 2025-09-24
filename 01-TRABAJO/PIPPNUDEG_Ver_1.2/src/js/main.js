@@ -11,6 +11,7 @@ import { NotificationSystem } from './notifications.js';
 import { LazyLoading, initLazyLoadingStyles } from './lazy-loading.js';
 import { AccessibilityManager } from './accessibility.js';
 import { SecurityManager } from './security.js';
+import { ContactForm } from './contact-form.js';
 
 class ImpulsoPro {
   constructor() {
@@ -75,6 +76,9 @@ class ImpulsoPro {
     // Initialize carousels
     this.modules.carouselManager = new CarouselManager();
     this.modules.carouselManager.init();
+
+    // Initialize contact form
+    this.modules.contactForm = new ContactForm();
 
     // Initialize theme system
     this.initThemeSystem();
@@ -323,11 +327,10 @@ class ImpulsoPro {
       Utils.addEventListenerSafe(button, 'click', (e) => {
         e.preventDefault();
 
-        const message = this.modules.navigation?.currentLanguage === 'es'
-          ? '¡Gracias por tu interés! Te contactaremos pronto.'
-          : 'Thank you for your interest! We will contact you soon.';
-
-        this.modules.notifications.showSuccess(message, 5000);
+        // Open contact form modal
+        if (this.modules.contactForm) {
+          this.modules.contactForm.openModal();
+        }
 
         // Analytics (if implemented)
         this.trackEvent('cta_click', {

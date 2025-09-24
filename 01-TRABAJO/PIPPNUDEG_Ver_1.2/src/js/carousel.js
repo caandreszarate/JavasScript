@@ -25,6 +25,7 @@ export class Carousel {
     this.isAutoPlaying = false;
     this.autoPlayInterval = null;
     this.isUserInteracting = false;
+    this.isTransitioning = false; // Prevent rapid clicks
 
     this.init();
   }
@@ -52,12 +53,16 @@ export class Carousel {
 
   bindEvents() {
     // Navigation buttons
-    Utils.addEventListenerSafe(this.prevButton, 'click', () => {
+    Utils.addEventListenerSafe(this.prevButton, 'click', (e) => {
+      e.preventDefault();
+      this.pauseAutoPlay(); // Pause immediately
       this.previousSlide();
       this.handleUserInteraction();
     });
 
-    Utils.addEventListenerSafe(this.nextButton, 'click', () => {
+    Utils.addEventListenerSafe(this.nextButton, 'click', (e) => {
+      e.preventDefault();
+      this.pauseAutoPlay(); // Pause immediately
       this.nextSlide();
       this.handleUserInteraction();
     });
@@ -172,7 +177,9 @@ export class Carousel {
   }
 
   showSlide(slideIndex) {
-    if (slideIndex < 0 || slideIndex >= this.slides.length) return;
+    if (slideIndex < 0 || slideIndex >= this.slides.length || this.isTransitioning) return;
+
+    this.isTransitioning = true;
 
     // Hide all slides
     this.slides.forEach(slide => slide.classList.remove('active'));
@@ -189,6 +196,11 @@ export class Carousel {
 
     // Announce to screen readers
     this.announceSlideChange();
+
+    // Reset transition flag after animation
+    setTimeout(() => {
+      this.isTransitioning = false;
+    }, 800); // Match CSS transition duration (0.8s)
   }
 
   nextSlide() {
@@ -268,11 +280,11 @@ export class Carousel {
       clearTimeout(this.interactionTimeout);
     }
 
-    // Resume after inactivity
+    // Resume after inactivity (increased time)
     this.interactionTimeout = setTimeout(() => {
       this.isUserInteracting = false;
       this.resumeAutoPlay();
-    }, 3000);
+    }, 5000); // 5 seconds of inactivity before resuming
   }
 
   showPauseIndicator() {
@@ -339,7 +351,7 @@ export class CarouselManager {
     const mainCarousel = Utils.getElement('.carousel-container');
     if (mainCarousel) {
       const carousel = new Carousel(mainCarousel, {
-        autoPlayDelay: 15000, // Slower for reading
+        autoPlayDelay: 20000, // Even slower for better reading
         pauseOnInteraction: true
       });
       this.carousels.set('main', carousel);
