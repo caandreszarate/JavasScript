@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Impulso Profesional - Programa de excelencia del PNUD y Ministerio de Trabajo de Guinea Ecuatorial para formación intensiva y prácticas laborales">
+    <meta name="keywords" content="impulso profesional, pnud, guinea ecuatorial, formación, empleo, desarrollo profesional">
+    <meta name="author" content="Impulso Profesional">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://impulsoprofesionalge.org/">
+    <meta property="og:title" content="Impulso Profesional - Desarrollo y Formación Guinea Ecuatorial">
+    <meta property="og:description" content="Programa de excelencia para formación intensiva y prácticas laborales en empresas nacionales e internacionales">
+    <meta property="og:image" content="/assets/Logo_Web.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://impulsoprofesionalge.org/">
+    <meta property="twitter:title" content="Impulso Profesional - Desarrollo y Formación Guinea Ecuatorial">
+    <meta property="twitter:description" content="Programa de excelencia para formación intensiva y prácticas laborales">
+    <meta property="twitter:image" content="/assets/Logo_Web.png">
+
+    <title>Impulso Profesional - Desarrollo y Formación Guinea Ecuatorial</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/Logo_Web.png">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/logo_web_blanco.png" as="image" type="image/png">
+    <link rel="preload" href="js/main.js" as="script" type="module">
+</head>
+<body>
+    <!-- Skip links for accessibility -->
+    <a href="#main-content" class="sr-only skip-link">Saltar al contenido principal</a>
+
+    <!-- Header con navegación -->
+    <header class="header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Navegación principal">
+            <div class="navbar__container container">
+                <!-- Logo -->
+                <div class="navbar__logo">
+                    <a href="inicio.html" class="navbar__logo-link" aria-label="Impulso Profesional - Inicio">
+                        <img src="/assets/logo_web_blanco.png"
+                             alt="Impulso Profesional"
+                             class="navbar__logo-image"
+                             width="150"
+                             height="45">
+                    </a>
+                </div>
+
+                <!-- Menú de navegación principal -->
+                <ul class="navbar__menu" id="nav-menu" role="menubar">
+                    <li class="navbar__item" role="none">
+                        <a href="inicio.html" class="navbar__link navbar__link--active" role="menuitem">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <span data-es="Inicio" data-en="Home">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="navbar__item" role="none">
+                        <a href="ofertas.html" class="navbar__link" role="menuitem">
+                            <i class="fas fa-tags" aria-hidden="true"></i>
+                            <span data-es="Ofertas" data-en="Offers">Ofertas</span>
+                        </a>
+                    </li>
+                    <li class="navbar__item" role="none">
+                        <a href="entidades.html" class="navbar__link" role="menuitem">
+                            <i class="fas fa-handshake" aria-hidden="true"></i>
+                            <span data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</span>
+                        </a>
+                    </li>
+                    <li class="navbar__item" role="none">
+                        <a href="requisitos.html" class="navbar__link" role="menuitem">
+                            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                            <span data-es="Requisitos" data-en="Requirements">Requisitos</span>
+                        </a>
+                    </li>
+                    <li class="navbar__item" role="none">
+                        <a href="formacion.html" class="navbar__link" role="menuitem">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            <span data-es="Formación" data-en="Training">Formación</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Controles de navegación -->
+                <div class="navbar__controls">
+                    <!-- Botón de inicio de sesión -->
+                    <div class="navbar__auth">
+                        <button class="btn-login" id="btn-login" aria-label="Iniciar sesión">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            <span data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</span>
+                        </button>
+                    </div>
+
+                    <!-- Control de idioma -->
+                    <div class="navbar__language">
+                        <button class="btn-language" id="btn-language" aria-label="Cambiar idioma">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span data-es="ES" data-en="EN">ES</span>
+                        </button>
+                        <div class="language-menu" id="language-menu" role="menu">
+                            <div class="language-menu__item" data-type="indicator" role="menuitem">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <span data-es="Indicador Sutil" data-en="Subtle Indicator">Indicador Sutil</span>
+                            </div>
+                            <div class="language-menu__item" data-type="elegant" role="menuitem">
+                                <i class="fas fa-bell" aria-hidden="true"></i>
+                                <span data-es="Notificación Elegante" data-en="Elegant Notification">Notificación Elegante</span>
+                            </div>
+                            <div class="language-menu__item" data-type="none" role="menuitem">
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                                <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control de tema -->
+                    <div class="navbar__theme">
+                        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+                            <i class="fas fa-sun" id="theme-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón hamburguesa para móvil -->
+                <button class="navbar__toggle" id="nav-toggle" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main" id="main-content" role="main">
+        <!-- Sección Hero -->
+        <section class="section section--hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="section__header">
+                    <h1 id="hero-title" data-es="Bienvenido a Impulso Pro" data-en="Welcome to Impulso Pro">
+                        Bienvenido a Impulso Pro
+                    </h1>
+                    <p class="section__subtitle" data-es="Descubre las mejores oportunidades y recursos para tu crecimiento profesional" data-en="Discover the best opportunities and resources for your professional growth">
+                        Descubre las mejores oportunidades y recursos para tu crecimiento profesional
+                    </p>
+                    <div style="margin-top: 2rem;">
+                        <a href="ofertas.html" class="btn btn--primary btn--lg">
+                            <span data-es="Explorar Ofertas" data-en="Explore Offers">Explorar Ofertas</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secciones de contenido -->
+        <section id="inicio" class="section" aria-labelledby="inicio-title">
+            <div class="container">
+                <h2 id="inicio-title" data-es="Inicio" data-en="Home">Inicio</h2>
+                <p data-es="Esta es la sección de inicio de Impulso Pro." data-en="This is the home section of Impulso Pro.">
+                    Esta es la sección de inicio de Impulso Pro.
+                </p>
+            </div>
+        </section>
+
+        <section id="ofertas" class="section section--secondary" aria-labelledby="ofertas-title">
+            <div class="container">
+                <h2 id="ofertas-title" data-es="Ofertas" data-en="Offers">Ofertas</h2>
+                <p data-es="Explora nuestras mejores ofertas y promociones." data-en="Explore our best offers and promotions.">
+                    Explora nuestras mejores ofertas y promociones.
+                </p>
+            </div>
+        </section>
+
+        <section id="entidades" class="section" aria-labelledby="entidades-title">
+            <div class="container">
+                <h2 id="entidades-title" data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</h2>
+                <p data-es="Conoce nuestras entidades aliadas y colaboradores." data-en="Meet our allied entities and collaborators.">
+                    Conoce nuestras entidades aliadas y colaboradores.
+                </p>
+            </div>
+        </section>
+
+        <section id="requisitos" class="section section--secondary" aria-labelledby="requisitos-title">
+            <div class="container">
+                <h2 id="requisitos-title" data-es="Requisitos" data-en="Requirements">Requisitos</h2>
+                <p data-es="Información sobre los requisitos necesarios." data-en="Information about the necessary requirements.">
+                    Información sobre los requisitos necesarios.
+                </p>
+            </div>
+        </section>
+
+        <section id="formacion" class="section" aria-labelledby="formacion-title">
+            <div class="container">
+                <h2 id="formacion-title" data-es="Formación" data-en="Training">Formación</h2>
+                <p data-es="Programas de formación y desarrollo profesional." data-en="Training programs and professional development.">
+                    Programas de formación y desarrollo profesional.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <!-- Logo y Descripción -->
+                <div class="footer__section">
+                    <div class="footer__logo">
+                        <img src="/assets/logo_web_blanco.png"
+                             alt="Impulso Profesional"
+                             class="footer__logo-img"
+                             width="120"
+                             height="60">
+                    </div>
+                    <p class="footer__description" data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Professional Impulse is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">
+                        Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.
+                    </p>
+                    <p class="footer__description" data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales." data-en="It is an excellence program, with an intensive training part and another of labor practices within National Private Companies and International Organizations.">
+                        Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales y Organismos Internacionales.
+                    </p>
+                </div>
+
+                <!-- Información de Contacto -->
+                <div class="footer__section">
+                    <h3 data-es="Información de Contacto" data-en="Contact Information">Información de Contacto</h3>
+                    <div class="contact-info">
+                        <div class="contact-info__item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <span data-es="Teléfono:" data-en="Phone:">Teléfono:</span>
+                            <a href="tel:+635551212" rel="noopener">(+63) 555 1212</a>
+                        </div>
+                        <div class="contact-info__item">
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                            <span data-es="Móvil:" data-en="Mobile:">Móvil:</span>
+                            <a href="tel:+635550100" rel="noopener">(+63) 555 0100</a>
+                        </div>
+                        <div class="contact-info__item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span data-es="Email:" data-en="Email:">Email:</span>
+                            <a href="mailto:info@impulsoprofesionalge.org" rel="noopener">info@impulsoprofesionalge.org</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logos Institucionales -->
+                <div class="footer__section">
+                    <h3 data-es="Organizaciones" data-en="Organizations">Organizaciones</h3>
+                    <div class="institutional-logos">
+                        <div class="institutional-logos__item">
+                            <img src="/assets/escudoge.png"
+                                 alt="Escudo Guinea Ecuatorial"
+                                 class="institutional-logos__img"
+                                 width="60"
+                                 height="60">
+                        </div>
+                        <div class="institutional-logos__item">
+                            <img src="/assets/escudopnud.jpg"
+                                 alt="Logo PNUD"
+                                 class="institutional-logos__img"
+                                 width="60"
+                                 height="60">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="social-media">
+                <div class="social-icons">
+                    <a href="#" class="social-icons__link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-icons__link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-icons__link" aria-label="X (Twitter)" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-icons__link" aria-label="YouTube" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-icons__link" aria-label="TikTok" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="social-icons__link" aria-label="Discord" rel="noopener noreferrer" target="_blank">
+                        <i class="fab fa-discord" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer__bottom">
+                <p data-es="© 2024 Impulso Profesional. Todos los derechos reservados." data-en="© 2024 Professional Impulse. All rights reserved.">
+                    © 2024 Impulso Profesional. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float" id="whatsapp-float" style="opacity: 0; transform: scale(0.8); transition: all 0.3s ease;">
+        <div class="whatsapp-container">
+            <a href="https://wa.me/635551212" target="_blank" class="whatsapp-link" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+                <div class="whatsapp-icon">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </div>
+                <div class="whatsapp-tooltip">
+                    <span class="whatsapp-tooltip__text">¡Chatea con nosotros!</span>
+                    <span class="whatsapp-tooltip__number">(+63) 555 1212</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal de inicio de sesión -->
+    <div class="modal" id="login-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 id="modal-title" class="modal__title" data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</h3>
+                <button class="modal__close" id="modal-close" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p data-es="Funcionalidad de inicio de sesión en desarrollo..." data-en="Login functionality in development...">
+                    Funcionalidad de inicio de sesión en desarrollo...
+                </p>
+                <form>
+                    <div class="form-group">
+                        <label for="email" class="form-label" data-es="Email:" data-en="Email:">Email:</label>
+                        <input type="email" id="email" class="form-input" placeholder="tu@email.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label" data-es="Contraseña:" data-en="Password:">Contraseña:</label>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" disabled>
+                    </div>
+                    <button type="submit" class="btn btn--primary" disabled data-es="Iniciar Sesión" data-en="Login">
+                        Iniciar Sesión
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live region for screen reader announcements -->
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="live-region"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Impulso Profesional",
+        "description": "Programa de excelencia del PNUD y Ministerio de Trabajo de Guinea Ecuatorial",
+        "url": "https://impulsoprofesionalge.org",
+        "logo": "https://impulsoprofesionalge.org/assets/Logo_Web.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+635551212",
+            "contactType": "customer service",
+            "email": "info@impulsoprofesionalge.org"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "GQ"
+        }
+    }
+    </script>
+</body>
+</html>

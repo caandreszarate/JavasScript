@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach</title>
+</head>
+<body>
+    <div id="app"></div>
+
+
+    <script>
+      
+        const jobs = [
+            {job: 'Hacer Deporte', status: 'Realizada'},
+            {job: 'Estudiar JavaScript', status: 'Pendiente'},
+            {job: 'Comprar Mercado', status: 'Pendiente'},
+            {job: 'Medicamento', status: 'Realizada'},
+            {job: 'Llamada Hijo', status: 'Pendiente'},
+        ]
+
+        const app = document.getElementById('app');
+        jobs.forEach(item => {
+            app.innerHTML += `<li> ${item.job} - <input type="checkbox">${item.status}</li>`;
+        })
+
+    </script>
+</body>
+</html>

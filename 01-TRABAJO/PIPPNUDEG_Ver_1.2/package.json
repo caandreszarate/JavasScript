@@ -1,0 +1,35 @@
+{
+  "name": "impulso-pro",
+  "version": "1.2.0",
+  "description": "Plataforma web moderna para Impulso Profesional - Programa de excelencia PNUD Guinea Ecuatorial",
+  "main": "src/inicio.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "npx http-server dist -p 3000",
+    "lint": "eslint src --ext .js,.jsx --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,html,css}'",
+    "optimize-images": "imagemin src/assets/images/* --out-dir=dist/assets/images --plugin=imagemin-webp --plugin=imagemin-mozjpeg --plugin=imagemin-pngquant",
+    "analyze": "vite-bundle-analyzer"
+  },
+  "keywords": ["impulso-profesional", "pnud", "guinea-ecuatorial", "formacion", "empleo"],
+  "author": "Impulso Profesional",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.0",
+    "imagemin": "^8.0.1",
+    "imagemin-webp": "^8.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "vite-bundle-analyzer": "^0.7.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

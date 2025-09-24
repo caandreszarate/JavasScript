@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Impulso Pro - Inicio con Efectos Burbuja</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-burbujas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header con navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo -->
+                <div class="nav-logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/logo_web_blanco.png" alt="Impulso Profesional" class="logo-image">
+                    </a>
+                </div>
+
+                <!-- Menú de navegación principal -->
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="inicio-burbujas.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span data-es="Inicio" data-en="Home">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ofertas.html" class="nav-link">
+                            <i class="fas fa-tags"></i>
+                            <span data-es="Ofertas" data-en="Offers">Ofertas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="entidades.html" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            <span data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="requisitos.html" class="nav-link">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span data-es="Requisitos" data-en="Requirements">Requisitos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="formacion.html" class="nav-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-es="Formación" data-en="Training">Formación</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Botón de inicio de sesión -->
+                <div class="nav-auth">
+                    <button class="btn-login" id="btn-login">
+                        <i class="fas fa-user"></i>
+                        <span data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</span>
+                    </button>
+                </div>
+
+                <!-- Botón de idioma -->
+                <div class="nav-language">
+                    <button class="btn-language" id="btn-language">
+                        <i class="fas fa-globe"></i>
+                        <span data-es="ES" data-en="EN">ES</span>
+                    </button>
+                    <div class="language-menu" id="language-menu">
+                        <div class="menu-item" data-type="indicator">
+                            <i class="fas fa-circle"></i>
+                            <span data-es="Indicador Sutil" data-en="Subtle Indicator">Indicador Sutil</span>
+                        </div>
+                        <div class="menu-item" data-type="elegant">
+                            <i class="fas fa-bell"></i>
+                            <span data-es="Notificación Elegante" data-en="Elegant Notification">Notificación Elegante</span>
+                        </div>
+                        <div class="menu-item" data-type="none">
+                            <i class="fas fa-times"></i>
+                            <span data-es="Sin Notificaciones" data-en="No Notifications">Sin Notificaciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón hamburguesa para móvil -->
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Carrusel Hero -->
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active" data-slide="1">
+                    <div class="carousel-image">
+                        <img src="assets/carrusel_1.jpeg" alt="Impulso Pro - Oportunidades Profesionales">
+                    </div>
+                    <div class="carousel-content">
+                        <div class="carousel-text">
+                            <h1 data-es="Impulso Profesional" data-en="Professional Impulse">Impulso Profesional</h1>
+                            <p data-es="Descubre oportunidades únicas para tu crecimiento profesional" data-en="Discover unique opportunities for your professional growth">Descubre oportunidades únicas para tu crecimiento profesional</p>
+                            <div class="professions-list">
+                                <span class="profession-tag" data-es="Marketing Digital" data-en="Digital Marketing">Marketing Digital</span>
+                                <span class="profession-tag" data-es="Desarrollo Web" data-en="Web Development">Desarrollo Web</span>
+                                <span class="profession-tag" data-es="Análisis de Datos" data-en="Data Analysis">Análisis de Datos</span>
+                            </div>
+                        </div>
+                        <div class="carousel-cta">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
+                                <i class="fas fa-rocket"></i>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide" data-slide="2">
+                    <div class="carousel-image">
+                        <img src="assets/carrusel_2.png" alt="Impulso Pro - Profesionales Requeridos">
+                    </div>
+                    <div class="carousel-content">
+                        <div class="carousel-text">
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
+                            <div class="professions-list">
+                                <span class="profession-tag" data-es="Cocina" data-en="Kitchen">Cocina</span>
+                                <span class="profession-tag" data-es="Técnico de Telecomunicaciones" data-en="Telecommunications Technician">Técnico de Telecomunicaciones</span>
+                                <span class="profession-tag" data-es="Recepcionistas" data-en="Receptionists">Recepcionistas</span>
+                                <span class="profession-tag" data-es="Camareros" data-en="Waiters">Camareros</span>
+                            </div>
+                        </div>
+                        <div class="carousel-cta">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
+                                <i class="fas fa-rocket"></i>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide" data-slide="3">
+                    <div class="carousel-image">
+                        <img src="assets/carrusel_3.png" alt="Impulso Pro - Oportunidades Administrativas">
+                    </div>
+                    <div class="carousel-content">
+                        <div class="carousel-text">
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
+                            <div class="professions-list">
+                                <span class="profession-tag" data-es="Asistentes de Recursos Humanos" data-en="HR Assistants">Asistentes de Recursos Humanos</span>
+                                <span class="profession-tag" data-es="Asistentes Administrativos" data-en="Administrative Assistants">Asistentes Administrativos</span>
+                                <span class="profession-tag" data-es="Estadísticos" data-en="Statisticians">Estadísticos</span>
+                                <span class="profession-tag" data-es="Financieros" data-en="Financial">Financieros</span>
+                                <span class="profession-tag" data-es="Trade Marketing" data-en="Trade Marketing">Trade Marketing</span>
+                            </div>
+                        </div>
+                        <div class="carousel-cta">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
+                                <i class="fas fa-rocket"></i>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide" data-slide="4">
+                    <div class="carousel-image">
+                        <img src="assets/carrusel_4.png" alt="Impulso Pro - Oportunidades Especializadas">
+                    </div>
+                    <div class="carousel-content">
+                        <div class="carousel-text">
+                            <h1 data-es="Requerimos Profesionales en:" data-en="We require professionals in:">Requerimos Profesionales en:</h1>
+                            <div class="professions-list">
+                                <span class="profession-tag" data-es="Analista de Datos" data-en="Data Analyst">Analista de Datos</span>
+                                <span class="profession-tag" data-es="Agentes Corporativos" data-en="Corporate Agents">Agentes Corporativos</span>
+                                <span class="profession-tag" data-es="Agentes de Distribución" data-en="Distribution Agents">Agentes de Distribución</span>
+                                <span class="profession-tag" data-es="Banca" data-en="Banking">Banca</span>
+                                <span class="profession-tag" data-es="Dirección de Empresas" data-en="Business Management">Dirección de Empresas</span>
+                            </div>
+                        </div>
+                        <div class="carousel-cta">
+                            <a href="#inscribete" class="btn-cta" data-es="Inscríbete ahora" data-en="Sign up now">
+                                <i class="fas fa-rocket"></i>
+                                <span data-es="Inscríbete ahora" data-en="Sign up now">Inscríbete ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles del carrusel -->
+                <button class="carousel-control prev" id="carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control next" id="carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Indicadores del carrusel -->
+                <div class="carousel-indicators">
+                    <button class="indicator active" data-slide="1"></button>
+                    <button class="indicator" data-slide="2"></button>
+                    <button class="indicator" data-slide="3"></button>
+                    <button class="indicator" data-slide="4"></button>
+                </div>
+
+                <!-- Indicador de pausa -->
+                <div class="carousel-pause-indicator" id="pause-indicator">
+                    <i class="fas fa-pause"></i>
+                    <span data-es="Pausado" data-en="Paused">Pausado</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección ¿Quiénes somos? con Efectos Burbuja 4D -->
+        <section class="quienes-somos-section-burbujas">
+            <!-- Burbujas flotantes 4D -->
+            <div class="bubbles-container">
+                <div class="bubble bubble-1"></div>
+                <div class="bubble bubble-2"></div>
+                <div class="bubble bubble-3"></div>
+                <div class="bubble bubble-4"></div>
+                <div class="bubble bubble-5"></div>
+                <div class="bubble bubble-6"></div>
+                <div class="bubble bubble-7"></div>
+                <div class="bubble bubble-8"></div>
+                <div class="bubble bubble-9"></div>
+                <div class="bubble bubble-10"></div>
+            </div>
+
+            <div class="container">
+                <div class="quienes-somos-content-burbujas">
+                    <div class="quienes-somos-text-burbujas">
+                        <h2 data-es="¿Quiénes somos?" data-en="Who are we?">¿Quiénes somos?</h2>
+                        <div class="quienes-somos-description">
+                            <p data-es="Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD." data-en="Professional Impulse is a joint initiative of the Ministry of Labor and Employment Promotion and UNDP.">Impulso Profesional es una iniciativa conjunta del Ministerio de Trabajo y Fomento de Empleo y del PNUD.</p>
+                            <p data-es="Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales." data-en="It is an excellence program, with an intensive training part and another of labor practices within National Private Companies.">Se trata de un programa de excelencia, con una parte de formación intensiva y otra de prácticas laborales dentro de Empresas Privadas Nacionales.</p>
+                        </div>
+                        
+                        <div class="counters-grid-burbujas">
+                            <div class="counter-item-burbujas">
+                                <div class="counter-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="counter-number" data-target="350" data-prefix="+">0</div>
+                                <div class="counter-label" data-es="Profesionales Beneficiados" data-en="Benefited Professionals">Profesionales Beneficiados</div>
+                            </div>
+                            <div class="counter-item-burbujas">
+                                <div class="counter-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="counter-number" data-target="9" data-prefix="+">0</div>
+                                <div class="counter-label" data-es="Entidades Vinculadas" data-en="Linked Entities">Entidades Vinculadas</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quienes-somos-image-burbujas">
+                        <img src="assets/img_quienes_somos.png" alt="Impulso Profesional - ¿Quiénes somos?" class="quienes-somos-img-burbujas">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Entidades Aliadas -->
+        <section class="entidades-aliadas-section">
+            <div class="container">
+                <div class="entidades-header">
+                    <h2 data-es="Entidades Aliadas" data-en="Allied Entities">Entidades Aliadas</h2>
+                    <p data-es="Conviértete en uno de nuestros socios comprometidos y descubre nuevos talentos, además de obtener múltiples beneficios para el crecimiento de tu empresa." data-en="Become one of our committed partners and discover new talents, plus get multiple benefits for your company's growth.">Conviértete en uno de nuestros socios comprometidos y descubre nuevos talentos, además de obtener múltiples beneficios para el crecimiento de tu empresa.</p>
+                </div>
+
+                <!-- Carrusel Horizontal de Logos de Entidades -->
+                <div class="logos-carousel-container">
+                    <div class="logos-carousel">
+                        <div class="logos-track">
+                            <div class="logo-item">
+                                <img src="assets/Entidades/andachina.jpg" alt="Hotel Anda China" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/bangue.png" alt="Bangue" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/hotel-djibloho.png" alt="Grand Hotel Djibloho" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/muni.jpg" alt="Muni" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/ecobank.png" alt="Ecobank" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/ita-agro.png" alt="ITA Agro" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/clinicadonamarta.jpeg" alt="Clínica Doña Marta" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/logo-TLC.svg" alt="TLC" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/pnud.jpg" alt="PNUD" class="logo-carousel-img">
+                            </div>
+                            <!-- Duplicar logos para efecto infinito -->
+                            <div class="logo-item">
+                                <img src="assets/Entidades/andachina.jpg" alt="Hotel Anda China" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/bangue.png" alt="Bangue" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/hotel-djibloho.png" alt="Grand Hotel Djibloho" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/muni.jpg" alt="Muni" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/ecobank.png" alt="Ecobank" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/ita-agro.png" alt="ITA Agro" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/clinicadonamarta.jpeg" alt="Clínica Doña Marta" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/logo-TLC.svg" alt="TLC" class="logo-carousel-img">
+                            </div>
+                            <div class="logo-item">
+                                <img src="assets/Entidades/pnud.jpg" alt="PNUD" class="logo-carousel-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón Conocer Entidades -->
+                <div class="entidades-cta">
+                    <a href="entidades.html" class="btn-entidades" data-es="Conocer Entidades" data-en="Meet Entities">
+                        <i class="fas fa-handshake"></i>
+                        <span data-es="Conocer Entidades" data-en="Meet Entities">Conocer Entidades</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Promovemos la Empleabilidad -->
+        <section class="empleabilidad-section">
+            <div class="container">
+                <div class="empleabilidad-header">
+                    <h2 data-es="Promovemos la empleabilidad de los Jóvenes" data-en="We promote youth employability">Promovemos la empleabilidad de los Jóvenes</h2>
+                </div>
+                
+                <div class="empleabilidad-content">
+                    <div class="beneficios-card">
+                        <div class="card-image">
+                            <img src="assets/persona_beneficios.png" alt="Beneficios para Jóvenes Profesionales" class="empleabilidad-img">
+                        </div>
+                        <div class="card-content">
+                            <h3 data-es="Beneficios" data-en="Benefits">Beneficios</h3>
+                            <p data-es="Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas." data-en="Young Professionals who enroll and are selected to be part of the program will be guaranteed training through Bangue Business School and PNUD, before being received by their respective companies.">Los Jóvenes Profesionales que se inscriban y sean seleccionados para formar parte del programa, se les garantizará formación a través de Bangue Business School y PNUD, antes de ser recibidos por sus respectivas empresas.</p>
+                        </div>
+                    </div>
+
+                    <div class="capacitacion-card">
+                        <div class="card-image">
+                            <img src="assets/capacitacion_continua.png" alt="Capacitación Continua" class="empleabilidad-img">
+                        </div>
+                        <div class="card-content">
+                            <h3 data-es="Capacitación Continua" data-en="Continuous Training">Capacitación Continua</h3>
+                            <p data-es="El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas." data-en="The program will guarantee continuous training for selected young professionals during their internship stay in companies.">El programa garantizará formación continua a los jóvenes profesionales seleccionados, durante su estancia de práctica en las empresas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrusel de Entidades -->
+        <section class="directores-section">
+            <div class="container">
+                <div class="directores-header">
+                    <h2 data-es="Mensajes de Nuestros Directores" data-en="Messages from Our Directors">Mensajes de Nuestros Directores</h2>
+                </div>
+                
+                <div class="entidades-carousel">
+                    <div class="entidades-slide active" data-slide="1">
+                        <div class="entidad-logo">
+                            <img src="assets/Entidades/andachina.jpg" alt="Hotel Anda China" class="entidad-img">
+                        </div>
+                        <div class="director-message">
+                            <div class="message-content">
+                                <p data-es="En el Hotel Anda China valoramos cada idea. Cada perspectiva Única. Eres parte fundamental de lo que construimos día a día y estamos convencidos de que las grandes soluciones provienen de mentes jóvenes y audaces como la tuya." data-en="At Hotel Anda China we value every idea. Every unique perspective. You are a fundamental part of what we build day by day and we are convinced that great solutions come from young and bold minds like yours.">En el Hotel Anda China valoramos cada idea. Cada perspectiva Única. Eres parte fundamental de lo que construimos día a día y estamos convencidos de que las grandes soluciones provienen de mentes jóvenes y audaces como la tuya.</p>
+                                <div class="director-info">
+                                    <span class="director-name" data-es="Eliza Evans" data-en="Eliza Evans">Eliza Evans</span>
+                                    <span class="director-position" data-es="Gerente Sucursal" data-en="Branch Manager">Gerente Sucursal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entidades-slide" data-slide="2">
+                        <div class="entidad-logo">
+                            <img src="assets/Entidades/bangue.png" alt="Bangue" class="entidad-img">
+                        </div>
+                        <div class="director-message">
+                            <div class="message-content">
+                                <p data-es="En nuestro Banco creemos en el poder de las nuevas ideas y la energía que trae cada joven profesional. Sabemos que juntos vamos a marcar una diferencia en nuestra industria y en el mundo ¡Hagamos que este viaje cuente!" data-en="In our Bank we believe in the power of new ideas and the energy that each young professional brings. We know that together we will make a difference in our industry and in the world. Let's make this journey count!">En nuestro Banco creemos en el poder de las nuevas ideas y la energía que trae cada joven profesional. Sabemos que juntos vamos a marcar una diferencia en nuestra industria y en el mundo ¡Hagamos que este viaje cuente!</p>
+                                <div class="director-info">
+                                    <span class="director-name" data-es="Jose Ondo" data-en="Jose Ondo">Jose Ondo</span>
+                                    <span class="director-position" data-es="Gerente Sucursal" data-en="Branch Manager">Gerente Sucursal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entidades-slide" data-slide="3">
+                        <div class="entidad-logo">
+                            <img src="assets/Entidades/hotel-djibloho.png" alt="Grand Hotel Djibloho" class="entidad-img">
+                        </div>
+                        <div class="director-message">
+                            <div class="message-content">
+                                <p data-es="Sabemos que tu potencial es tan grande como tu deseo de aprender, aquí te damos la bienvenida a una experiencia de crecimiento constante, con desafíos emocionantes y un equipo que estará contigo en cada paso ¡El Futuro es tuyo, y estamos aquí para ayudarte alcanzarlo!" data-en="We know that your potential is as great as your desire to learn, here we welcome you to an experience of constant growth, with exciting challenges and a team that will be with you every step of the way. The Future is yours, and we are here to help you reach it!">Sabemos que tu potencial es tan grande como tu deseo de aprender, aquí te damos la bienvenida a una experiencia de crecimiento constante, con desafíos emocionantes y un equipo que estará contigo en cada paso ¡El Futuro es tuyo, y estamos aquí para ayudarte alcanzarlo!</p>
+                                <div class="director-info">
+                                    <span class="director-name" data-es="Jose Monsuy" data-en="Jose Monsuy">Jose Monsuy</span>
+                                    <span class="director-position" data-es="Gerente Sucursal" data-en="Branch Manager">Gerente Sucursal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entidades-slide" data-slide="4">
+                        <div class="entidad-logo">
+                            <img src="assets/Entidades/muni.jpg" alt="Muni" class="entidad-img">
+                        </div>
+                        <div class="director-message">
+                            <div class="message-content">
+                                <p data-es="No es solo trabajo es pasión. Creemos que cada joven profesional tiene el poder de hacer la diferencia y estamos aquí para ayudarte a encontrar y liberar esa fuerza. Aprende y transforma ¡El futuro es de los valientes!" data-en="It's not just work, it's passion. We believe that every young professional has the power to make a difference and we are here to help you find and unleash that force. Learn and transform. The future belongs to the brave!">No es solo trabajo es pasión. Creemos que cada joven profesional tiene el poder de hacer la diferencia y estamos aquí para ayudarte a encontrar y liberar esa fuerza. Aprende y transforma ¡El futuro es de los valientes!</p>
+                                <div class="director-info">
+                                    <span class="director-name" data-es="Pedro Obono" data-en="Pedro Obono">Pedro Obono</span>
+                                    <span class="director-position" data-es="Director Administrativo" data-en="Administrative Director">Director Administrativo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles del carrusel -->
+                    <button class="entidades-control prev" id="entidades-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="entidades-control next" id="entidades-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indicadores del carrusel -->
+                    <div class="entidades-indicators">
+                        <button class="entidades-indicator active" data-slide="1"></button>
+                        <button class="entidades-indicator" data-slide="2"></button>
+                        <button class="entidades-indicator" data-slide="3"></button>
+                        <button class="entidades-indicator" data-slide="4"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de inicio de sesión -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p data-es="Funcionalidad de inicio de sesión en desarrollo..." data-en="Login functionality in development...">Funcionalidad de inicio de sesión en desarrollo...</p>
+                <div class="form-group">
+                    <label for="email" data-es="Email:" data-en="Email:">Email:</label>
+                    <input type="email" id="email" placeholder="tu@email.com" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="password" data-es="Contraseña:" data-en="Password:">Contraseña:</label>
+                    <input type="password" id="password" placeholder="••••••••" disabled>
+                </div>
+                <button class="btn-primary" disabled data-es="Iniciar Sesión" data-en="Login">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
