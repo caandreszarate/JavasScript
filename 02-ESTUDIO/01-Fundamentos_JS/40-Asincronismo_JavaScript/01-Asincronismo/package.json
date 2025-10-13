@@ -1,0 +1,17 @@
+{
+  "name": "01-asincronismo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "callback": "node src/xmlhttp_request/index.js"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "carlos martinez andrewsogemer@gmail.com",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
